@@ -1,10 +1,15 @@
 import { PiPencilSimpleFill } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import startDrawing from "./utils/canvas";
 
 function App() {
   const [drawable, setDrawable] = useState(false);
+
+  useEffect(() => {
+    startDrawing("000");
+  });
 
   return (
     <>
@@ -19,14 +24,16 @@ function App() {
             type="color"
             name="color"
             id="color"
+            onChange={(e)=>startDrawing(e.target.value)}
             className=" p-[0.2rem] shadow-md rounded-[0.5rem] cursor-pointer outline-none hover:bg-gray-400"
           />
         </div>
-        <div
-          className={`whiteboard bg-[#CBCCCF] min-h-[70vh] w-[90vw] rounded-[0.6rem] shadow-lg ${
+        <canvas
+          id="draw"
+          className={`whiteboard bg-[#CBCCCF] rounded-[0.6rem] shadow-lg ${
             drawable ? "hover:cursor-crosshair" : ""
           }`}
-        ></div>
+        ></canvas>
         <div className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer">
           <RxCross1 />
         </div>
