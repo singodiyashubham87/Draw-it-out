@@ -1,7 +1,8 @@
 import { PiPencilSimpleFill } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
+import { RiScreenshot2Fill } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { startDrawing, clearCanvas } from "./utils/canvas";
 
 function App() {
@@ -9,26 +10,45 @@ function App() {
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
   const [drawable, setDrawable] = useState(false);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     startDrawing(color, thickness);
   }, [color, thickness]);
 
+  // Function to handle taking a snapshot
+  const takeSnapshot = () => {
+    const canvas = canvasRef.current;
+    const snapshot = canvas.toDataURL();
+    // Create a link element
+    const link = document.createElement("a");
+    link.href = snapshot;
+    console.log(link);
+
+    // Set the filename for the download
+    link.download = "snapshot.png";
+
+    // Simulate a click on the link to trigger the download
+    link.click();
+  };
+
   return (
     <>
       <div className="container w-full bg-[#B7BABF] min-w-[100dvw] min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem]">
-        <div className="tools bg-[#CBCCCF] shadow-lg flex justify-center items-center gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
+        <div className="tools bg-[#CBCCCF] shadow-mdm flex justify-center items-center gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
           <PiPencilSimpleFill
-            className={`text-[3rem] p-[0.6rem] shadow-md rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+            className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
               drawable ? "bg-gray-400" : ""
             }`}
             onClick={() => setDrawable(!drawable)}
+            title="Draw"
           />
           <FaFeatherPointed
-            className={`text-[3rem] p-[0.6rem] shadow-md rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+            className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
               pencilWidth ? "bg-gray-400" : ""
             }`}
             onClick={() => setPencilWidth(!pencilWidth)}
+            title="Brush Thickness"
           />
           {pencilWidth && (
             <input
@@ -47,7 +67,12 @@ function App() {
             name="color"
             id="color"
             onChange={(e) => setColor(e.target.value)}
-            className={`p-[0.2rem] shadow-md rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF]`}
+            className={`bg-[#CBCCCF] p-[0.2rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF]`}
+          />
+          <RiScreenshot2Fill
+            className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+            onClick={takeSnapshot}
+            title="Snapshot"
           />
         </div>
         <canvas
@@ -55,6 +80,7 @@ function App() {
           className={`whiteboard bg-[#CBCCCF] rounded-[0.6rem] shadow-lg ${
             drawable ? "hover:cursor-crosshair" : "pointer-events-none	"
           }`}
+          ref={canvasRef}
         ></canvas>
         <div
           className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"

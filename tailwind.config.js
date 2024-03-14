@@ -23,6 +23,10 @@ export default {
         vsm: "441px",
         vvsm: "351px",
       },
+      boxShadow: {
+        'vsm': '0px 0px 3px #727575',
+        'mdm': '0px 0px 5px #727575',
+      }
     },
   },
   plugins: [],
