@@ -1,4 +1,4 @@
-export default function startDrawing(color) {
+export function startDrawing(color, lineThickness) {
   const canvas = document.getElementById("draw");
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.7;
@@ -6,7 +6,7 @@ export default function startDrawing(color) {
   ctx.strokeStyle = `${color}`;
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
-  ctx.lineWidth = 10;
+  ctx.lineWidth = lineThickness || 5;
 
   let isDrawing = false;
 
@@ -34,4 +34,12 @@ export default function startDrawing(color) {
   canvas.addEventListener("mouseup", () => (isDrawing = false));
   canvas.addEventListener("mouseout", () => (isDrawing = false));
   canvas.addEventListener("mousemove", draw);
+}
+
+export function clearCanvas() {
+    const canvas = document.getElementById("draw");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth * 0.7;
+    canvas.height = window.innerHeight * 0.6;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
