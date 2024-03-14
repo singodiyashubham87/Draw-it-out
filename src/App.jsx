@@ -11,6 +11,9 @@ function App() {
   const [color, setColor] = useState("#000");
   const [drawable, setDrawable] = useState(false);
   const canvasRef = useRef(null);
+  const colorStyle = {
+    backgroundColor: color,
+  };
 
   useEffect(() => {
     startDrawing(color, thickness);
@@ -35,7 +38,7 @@ function App() {
   return (
     <>
       <div className="container w-full bg-[#B7BABF] min-w-[100dvw] min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem]">
-        <div className="tools bg-[#CBCCCF] shadow-mdm flex justify-center items-center gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
+        <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
           <PiPencilSimpleFill
             className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
               drawable ? "bg-gray-400" : ""
@@ -62,13 +65,19 @@ function App() {
               className="cursor-pointer"
             />
           )}
-          <input
-            type="color"
-            name="color"
-            id="color"
-            onChange={(e) => setColor(e.target.value)}
-            className={`bg-[#CBCCCF] p-[0.2rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF]`}
-          />
+          <div className="p-[1rem] rounded-[0.5rem] relative flex items-center justify-center shadow-vsm">
+            <div
+              className="w-[50%] h-[50%] shadow-inner rounded-[50%] absolute"
+              style={colorStyle}
+            ></div>
+            <input
+              type="color"
+              name="color"
+              id="color"
+              onChange={(e) => setColor(e.target.value)}
+              className={`bg-[#CBCCCF] p-[0.2rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] opacity-[0.001] w-full h-full z-5`}
+            />
+          </div>
           <RiScreenshot2Fill
             className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
             onClick={takeSnapshot}
