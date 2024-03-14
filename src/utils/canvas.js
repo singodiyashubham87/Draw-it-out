@@ -6,7 +6,7 @@ export function startDrawing(color, lineThickness) {
   ctx.strokeStyle = `${color}`;
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
-  ctx.lineWidth = lineThickness || 5;
+  ctx.lineWidth = lineThickness;
 
   let isDrawing = false;
 
@@ -37,9 +37,9 @@ export function startDrawing(color, lineThickness) {
 }
 
 export function clearCanvas() {
-    const canvas = document.getElementById("draw");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth * 0.7;
-    canvas.height = window.innerHeight * 0.6;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const canvas = document.getElementById("draw");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth * 0.7;
+  canvas.height = window.innerHeight * 0.6;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }

@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     startDrawing(color, thickness);
-  });
+  }, [color, thickness]);
 
   return (
     <>
@@ -46,10 +46,7 @@ function App() {
             type="color"
             name="color"
             id="color"
-            onChange={(e) =>{
-              setColor(e.target.value);
-              startDrawing(e.target.value, 10);
-            }}
+            onChange={(e) => setColor(e.target.value)}
             className={`p-[0.2rem] shadow-md rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF]`}
           />
         </div>
@@ -61,7 +58,10 @@ function App() {
         ></canvas>
         <div
           className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"
-          onClick={() => clearCanvas()}
+          onClick={() => {
+            clearCanvas();
+            startDrawing(color, thickness);
+          }}
         >
           <RxCross1 />
         </div>
