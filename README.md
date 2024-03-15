@@ -1,6 +1,6 @@
 <h1 align="center">Draw-it-out: Online Whiteboard App</h1> 
 
-<div align="center"><img src="./src/assets/images/webLogo.png" width="200px" height="200px"/></div>
+<div align="center"><img src="./src/assets/images/readmeLogo.png" width="200px" height="200px"/></div>
 
 # Introduction
 Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It allows users to draw, sketch, and take snapshots of their creations. The intuitive interface and responsive design make it easy to use across various devices.
