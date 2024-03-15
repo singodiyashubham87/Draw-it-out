@@ -6,14 +6,11 @@ import { useEffect, useState, useRef } from "react";
 import { startDrawing, clearCanvas } from "./utils/canvas";
 
 function App() {
-  const [pencilWidth, setPencilWidth] = useState(false);
-  const [thickness, setThickness] = useState(10);
-  const [color, setColor] = useState("#000");
-  const [drawable, setDrawable] = useState(false);
   const canvasRef = useRef(null);
-  const colorStyle = {
-    backgroundColor: color,
-  };
+  const [drawable, setDrawable] = useState(true);
+  const [thickness, setThickness] = useState(10);
+  const [pencilWidth, setPencilWidth] = useState(false);
+  const [color, setColor] = useState("#000");
 
   useEffect(() => {
     startDrawing(color, thickness);
@@ -36,17 +33,17 @@ function App() {
 
   return (
     <>
-      <div className="container w-full bg-[#B7BABF] min-w-[100dvw] min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem]">
-        <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
+      <div className="container w-full bg-[#B7BABF] min-w-[100dvw] min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary">
+        <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
           <PiPencilSimpleFill
-            className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
               drawable ? "bg-gray-400" : ""
             }`}
             onClick={() => setDrawable(!drawable)}
             title="Draw"
           />
           <FaFeatherPointed
-            className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
               pencilWidth ? "bg-gray-400" : ""
             }`}
             onClick={() => setPencilWidth(!pencilWidth)}
@@ -69,12 +66,13 @@ function App() {
               type="color"
               name="color"
               id="color"
+              title="Color Picker"
               onChange={(e) => setColor(e.target.value)}
               className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0`}
             />
           </div>
           <RiScreenshot2Fill
-            className={`text-[3rem] p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
             onClick={takeSnapshot}
             title="Snapshot"
           />
@@ -95,6 +93,7 @@ function App() {
         >
           <RxCross1 />
         </div>
+        <h1 className="text-[1rem]">Made with &#128157;  by <a href="https://shubham-s-socials.vercel.app/" className="decoration-none font-semibold hover:underline">Master Mickey</a>!</h1>
       </div>
     </>
   );
