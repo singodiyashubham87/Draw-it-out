@@ -45,7 +45,6 @@ We welcome contributions from the open-source community to improve ScanVerse. Fo
 
 * **_Shubham Singodiya_** - Lead developer and creator of the whiteboard web application.
 
-We appreciate our team member's hard work and dedication to make ScanVerse a reality.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
