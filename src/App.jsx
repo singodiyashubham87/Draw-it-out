@@ -26,7 +26,6 @@ function App() {
     // Create a link element
     const link = document.createElement("a");
     link.href = snapshot;
-    console.log(link);
 
     // Set the filename for the download
     link.download = "snapshot.png";
@@ -65,17 +64,13 @@ function App() {
               className="cursor-pointer"
             />
           )}
-          <div className="p-[1rem] rounded-[0.5rem] relative flex items-center justify-center shadow-vsm">
-            <div
-              className="w-[50%] h-[50%] shadow-inner rounded-[50%] absolute"
-              style={colorStyle}
-            ></div>
+          <div className="p-[1rem] px-[1.5rem] rounded-[0.5rem] relative shadow-vsm hover:bg-[#B7BABF] cursor-pointer">
             <input
               type="color"
               name="color"
               id="color"
               onChange={(e) => setColor(e.target.value)}
-              className={`bg-[#CBCCCF] p-[0.2rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] opacity-[0.001] w-full h-full z-5`}
+              className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0`}
             />
           </div>
           <RiScreenshot2Fill
