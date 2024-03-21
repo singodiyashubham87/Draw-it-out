@@ -61,7 +61,7 @@ function App() {
           >
             <RxCross1 />
           </div>
-          <h1 className="text-[0.7rem] vvsm:text-[1rem] mb-4">
+          <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4">
             Made with &#128157; by{" "}
             <a
               href="https://shubham-s-socials.vercel.app/"
