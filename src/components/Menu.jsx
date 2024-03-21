@@ -1,23 +1,42 @@
+/* eslint-disable react/prop-types */
 import { PiPencilSimpleFill } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { useState } from "react";
-import { takeSnapshot } from "../utils/takeSnapshot.js";
+import { takeSnapshot } from "../utils/canvas.js";
 
-// eslint-disable-next-line react/prop-types
-const Menu = ({ drawable, setDrawable, thickness, setThickness, setColor, canvasRef }) => {
+const Menu = ({
+  isDrawing,
+  setIsDrawing,
+  thickness,
+  setThickness,
+  color,
+  setColor,
+  canvasRef,
+}) => {
   const [pencilWidth, setPencilWidth] = useState(false);
+
+  const toggleIsDrawing = () => {
+    setIsDrawing(!isDrawing);
+  };
 
   return (
     <>
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
         <PiPencilSimpleFill
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-            drawable ? "bg-gray-400" : ""
+            isDrawing ? "bg-gray-400" : ""
           }`}
-          onClick={() => setDrawable(!drawable)}
+          onClick={toggleIsDrawing}
           title="Draw"
         />
+        {/* <BsFillEraserFill
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+            isErasing ? "bg-gray-400" : ""
+          }`}
+          onClick={toggleIsErasing}
+          title="Draw"
+        /> */}
         <FaFeatherPointed
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             pencilWidth ? "bg-gray-400" : ""
@@ -49,7 +68,7 @@ const Menu = ({ drawable, setDrawable, thickness, setThickness, setColor, canvas
         </div>
         <RiScreenshot2Fill
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-          onClick={()=>takeSnapshot(canvasRef)}
+          onClick={() => takeSnapshot(canvasRef.current, color)}
           title="Snapshot"
         />
       </div>

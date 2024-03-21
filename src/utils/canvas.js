@@ -1,8 +1,13 @@
-export function startDrawing(color, lineThickness) {
-  const canvas = document.getElementById("draw");
+// Array to store the drawing history
+let drawHistory = [];
+
+export function startDrawing(canvas, color, lineThickness, bgColor) {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.8;
   canvas.height = window.innerHeight * 0.6;
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   ctx.strokeStyle = `${color}`;
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
@@ -10,6 +15,7 @@ export function startDrawing(color, lineThickness) {
 
   let isDrawing = false;
 
+  // Main draw function
   const draw = (e) => {
     if (!isDrawing) return;
     if (lastX === 0 && lastY === 0) {
@@ -22,6 +28,7 @@ export function startDrawing(color, lineThickness) {
     ctx.stroke();
     lastX = e.offsetX;
     lastY = e.offsetY;
+    drawHistory.push({ x: e.offsetX, y: e.offsetY });
   };
 
   let lastX = 0;
@@ -30,6 +37,7 @@ export function startDrawing(color, lineThickness) {
     lastX = e.offsetX;
     lastY = e.offsetY;
     isDrawing = true;
+    drawHistory.push({ x: lastX, y: lastY });
   });
   canvas.addEventListener("mouseup", () => (isDrawing = false));
   canvas.addEventListener("mouseout", () => (isDrawing = false));
@@ -60,12 +68,39 @@ export function startDrawing(color, lineThickness) {
   });
 }
 
-export function clearCanvas() {
-  const canvas = document.getElementById("draw");
+// Function to clear the canvas
+export function clearCanvas(canvas, bgColor) {
   const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth * 0.7;
-  canvas.height = window.innerHeight * 0.6;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+// Function to handle taking a snapshot
+export const takeSnapshot = (canvas) => {
+  const snapshot = canvas.toDataURL();
+  const link = document.createElement("a");
+  link.href = snapshot;
+  link.download = "snapshot.png";
+  link.click();
+};
 
+// function redrawCanvas(ctx) {
+//   ctx.fillStyle = "#000";
+//   drawHistory.forEach((point, i) => {
+//     if (i === 0) {
+//       ctx.beginPath();
+//       ctx.moveTo(point.x, point.y);
+//     } else {
+//       ctx.lineTo(point.x, point.y);
+//       ctx.stroke();
+//     }
+//   });
+// }
+
+export function changeBG(canvas, color) {
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = color;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawHistory = [];
+}
