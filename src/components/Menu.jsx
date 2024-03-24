@@ -30,13 +30,6 @@ const Menu = ({
           onClick={toggleIsDrawing}
           title="Draw"
         />
-        {/* <BsFillEraserFill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-            isErasing ? "bg-gray-400" : ""
-          }`}
-          onClick={toggleIsErasing}
-          title="Draw"
-        /> */}
         <FaFeatherPointed
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             pencilWidth ? "bg-gray-400" : ""
