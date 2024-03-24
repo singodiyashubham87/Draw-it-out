@@ -85,19 +85,6 @@ export const takeSnapshot = (canvas) => {
   link.click();
 };
 
-// function redrawCanvas(ctx) {
-//   ctx.fillStyle = "#000";
-//   drawHistory.forEach((point, i) => {
-//     if (i === 0) {
-//       ctx.beginPath();
-//       ctx.moveTo(point.x, point.y);
-//     } else {
-//       ctx.lineTo(point.x, point.y);
-//       ctx.stroke();
-//     }
-//   });
-// }
-
 export function changeBG(canvas, color) {
   const ctx = canvas.getContext("2d");
   ctx.fillStyle = color;
