@@ -5,6 +5,30 @@
 # Introduction
 Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It allows users to draw, sketch, and take snapshots of their creations. The intuitive interface and responsive design make it easy to use across various devices.
 
+# Getting Started
+
+### Prerequisite
+
+- Node.js (https://nodejs.org/) installed on your machine.
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/singodiyashubham87/Draw-it-out.git
+cd Draw-it-out
+```
+   
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the app:
+```bash
+npm run dev
+  ```
+
 # Features
 
 * **Drawing Tools:** Users can select between different drawing tools like pencil and brush thickness.
@@ -66,7 +90,7 @@ We welcome contributions from the open-source community to improve ScanVerse. Fo
 
 # Author
 
-* **_Shubham Singodiya_** - Lead developer and creator of the whiteboard web application.
+* [**_Shubham Singodiya_**](https://shubham-s-socials.vercel.app/) - Lead developer and creator of the whiteboard web application.
 
 # License
 
