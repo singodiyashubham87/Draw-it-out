@@ -56,6 +56,14 @@ https://draw-it-out.vercel.app/
 
 <!--- Acknowledgements: We would like to thank all the contributors who have helped in the development of ScanVerse. I would greatly appreciate your support and contributions -->
 
+# Basic Drawing Tools
+
+- Select color of the board: you can select the board color you want in the left side
+- Select color of the pencil: you can select the color of the pencil in the color picker button
+- Brush thickness: you can choose the thickness of the brush in the slider
+- Snapshot: you can save a snapshot with the snapshot button
+- Eraser: you can erase what you drew in the X button bellow the board
+
 # Contributions
 
 You can find the contributing guideline here -> [CONTRIBUTING GUIDELINES](CONTRIBUTING.md)
