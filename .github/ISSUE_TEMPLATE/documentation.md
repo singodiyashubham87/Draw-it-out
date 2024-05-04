@@ -2,7 +2,7 @@
 name: Documentation
 about: Describe the changes to be made in documentation
 title: "[DOCS]"
-labels: documentation
+labels: documentation, up for grabs
 assignees: ''
 
 ---
