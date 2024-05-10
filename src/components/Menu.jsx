@@ -4,6 +4,7 @@ import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { useState } from "react";
 import { takeSnapshot } from "../utils/canvas.js";
+import './Menu.css'
 
 const Menu = ({
   isDrawing,

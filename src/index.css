@@ -14,3 +14,64 @@ body{
   height: 100%;
   width: 100%;
 }
+
+.darkButton{
+  background-color: black;
+  color: white;
+}
+.lightButton{
+  background-color: white;
+  color: black;
+}
+
+.dark{
+  background-color: black !important;
+  color: white
+}
+.white{
+  background-color: white;
+  color: black;
+} 
+
+.toggleButton {
+  position: relative;
+  padding: 0;
+  width: 50px; /* Adjust width as needed */
+  height: 24px; /* Adjust height as needed */
+  border: none;
+  border-radius: 20px; /* Make it round */
+  background-color: #ccc; /* Background color of the slider */
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 20px; /* Make it round */
+  background-color: #fff; /* Color of the slider button */
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggleButton.darkButton .slider {
+  transform: translateX(100%);
+}
+
+.toggleButton.lightButton .slider {
+  transform: translateX(0);
+}
+
+/* Additional styling for icons */
+.toggleButton .slider svg {
+  color: black; /* Color of the icons */
+}
+
+.toggleButton.darkButton.right{
+  background-color:black;
+  color: white;
+}
