@@ -23,20 +23,24 @@ const Menu = ({
   return (
     <>
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
-        <PiPencilSimpleFill
+        <button
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             isDrawing ? "bg-gray-400" : ""
           }`}
-          onClick={toggleIsDrawing}
+          onClick={() => toggleIsDrawing()}
           title="Draw"
-        />
-        <FaFeatherPointed
+        >
+          <PiPencilSimpleFill />
+        </button>
+        <button
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             pencilWidth ? "bg-gray-400" : ""
           }`}
           onClick={() => setPencilWidth(!pencilWidth)}
           title="Brush Thickness"
-        />
+        >
+          <FaFeatherPointed />
+        </button>
         {pencilWidth && (
           <input
             type="range"
@@ -59,11 +63,13 @@ const Menu = ({
             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0`}
           />
         </div>
-        <RiScreenshot2Fill
+        <button
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
           onClick={() => takeSnapshot(canvasRef.current, color)}
           title="Snapshot"
-        />
+        >
+          <RiScreenshot2Fill />
+        </button>
       </div>
     </>
   );
