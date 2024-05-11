@@ -5,6 +5,8 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.8;
   canvas.height = window.innerHeight * 0.6;
+  // Initial background fill
+
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -72,16 +74,25 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
 export function clearCanvas(canvas, bgColor) {
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // ctx.fillStyle = bgColor;
+  // ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 // Function to handle taking a snapshot
-export const takeSnapshot = (canvas) => {
-  const snapshot = canvas.toDataURL();
+export const takeSnapshot = (canvas, filetype) => {
+  var snapshot;
+  switch (filetype) {
+    case "png":
+      snapshot = canvas.toDataURL("image/png");
+      break;
+
+    case "jpg":
+      snapshot = canvas.toDataURL("image/jpeg");
+      break;
+  }
   const link = document.createElement("a");
   link.href = snapshot;
-  link.download = "snapshot.png";
+  link.download = `snapshot.${filetype}`;
   link.click();
 };
 
