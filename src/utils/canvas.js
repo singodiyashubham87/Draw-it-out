@@ -1,71 +1,84 @@
 // Array to store the drawing history
 let drawHistory = [];
+let ctx = null;
 
-export function startDrawing(canvas, color, lineThickness, bgColor) {
-  const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth * 0.8;
-  canvas.height = window.innerHeight * 0.6;
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+function setUpCanvas(canvas, color, lineThickness, bgColor) {
+  if (!ctx) {
+    ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.6;
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.strokeStyle = `${color}`;
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
-  ctx.lineWidth = lineThickness;
+    ctx.strokeStyle = `${color}`;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.lineWidth = lineThickness;
 
-  let isDrawing = false;
+    let isDrawing = false;
 
-  // Main draw function
-  const draw = (e) => {
-    if (!isDrawing) return;
-    if (lastX === 0 && lastY === 0) {
+    // Main draw function
+    const draw = (e) => {
+      if (!isDrawing) return;
+      if (lastX === 0 && lastY === 0) {
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+      }
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
       lastX = e.offsetX;
       lastY = e.offsetY;
-    }
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
-    lastX = e.offsetX;
-    lastY = e.offsetY;
-    drawHistory.push({ x: e.offsetX, y: e.offsetY });
-  };
+      drawHistory.push({ x: e.offsetX, y: e.offsetY });
+    };
 
-  let lastX = 0;
-  let lastY = 0;
-  canvas.addEventListener("mousedown", (e) => {
-    lastX = e.offsetX;
-    lastY = e.offsetY;
-    isDrawing = true;
-    drawHistory.push({ x: lastX, y: lastY });
-  });
-  canvas.addEventListener("mouseup", () => (isDrawing = false));
-  canvas.addEventListener("mouseout", () => (isDrawing = false));
-  canvas.addEventListener("mousemove", draw);
+    let lastX = 0;
+    let lastY = 0;
+    canvas.addEventListener("mousedown", (e) => {
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+      isDrawing = true;
+      drawHistory.push({ x: lastX, y: lastY });
+    });
+    canvas.addEventListener("mouseup", () => (isDrawing = false));
+    canvas.addEventListener("mouseout", () => (isDrawing = false));
+    canvas.addEventListener("mousemove", draw);
 
-  //Event listeners for touch devices
-  canvas.addEventListener("touchstart", (e) => {
-    const touch = e.touches[0]; // Get the first touch
-    lastX = touch.clientX - canvas.offsetLeft;
-    lastY = touch.clientY - canvas.offsetTop;
-    isDrawing = true;
-  });
+    //Event listeners for touch devices
+    canvas.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0]; // Get the first touch
+      lastX = touch.clientX - canvas.offsetLeft;
+      lastY = touch.clientY - canvas.offsetTop;
+      isDrawing = true;
+    });
 
-  canvas.addEventListener("touchend", () => {
-    isDrawing = false;
-  });
+    canvas.addEventListener("touchend", () => {
+      isDrawing = false;
+    });
 
-  canvas.addEventListener("touchcancel", () => {
-    isDrawing = false;
-  });
+    canvas.addEventListener("touchcancel", () => {
+      isDrawing = false;
+    });
 
-  canvas.addEventListener("touchmove", (e) => {
-    if (!isDrawing) return;
-    const touch = e.touches[0]; // Get the first touch
-    const offsetX = touch.clientX - canvas.offsetLeft;
-    const offsetY = touch.clientY - canvas.offsetTop;
-    draw({ offsetX, offsetY });
-  });
+    canvas.addEventListener("touchmove", (e) => {
+      if (!isDrawing) return;
+      const touch = e.touches[0]; // Get the first touch
+      const offsetX = touch.clientX - canvas.offsetLeft;
+      const offsetY = touch.clientY - canvas.offsetTop;
+      draw({ offsetX, offsetY });
+    });
+  }
+
+  return ctx;
+}
+
+export function startDrawing(canvas, color, lineThickness, bgColor) {
+  setUpCanvas(canvas, color, lineThickness, bgColor);
+
+  ctx.strokeStyle = `${color}`;
+  ctx.lineWidth = lineThickness;
+  ctx.fillStyle = bgColor;
 }
 
 // Function to clear the canvas
