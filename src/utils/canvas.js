@@ -3,10 +3,13 @@ let drawHistory = [];
 
 export function startDrawing(canvas, color, lineThickness, bgColor) {
   const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth * 0.8;
-  canvas.height = window.innerHeight * 0.6;
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if(drawHistory.length===0){
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.6;
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
 
   ctx.strokeStyle = `${color}`;
   ctx.lineJoin = "round";
@@ -14,6 +17,7 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
   ctx.lineWidth = lineThickness;
 
   let isDrawing = false;
+
 
   // Main draw function
   const draw = (e) => {
@@ -67,6 +71,7 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
     draw({ offsetX, offsetY });
   });
 }
+
 
 // Function to clear the canvas
 export function clearCanvas(canvas, bgColor) {
