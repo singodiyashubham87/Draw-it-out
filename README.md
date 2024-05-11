@@ -33,7 +33,7 @@ npm run dev
 
 * **Drawing Tools:** Users can select between different drawing tools like pencil and brush thickness.
 * **Color Picker:** Choose from a wide range of colors using the color picker tool.
-* **Brush Thickness:** Adjust the thickness of the brush stroke using a range slider.
+* **Brush Thickness:** Adjust the brush stroke thickness using a range slider.
 * **Snapshot:** Capture and download snapshots of the whiteboard canvas.
 * **Clear Canvas:** Clear the canvas with a single click.
 * **Responsive Design:** The application is responsive and works seamlessly across different screen sizes.
@@ -54,7 +54,7 @@ https://draw-it-out.vercel.app/
 * **Release 0.0** : March 14, 2024 @22:31 [Zeroth phase of application completed.]
   - Features: Drawing functionality with custom thickness of the brush and custom color.
 
-<!--- Acknowledgements: We would like to thank all the contributors who have helped in the development of ScanVerse. I would greatly appreciate your support and contributions -->
+<!--- Acknowledgements: We would like to thank all the contributors who helped develop ScanVerse. I would greatly appreciate your support and contributions -->
 
 # Contributions
 
