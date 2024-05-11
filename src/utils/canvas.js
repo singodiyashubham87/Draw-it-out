@@ -60,6 +60,7 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
   });
 
   canvas.addEventListener("touchmove", (e) => {
+   // added e.preventDefault();
     e.preventDefault();
     if (!isDrawing) return;
     const touch = e.touches[0]; // Get the first touch
