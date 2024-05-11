@@ -4,13 +4,33 @@ import { startDrawing, clearCanvas } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
-  const [bgColor, setBgColor] = useState("#B7BABF");
+  const [bgColor, setBgColor] = useState("#B7BABF");  
+  const [theme, setTheme] = useState('light');//default it is light 
+  const [buttonTheme,setButtonTheme] = useState('darkButton')
+  const [slider,setSlider] = useState('right')
+
+  // const handleToggle = () => {
+  //   setIsDarkMode(!isToggled);
+  // };
+
+  const changeTheme=()=>{
+    if(theme=== 'light' && buttonTheme==='darkButton'){
+      setTheme('dark');
+      setButtonTheme('lightButton')
+    }else{
+      setTheme('light');
+      setButtonTheme('darkButton')
+      setSlider('right')
+    }
+    
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,9 +39,13 @@ function App() {
     }
   }, [bgColor, color, thickness]);
 
+  
+
   return (
     <>
-      <div className="bg-[#d3d5d8] flex flex-col min-w-[100dvw] justify-center gsm:flex-row">
+      <div className={`bg-[#d3d5d8] flex flex-col min-w-[100dvw] justify-center gsm:flex-row ${theme} `}>
+      
+        
         <div className="gsm:w-[10%] w-[85%] py-8 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
           {rainbowColors?.map((val, i) => (
             <BgColor
@@ -34,6 +58,21 @@ function App() {
         </div>
 
         <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
+          {/* <div className={`button-container w-[100%] gsm:min-h-[8dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0`}>
+            <button className={`${buttonTheme}`} onClick={changeTheme}>{theme=== 'light' && buttonTheme==='darkButton'? <FaMoon />:<FaSun/>}</button>
+          </div> */}
+
+        <div className={`button-container w-[100%] gsm:min-h-[8dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0`}>
+          <button className={`toggleButton ${buttonTheme} ${slider}`} onClick={changeTheme}>
+            <div className={`slider`}>
+              {theme === 'light' ? (
+                <FaMoon />
+              ) : (
+                <FaSun />
+              )}
+            </div>
+          </button>
+        </div>
           <Menu
             isDrawing={isDrawing}
             setIsDrawing={setIsDrawing}
@@ -52,6 +91,7 @@ function App() {
             }`}
             ref={canvasRef}
           ></canvas>
+          
           <div
             className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"
             onClick={() => {
@@ -61,6 +101,7 @@ function App() {
           >
             <RxCross1 />
           </div>
+          
           <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4">
             Made with &#128157; by{" "}
             <a
