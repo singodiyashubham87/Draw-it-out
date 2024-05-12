@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
-//import Chatbot from './Chatbot/Chatbot.jsx'; // Import the Chatbot component
+
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
