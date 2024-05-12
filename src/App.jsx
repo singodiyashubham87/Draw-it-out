@@ -24,6 +24,7 @@ function App() {
 
   return (
     <>
+    <img src="https://i.im.ge/2024/05/13/Z4BbuD.DRAWIT.png" style="height: 162px;width: 388px;position:relative;left: 802px;border-radius: 50%;" alt="DRAW IT"></img>
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
         {showMenuAndBgColor && (
           <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
