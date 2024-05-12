@@ -1,10 +1,11 @@
-import { RxCross1 } from "react-icons/rx";
-import { useEffect, useState, useRef } from "react";
-import { startDrawing, clearCanvas } from "./utils/canvas";
-import Menu from "./components/Menu";
-import BgColor from "./components/BgColor";
-import { rainbowColors } from "./utils/helpers";
+import { useEffect, useRef, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
+import BgColor from "./components/BgColor";
+import Menu from "./components/Menu";
+import { clearCanvas, startDrawing } from "./utils/canvas";
+import { rainbowColors } from "./utils/helpers";
+
 
 function App() {
   const canvasRef = useRef(null);
@@ -25,18 +26,20 @@ function App() {
   return (
     <>
       <div className="bg-[#d3d5d8] flex flex-col min-w-[100dvw] justify-center gsm:flex-row">
-        {showMenuAndBgColor && (
-          <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
-            {rainbowColors?.map((val, i) => (
-              <BgColor
-                key={i}
-                color={val}
-                setBgColor={setBgColor}
-                canvas={canvasRef.current}
-              />
-            ))}
-          </div>
-        )}
+  {showMenuAndBgColor && (
+    <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
+      {rainbowColors?.map((val, i) => (
+        <BgColor
+          key={i}
+          color={val}
+          setBgColor={setBgColor}
+          canvas={canvasRef.current}
+          className="rounded-full shadow-md transition duration-300 transform hover:scale-105"
+        />
+      ))}
+    </div>
+  )}
+
 
         <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
           <div className="flex items-center gap-14">
@@ -94,7 +97,7 @@ function App() {
           </h1>
         </div>
       </div>
-    </>
+     </>
   );
 }
 

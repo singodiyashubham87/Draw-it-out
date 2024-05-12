@@ -3,8 +3,7 @@ let drawHistory = [];
 
 export function startDrawing(canvas, color, lineThickness, bgColor) {
   const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth * 0.8;
-  canvas.height = window.innerHeight * 0.6;
+  adjustCanvasSize(canvas);
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -43,7 +42,7 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
   canvas.addEventListener("mouseout", () => (isDrawing = false));
   canvas.addEventListener("mousemove", draw);
 
-  //Event listeners for touch devices
+  // Event listeners for touch devices
   canvas.addEventListener("touchstart", (e) => {
     const touch = e.touches[0]; // Get the first touch
     lastX = touch.clientX - canvas.offsetLeft;
@@ -66,6 +65,17 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
     const offsetY = touch.clientY - canvas.offsetTop;
     draw({ offsetX, offsetY });
   });
+
+  // Adjust canvas size based on screen size
+  window.addEventListener("resize", () => {
+    adjustCanvasSize(canvas);
+  });
+}
+
+// Function to adjust canvas size based on screen size
+function adjustCanvasSize(canvas) {
+  canvas.width = window.innerWidth * 0.8;
+  canvas.height = window.innerHeight * 0.6;
 }
 
 // Function to clear the canvas
