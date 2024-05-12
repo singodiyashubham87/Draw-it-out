@@ -90,4 +90,49 @@ export function changeBG(canvas, color) {
   ctx.fillStyle = color;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   drawHistory = [];
-}
+};
+
+
+export function increaseHeight(canvas) {
+  const ctx = canvas.getContext("2d");
+  const histArray = [...drawHistory];
+  let newHeight = canvas.height + canvas.height * 0.1;
+  if (newHeight > window.innerHeight) {
+    newHeight = window.innerHeight;
+  }
+  canvas.height = newHeight;
+  // clearCanvas(canvas, -----bg color not given makes the screen black -----);
+  let lastX = 0;
+  let lastY = 0;
+  histArray.forEach((point) => {
+    if (lastX === 0 && lastY === 0) {
+      lastX = point.x;
+      lastY = point.y;
+      ctx.moveTo(lastX, lastY);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
+    ctx.stroke();
+  });
+};
+
+export function decreaseHeight(canvas) {
+  const ctx = canvas.getContext("2d");
+  const histArray = [...drawHistory];
+  let newHeight = canvas.height - canvas.height * 0.1;
+  if (newHeight >= 100) {
+    canvas.height = newHeight;
+    let lastX = 0;
+    let lastY = 0;
+    histArray.forEach((point) => {
+      if (lastX === 0 && lastY === 0) {
+        lastX = point.x;
+        lastY = point.y;
+        ctx.moveTo(lastX, lastY);
+      } else {
+        ctx.lineTo(point.x, point.y);
+      }
+      ctx.stroke();
+    });
+  }
+};
