@@ -38,6 +38,13 @@ npm run dev
 * **Clear Canvas:** Clear the canvas with a single click.
 * **Responsive Design:** The application is responsive and works seamlessly across different screen sizes.
 
+# Using Drawing Tools
+
+* **Pencil:** The pencil is selected by default in the app. Simply, move onto the canvas and start drawing.
+* **Brush Thickness:** This feature will allow you to select the thickness of the brush tool.
+* **Color Picker:** This feature will help to select a color of your choice. The user gets the option to select the color depending on three color models, namely, 'RGB', 'HSL' and 'HEX'. Optionally, the user can select any color on the screen as well, with the help of a color picker.
+* **Snapshot:** The snapshot option allows you to store your creativity in an image form(PNG).
+
 # Tech Stack
 
 * **ReactJS**
