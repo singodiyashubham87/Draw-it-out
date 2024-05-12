@@ -11,4 +11,5 @@ export const rainbowColors = [
   "#5e4fa2",
   "#ffffff",
   "#000000",
+  "#00000000", // for transparent png exports,
 ];
