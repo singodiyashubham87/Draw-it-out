@@ -3,7 +3,8 @@ let drawHistory = [];
 
 export function startDrawing(canvas, color, lineThickness, bgColor) {
   const ctx = canvas.getContext("2d");
-  adjustCanvasSize(canvas);
+  canvas.width = window.innerWidth * 0.8;
+  canvas.height = window.innerHeight * 0.6;
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -68,14 +69,9 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
 
   // Adjust canvas size based on screen size
   window.addEventListener("resize", () => {
-    adjustCanvasSize(canvas);
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.6;
   });
-}
-
-// Function to adjust canvas size based on screen size
-function adjustCanvasSize(canvas) {
-  canvas.width = window.innerWidth * 0.8;
-  canvas.height = window.innerHeight * 0.6;
 }
 
 // Function to clear the canvas
