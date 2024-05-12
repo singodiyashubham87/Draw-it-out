@@ -4,6 +4,7 @@ import { startDrawing, clearCanvas } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function App() {
   const canvasRef = useRef(null);
@@ -11,6 +12,8 @@ function App() {
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
+
+  const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,27 +25,45 @@ function App() {
   return (
     <>
       <div className="bg-[#d3d5d8] flex flex-col min-w-[100dvw] justify-center gsm:flex-row">
-        <div className="gsm:w-[10%] w-[85%] py-8 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
-          {rainbowColors?.map((val, i) => (
-            <BgColor
-              key={i}
-              color={val}
-              setBgColor={setBgColor}
-              canvas={canvasRef.current}
-            />
-          ))}
-        </div>
+        {showMenuAndBgColor && (
+          <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
+            {rainbowColors?.map((val, i) => (
+              <BgColor
+                key={i}
+                color={val}
+                setBgColor={setBgColor}
+                canvas={canvasRef.current}
+              />
+            ))}
+          </div>
+        )}
 
         <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
-          <Menu
-            isDrawing={isDrawing}
-            setIsDrawing={setIsDrawing}
-            thickness={thickness}
-            setThickness={setThickness}
-            color={color}
-            setColor={setColor}
-            canvasRef={canvasRef}
-          />
+          <div className="flex items-center gap-14">
+            {showMenuAndBgColor && (
+              <Menu
+                isDrawing={isDrawing}
+                setIsDrawing={setIsDrawing}
+                thickness={thickness}
+                setThickness={setThickness}
+                color={color}
+                setColor={setColor}
+                canvasRef={canvasRef}
+                showMenuAndBgColor={showMenuAndBgColor}
+                setShowMenuAndBgColor={setShowMenuAndBgColor}
+              />
+            )}
+            <div
+              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer ${
+                !showMenuAndBgColor && "mt-12"
+              }`}
+              onClick={() => {
+                setShowMenuAndBgColor((state) => !state);
+              }}
+            >
+              {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
+            </div>
+          </div>
           <canvas
             id="draw"
             className={`whiteboard bg-[#DBDCDF] rounded-[0.6rem] shadow-mdm ${
