@@ -39,7 +39,7 @@ function App() {
         )}
 
         <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
-          <div className="flex items-center gap-16">
+          <div className="flex items-center gap-14">
             {showMenuAndBgColor && (
               <Menu
                 isDrawing={isDrawing}
@@ -54,7 +54,7 @@ function App() {
               />
             )}
             <div
-              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer ${
+              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer ${
                 !showMenuAndBgColor && "mt-12"
               }`}
               onClick={() => {
