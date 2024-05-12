@@ -93,9 +93,9 @@ const Menu = ({
             id="dropdownHover"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`absolute z-10 ${isOpen ? '' : 'hidden'} divide-y bg-[#CBCCCF] rounded-lg shadow w-44 top-[3rem]`}
+            className={`absolute z-10 ${isOpen ? '' : 'hidden'} divide-y bg-[#CBCCCF] rounded-lg shadow w-48 top-[3.1rem]`}
           >
-            <ul className="text-sm text-gray-700 flex space-x-4" aria-labelledby="dropdownHoverButton">
+            <ul className="text-sm text-gray-700 flex space-x-3 p-3 justify-center" aria-labelledby="dropdownHoverButton">
               <li>
                 <RiScreenshot2Fill
                   className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
