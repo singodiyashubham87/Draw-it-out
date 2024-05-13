@@ -30,16 +30,18 @@ const Menu = ({
           }`}
           onClick={toggleIsDrawing}
           title="Draw"
-        />
+          />
+          <span>Pencil</span>
         </button>
         <button>
         <FaFeatherPointed
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             pencilWidth ? "bg-gray-400" : ""
           }`}
           onClick={() => setPencilWidth(!pencilWidth)}
           title="Brush Thickness"
-        />
+          />
+          <span>Thickness</span>
         </button>
         {pencilWidth && (
           <input
@@ -53,7 +55,7 @@ const Menu = ({
             className="cursor-pointer"
           />
         )}
-        <div className="p-[1rem] px-[1.5rem] rounded-[0.5rem] relative shadow-vsm hover:bg-[#B7BABF] cursor-pointer">
+        <div className="py-[1rem] px-[1.5rem] rounded-[0.5rem] w-12 h-12 relative shadow-vsm hover:bg-[#B7BABF] cursor-pointer">
           <input
             type="color"
             name="color"
@@ -62,13 +64,14 @@ const Menu = ({
             onChange={(e) => setColor(e.target.value)}
             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0`}
           />
+        <span className="absolute top-12 left-[0.4rem]">color</span>
         </div>
         <button>
         <RiScreenshot2Fill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] mx-auto cursor-pointer hover:bg-[#B7BABF]`}
           onClick={() => takeSnapshot(canvasRef.current, color)}
           title="Snapshot"
-        /></button>
+        /> <span>Screen shot</span> </button>
       </div>
     </>
   );
