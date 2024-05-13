@@ -4,7 +4,7 @@ import { startDrawing, clearCanvas } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash, FaMoon, FaSun } from "react-icons/fa";
 
 function App() {
   const canvasRef = useRef(null);
@@ -12,7 +12,7 @@ function App() {
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
-
+  const [darkMode, setDarkMode] = useState(null);
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
 
   useEffect(() => {
@@ -22,9 +22,16 @@ function App() {
     }
   }, [bgColor, color, thickness]);
 
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark')
+  };
+  
+
   return (
     <>
-      <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
+      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-black dark:text-white ">
         {showMenuAndBgColor && (
           <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
             {rainbowColors?.map((val, i) => (
@@ -38,8 +45,8 @@ function App() {
           </div>
         )}
 
-        <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
-          <div className="flex items-center gap-14">
+        <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0 dark:text-black">
+          <div className="flex items-center gap-14 shadow-black">
             {showMenuAndBgColor && (
               <Menu
                 isDrawing={isDrawing}
@@ -53,9 +60,13 @@ function App() {
                 setShowMenuAndBgColor={setShowMenuAndBgColor}
               />
             )}
+
             <div
-              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer ${
-                !showMenuAndBgColor && "mt-12"
+              className = "flex flex-row justify-center align-center space-x-10"
+            >
+              <div
+              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-lg dark:shadow-white dark:shadow-sm hover:bg-gray-400 cursor-pointer ${
+                !showMenuAndBgColor && "mt-10"
               }`}
               onClick={() => {
                 setShowMenuAndBgColor((state) => !state);
@@ -63,10 +74,18 @@ function App() {
             >
               {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
             </div>
+
+            <div
+              className={`darkLightModeToggle bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-400 cursor-pointer dark:bg-black shadow-black shadow-lg dark:shadow-white dark:shadow-sm ${!showMenuAndBgColor && "mt-10"}`}
+              onClick={toggleDarkMode}
+            >
+              {darkMode ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-black" />}
+            </div>
+            </div>
           </div>
           <canvas
             id="draw"
-            className={`whiteboard bg-[#DBDCDF] rounded-[0.6rem] shadow-mdm ${
+            className={`whiteboard bg-[#DBDCDF] rounded-[0.6rem] shadow-lg shadow-black dark:shadow-white dark:shadow-lg ${
               isDrawing
                 ? "cursor-crosshair"
                 : "cursor-default pointer-events-none"
@@ -74,7 +93,7 @@ function App() {
             ref={canvasRef}
           ></canvas>
           <div
-            className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"
+            className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-lg dark:shadow-white dark:shadow-md hover:bg-gray-400 cursor-pointer"
             onClick={() => {
               clearCanvas(canvasRef.current, bgColor);
               setIsDrawing(true);
@@ -82,7 +101,7 @@ function App() {
           >
             <RxCross1 />
           </div>
-          <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4">
+          <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
             Made with &#128157; by{" "}
             <a
               href="https://shubham-s-socials.vercel.app/"

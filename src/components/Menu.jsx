@@ -22,10 +22,10 @@ const Menu = ({
 
   return (
     <>
-      <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
+      <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm shadow-black flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem] dark:shadow-white dark:shadow-md">
         <button>
         <PiPencilSimpleFill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             isDrawing ? "bg-gray-400" : ""
           }`}
           onClick={toggleIsDrawing}
@@ -34,7 +34,7 @@ const Menu = ({
         </button>
         <button>
         <FaFeatherPointed
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             pencilWidth ? "bg-gray-400" : ""
           }`}
           onClick={() => setPencilWidth(!pencilWidth)}
@@ -53,7 +53,7 @@ const Menu = ({
             className="cursor-pointer"
           />
         )}
-        <div className="p-[1rem] px-[1.5rem] rounded-[0.5rem] relative shadow-vsm hover:bg-[#B7BABF] cursor-pointer">
+        <div className="p-[1rem] px-[1.5rem] rounded-[0.5rem] relative shadow-black shadow-vsm hover:bg-[#B7BABF] cursor-pointer">
           <input
             type="color"
             name="color"
@@ -65,7 +65,7 @@ const Menu = ({
         </div>
         <button>
         <RiScreenshot2Fill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
           onClick={() => takeSnapshot(canvasRef.current, color)}
           title="Snapshot"
         /></button>
