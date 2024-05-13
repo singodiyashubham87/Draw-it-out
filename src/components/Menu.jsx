@@ -98,21 +98,21 @@ const Menu = ({
             <ul className="text-sm text-gray-700 flex space-x-3 p-3 justify-center" aria-labelledby="dropdownHoverButton">
               <li>
                 <RiScreenshot2Fill
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={() => takeSnapshot(canvasRef.current, color)}
                   title="Snapshot"
                 />
               </li>
               <li>
                 <FaFilePdf 
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={()=>convertToPDF(canvasRef.current)}
                   title="PDF"
                 />
               </li>
               <li>
                 <TbFileTypeSvg
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={()=>convertToSVG(canvasRef.current)}
                   title="SVG"
                 />
