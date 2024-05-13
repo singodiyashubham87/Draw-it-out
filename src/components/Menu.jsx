@@ -4,6 +4,11 @@ import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { useState } from "react";
 import { takeSnapshot } from "../utils/canvas.js";
+import { PiPlus } from "react-icons/pi";
+import { PiMinus } from "react-icons/pi";
+import { increaseHeight } from "../utils/canvas.js";
+import { decreaseHeight } from "../utils/canvas.js";
+// import BgColor from "./BgColor.jsx";
 
 const Menu = ({
   isDrawing,
@@ -13,6 +18,7 @@ const Menu = ({
   color,
   setColor,
   canvasRef,
+  bgColor,
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
 
@@ -24,22 +30,22 @@ const Menu = ({
     <>
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
         <button>
-        <PiPencilSimpleFill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-            isDrawing ? "bg-gray-400" : ""
-          }`}
-          onClick={toggleIsDrawing}
-          title="Draw"
-        />
+          <PiPencilSimpleFill
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+              isDrawing ? "bg-gray-400" : ""
+            }`}
+            onClick={toggleIsDrawing}
+            title="Draw"
+          />
         </button>
         <button>
-        <FaFeatherPointed
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-            pencilWidth ? "bg-gray-400" : ""
-          }`}
-          onClick={() => setPencilWidth(!pencilWidth)}
-          title="Brush Thickness"
-        />
+          <FaFeatherPointed
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+              pencilWidth ? "bg-gray-400" : ""
+            }`}
+            onClick={() => setPencilWidth(!pencilWidth)}
+            title="Brush Thickness"
+          />
         </button>
         {pencilWidth && (
           <input
@@ -64,11 +70,26 @@ const Menu = ({
           />
         </div>
         <button>
-        <RiScreenshot2Fill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-          onClick={() => takeSnapshot(canvasRef.current, color)}
-          title="Snapshot"
-        /></button>
+          <RiScreenshot2Fill
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+            onClick={() => takeSnapshot(canvasRef.current, color)}
+            title="Snapshot"
+          />
+        </button>
+        <button>
+          <PiPlus
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+            onClick={() => increaseHeight(canvasRef.current, bgColor)}
+            title="IncreaseHeight"
+          />
+        </button>
+        <button>
+          <PiMinus
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+            onClick={() => decreaseHeight(canvasRef.current, bgColor)}
+            title="DecreaseHeight"
+          />
+        </button>
       </div>
     </>
   );
