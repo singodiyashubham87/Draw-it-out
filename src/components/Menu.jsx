@@ -79,18 +79,14 @@ const Menu = ({
         <button>
           <PiPlus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-            onClick={() =>
-              increaseHeight(canvasRef.current, bgColor, thickness, color)
-            }
+            onClick={() => increaseHeight(canvasRef.current, bgColor)}
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-            onClick={() =>
-              decreaseHeight(canvasRef.current, bgColor, thickness, color)
-            }
+            onClick={() => decreaseHeight(canvasRef.current, bgColor)}
             title="DecreaseHeight"
           />
         </button>
