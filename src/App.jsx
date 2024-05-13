@@ -12,6 +12,7 @@ function App() {
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
+
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
 
   useEffect(() => {
@@ -48,7 +49,8 @@ function App() {
                 color={color}
                 setColor={setColor}
                 canvasRef={canvasRef}
-                bgColor={bgColor}
+                showMenuAndBgColor={showMenuAndBgColor}
+                setShowMenuAndBgColor={setShowMenuAndBgColor}
               />
             )}
             <div
@@ -74,7 +76,7 @@ function App() {
           <div
             className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"
             onClick={() => {
-              clearCanvas(canvasRef.current, "#B7BABF");
+              clearCanvas(canvasRef.current, bgColor);
               setIsDrawing(true);
             }}
           >
