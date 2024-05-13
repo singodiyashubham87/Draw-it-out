@@ -18,6 +18,7 @@ const Menu = ({
   color,
   setColor,
   canvasRef,
+  bgColor,
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
 
@@ -76,17 +77,23 @@ const Menu = ({
           />
         </button>
         <button>
-        <PiPlus
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-          onClick={() => increaseHeight(canvasRef.current)}
-          title="IncreaseHeight"
-        /></button>
+          <PiPlus
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+            onClick={() =>
+              increaseHeight(canvasRef.current, bgColor, thickness, color)
+            }
+            title="IncreaseHeight"
+          />
+        </button>
         <button>
-        <PiMinus
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-          onClick={() => decreaseHeight(canvasRef.current)}
-          title="DecreaseHeight"
-        /></button>
+          <PiMinus
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+            onClick={() =>
+              decreaseHeight(canvasRef.current, bgColor, thickness, color)
+            }
+            title="DecreaseHeight"
+          />
+        </button>
       </div>
     </>
   );

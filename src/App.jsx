@@ -1,6 +1,6 @@
 import { RxCross1 } from "react-icons/rx";
 import { useEffect, useState, useRef } from "react";
-import { startDrawing, clearCanvas } from "./utils/canvas";
+import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
@@ -12,15 +12,20 @@ function App() {
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
-
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
+  const [canvasInitialized, setCanvasInitialized] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (canvas) {
+
+    if (canvas && !canvasInitialized) {
       startDrawing(canvas, color, thickness, bgColor);
+      setCanvasInitialized(true);
+      console.log("starting");
+    } else if (canvasInitialized) {
+      handleUpdates(canvas, color, thickness, bgColor);
     }
-  }, [bgColor, color, thickness]);
+  }, [bgColor, color, thickness, canvasInitialized]);
 
   return (
     <>
@@ -49,8 +54,7 @@ function App() {
                 color={color}
                 setColor={setColor}
                 canvasRef={canvasRef}
-                showMenuAndBgColor={showMenuAndBgColor}
-                setShowMenuAndBgColor={setShowMenuAndBgColor}
+                bgColor={bgColor}
               />
             )}
             <div
@@ -76,7 +80,7 @@ function App() {
           <div
             className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"
             onClick={() => {
-              clearCanvas(canvasRef.current, bgColor);
+              clearCanvas(canvasRef.current, "#B7BABF");
               setIsDrawing(true);
             }}
           >
