@@ -93,5 +93,5 @@ Thanks a lot for spending your time helping this project grow. Keep rocking!
 
 # Message from PA
 
-Thank you for visiting Draw-it-out!💝
+Thank you for visiting Draw-it-out! 💝
 </br>Feel free to explore the code, contribute, and provide feedback.
