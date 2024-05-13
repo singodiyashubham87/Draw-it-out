@@ -37,6 +37,7 @@ npm run dev
 * **Snapshot:** Capture and download snapshots of the whiteboard canvas.
 * **Clear Canvas:** Clear the canvas with a single click.
 * **Responsive Design:** The application is responsive and works seamlessly across different screen sizes.
+* **Resizable Board:** Adjust the height of the board using Increase and Decrease buttons.
 
 # Using Drawing Tools
 
@@ -44,6 +45,7 @@ npm run dev
 * **Brush Thickness:** This feature will allow you to select the thickness of the brush tool.
 * **Color Picker:** This feature will help to select a color of your choice. The user gets the option to select the color depending on three color models, namely, 'RGB', 'HSL' and 'HEX'. Optionally, the user can select any color on the screen as well, with the help of a color picker.
 * **Snapshot:** The snapshot option allows you to store your creativity in an image form(PNG).
+* **Canvas Height**: This feature will allow you to select the height of the canvas.
 
 # Tech Stack
 
@@ -75,6 +77,13 @@ You can find the contributing guideline here -> [CONTRIBUTING GUIDELINES](CONTRI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Thanks to all Contributors
+
+Thanks a lot for spending your time helping this project grow. Keep rocking!
+
+<a href="https://github.com/singodiyashubham87/Draw-it-out/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=singodiyashubham87/Draw-it-out" />
+</a>
 
 # Message from PA
 Thank you for visiting Draw-it-out!💝
