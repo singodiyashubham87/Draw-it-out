@@ -1,4 +1,6 @@
 // Array to store the drawing history
+import jsPdf from "jspdf";
+import { Context } from "svgcanvas";
 let drawHistory = [];
 
 export function startDrawing(canvas, color, lineThickness, bgColor) {
@@ -84,6 +86,36 @@ export const takeSnapshot = (canvas) => {
   const link = document.createElement("a");
   link.href = snapshot;
   link.download = "snapshot.png";
+  link.click();
+};
+
+// Function to handle converting it into PDF format
+export const convertToPDF = (canvas) => {
+  const imgData = canvas.toDataURL();
+  const pdf = new jsPdf();
+  const width = pdf.internal.pageSize.getWidth();
+  const height = pdf.internal.pageSize.getHeight();
+  console.log("Width & Height: ", width, height);
+  pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+  pdf.save("download.pdf");
+};
+
+// Function to handle converting it into SVG format
+export const convertToSVG = (canvas) => {
+  const context2D = canvas.getContext("2d");
+  const options = {
+    width: canvas.width,
+    height: canvas.height,
+    ctx: context2D,
+  };
+  const ctx = new Context(options);
+  const svgContent = ctx.getSerializedSvg();
+  const blob = new Blob([svgContent], { type: "image/svg+xml" });
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "image.svg";
+
   link.click();
 };
 
