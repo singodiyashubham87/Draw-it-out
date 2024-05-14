@@ -5,6 +5,15 @@ import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaBookOpen } from "react-icons/fa";
+import { VscClose } from "react-icons/vsc";
+import { PiPencilSimpleFill } from "react-icons/pi";
+import { FaFeatherPointed } from "react-icons/fa6";
+import { RiScreenshot2Fill } from "react-icons/ri";
+import {FaFilePdf} from 'react-icons/fa'
+import { TbFileTypeSvg } from "react-icons/tb";
+import { PiPlus } from "react-icons/pi";
+import { PiMinus } from "react-icons/pi";
 
 function App() {
   const canvasRef = useRef(null);
@@ -13,29 +22,38 @@ function App() {
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
-
+  const [modal,setModal]=useState(false)
+  const style={
+    guideline:`p-4 flex text-xs`,
+  }
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
       startDrawing(canvas, color, thickness, bgColor);
     }
   }, [bgColor, color, thickness]);
-
+  const showGuidelines=()=>{
+    setModal(!modal)
+  }
+  const closeModal=()=>{
+    setModal(false)
+  }
   return (
     <>
         <div className="relative">
-        <div className="flex flex-col justify-center text-center items-center bg-gray-800 pb-8 pt-8">
-        <h1 className="headingfont text-4xl font-bold text-slate-100 p-2">Draw it Out!</h1>
-        <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
-        </div>
-        {/* <div className="absolute top-0 right-0 p-6">
+          <div className="flex flex-col justify-center text-center items-center bg-gray-800 pb-8 pt-8">
+          <h1 className="headingfont text-4xl font-bold text-slate-100 p-2">Draw it Out!</h1>
+          <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
+          </div>
+          <div className="absolute top-0 right-0 p-6">
           <FaBookOpen 
-            size={28} 
-            color="white" 
-            className="bg-black p-1 rounded-xl"
+          size={28} 
+          color="white" 
+          className="bg-black p-1 rounded-xl"
+          onClick={showGuidelines}
           />
-        </div> */}
-      </div>
+          </div>
+        </div>
     
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
         {showMenuAndBgColor && (
@@ -104,6 +122,25 @@ function App() {
             </a>
             !
           </h1>
+        </div>
+        <div className={modal ? 'z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100': 'fixed right-[-100%]'} onClick={showGuidelines} >
+        <VscClose
+              size={20}
+              color="white"
+              onClick={closeModal}
+              className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
+            />
+            <ul className='pt-18 p-4'>
+              <li className='p-2 font-bold text-lg uppercase'>Guidelines</li>
+              <li className={style.guideline}><PiPencilSimpleFill/><span className="ml-2">Draw your heart out using the pen.</span></li>
+              <li className={style.guideline}><FaFeatherPointed/><span className="ml-2"> Use a light touch for delicate lines.</span></li>
+              <li className={style.guideline}><RiScreenshot2Fill/><span className="ml-2"> Capture your screen for reference.</span></li>
+              <li className={style.guideline}><FaFilePdf/> <span className="ml-2">Export your work as a PDF for easy sharing.</span></li>
+              <li className={style.guideline}><TbFileTypeSvg/><span className="ml-2"> Save your artwork as an SVG for scalability.</span></li>
+              <li className={style.guideline}><PiPlus/><span className="ml-2"> Zoom in to work on finer details.</span></li>
+              <li className={style.guideline}><PiMinus/><span className="ml-2"> Zoom out for an overview of your drawing.</span></li>
+              <li className={style.guideline}><FaRegEye/><span className="ml-2">View only your canvas.</span></li>
+            </ul>
         </div>
       </div>
     </>
