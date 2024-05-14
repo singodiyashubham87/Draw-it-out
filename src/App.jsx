@@ -5,6 +5,39 @@ import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import Joyride from "react-joyride";
+
+const tourSteps = [
+  {
+    target: "body",
+    placement: "center",
+    title: "Lets Get Started",
+    content:
+      "Seems like it’s your first time here. Follow this quick walkthrough to know how get around. ",
+    disableBeacon: true,
+  },
+  {
+    target: ".board",
+    content: "Click here to select a tool.",
+    disableBeacon: true,
+  },
+  {
+    target: ".color-pallet",
+    content: "Select a Color from Here.",
+    disableBeacon: true,
+  },
+  {
+    target: "#draw",
+    content: "Explore your Inner Picasso here.",
+    disableBeacon: true,
+  },
+  {
+    target: "body",
+    placement: "center",
+    content: "Now All Set :)",
+    disableBeacon: true,
+  },
+];
 
 function App() {
   const canvasRef = useRef(null);
@@ -13,6 +46,7 @@ function App() {
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
+  const [steps] = useState(tourSteps);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -23,9 +57,11 @@ function App() {
 
   return (
     <>
+      <Joyride steps={steps} continuous showSkipButton={true} />
+      
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
         {showMenuAndBgColor && (
-          <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
+          <div className="color-pallet gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
             {rainbowColors?.map((val, i) => (
               <BgColor
                 key={i}
