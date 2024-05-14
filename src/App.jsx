@@ -23,6 +23,20 @@ function App() {
 
   return (
     <>
+        <div className="relative">
+        <div className="flex flex-col justify-center text-center items-center bg-gray-800 pb-8 pt-8">
+        <h1 className="headingfont text-4xl font-bold text-slate-100 p-2">Draw it Out!</h1>
+        <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
+        </div>
+        {/* <div className="absolute top-0 right-0 p-6">
+          <FaBookOpen 
+            size={28} 
+            color="white" 
+            className="bg-black p-1 rounded-xl"
+          />
+        </div> */}
+      </div>
+    
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
         {showMenuAndBgColor && (
           <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
