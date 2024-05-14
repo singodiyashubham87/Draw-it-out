@@ -36,6 +36,15 @@ function App() {
           </a>
         {showMenuAndBgColor && (
           <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
+            <input
+            type="color"
+            name="color"
+            id="color"
+            title="Color Picker"
+            // defaultValue={bgColor}
+            onChange={(e) => setBgColor(e.target.value)}
+            className={`cursor-pointer m-auto w-[2rem] h-[2rem] vsm:w-[3rem] vsm:h-[3rem]  rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600 `}
+          />
             {rainbowColors?.map((val, i) => (
               <BgColor
                 key={i}
