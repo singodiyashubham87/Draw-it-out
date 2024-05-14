@@ -33,7 +33,7 @@ function App() {
           ))}
         </div>
 
-        <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
+        <div className="container w-[100%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0" >
           <Menu
             isDrawing={isDrawing}
             setIsDrawing={setIsDrawing}
@@ -51,6 +51,7 @@ function App() {
                 : "cursor-default pointer-events-none"
             }`}
             ref={canvasRef}
+            style={{width:'85%',height:'70vh'}}
           ></canvas>
           <div
             className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"
