@@ -22,7 +22,7 @@ function App() {
     if (canvas) {
       startDrawing(canvas, color, thickness, bgColor);
     }
-  }, [bgColor, color, thickness]);
+  }, [bgColor]);
 
   return (
     <>
