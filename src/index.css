@@ -14,8 +14,21 @@ body{
   height: 100%;
   width: 100%;
 }
+
 .headingfont {
   font-family: "Love Ya Like A Sister", cursive;
   font-weight: 400;
   font-style: normal;
+}
+
+#draw{
+  width: 90%;
+  height: 70vh;
+}
+
+@media (max-width:570px) {
+  body #draw{
+    width: 100%;
+    height: 56vh;
+  }
 }
