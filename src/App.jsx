@@ -1,6 +1,6 @@
 import { RxCross1 } from "react-icons/rx";
 import { useEffect, useState, useRef } from "react";
-import { startDrawing, clearCanvas } from "./utils/canvas";
+import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
@@ -19,10 +19,19 @@ function App() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    
     if (canvas) {
       startDrawing(canvas, color, thickness, bgColor);
+      
     }
-  }, [bgColor, color, thickness]);
+  }, []);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    
+    if (canvas) {
+      handleUpdates(canvas, color, thickness, bgColor);
+    }
+  }, [thickness]);
 
   return (
     <>
