@@ -87,9 +87,9 @@ function App() {
       
          {/* Buy me a coffee element */}
          <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="sm:absolute flex items-center right-10 top-4 relative ml-[90%] sm:ml-0 ">
-            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2 dark:border-white">
-              <SiBuymeacoffee className="text-xl mx-auto sm:mr-2 dark:text-white" /> {/* Icon */}
-              <span className="hidden sm:block text-base font-cursive dark:text-white">Buy me a Coffee</span> {/* Text */}
+            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-gray-400 rounded-xl p-2 dark:border-white dark:bg-gray-400 dark:hover:bg-gray-100">
+              <SiBuymeacoffee className="text-xl mx-auto sm:mr-2 dark:text-black" /> {/* Icon */}
+              <span className="hidden sm:block text-base font-cursive dark:text-black ">Buy me a Coffee</span> {/* Text */}
             </button>
           </a>
         {showMenuAndBgColor && (
