@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { PiPencilSimpleFill } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
+import { RxReset } from "react-icons/rx";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import {FaFilePdf} from 'react-icons/fa'
 import { TbFileTypeSvg } from "react-icons/tb";
@@ -36,6 +37,12 @@ const Menu = ({
     setIsDrawing(!isDrawing);
   };
 
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
   return (
     <>
       <div className="board max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
@@ -53,8 +60,17 @@ const Menu = ({
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
               pencilWidth ? "bg-gray-400" : ""
             }`}
-            onClick={() => setPencilWidth(!pencilWidth)}
+            onClick={() => `setPencilWidth`(!pencilWidth)}
             title="Brush Thickness"
+          />
+        </button>
+        <button>
+          < RxReset
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+              pencilWidth ? "bg-gray-400" : ""
+            }`}
+            onClick={clearCanvas}
+            title="Clear"
           />
         </button>
         {pencilWidth && (
