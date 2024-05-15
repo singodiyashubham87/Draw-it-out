@@ -94,7 +94,7 @@ function App() {
           <h1 className="headingfont text-4xl font-bold text-slate-100 p-2">Draw it Out!</h1>
           <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
           </div>
-          <button className="absolute top-0 right-0 p-6">
+          <button className="absolute top-0 left-0 p-6">
           <FaBookOpen 
           size={28} 
           color="white" 
@@ -109,7 +109,7 @@ function App() {
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
          {/* Buy me a coffee element */}
          <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="sm:absolute flex items-center right-10 top-4 relative ml-[90%] sm:ml-0">
-            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
+            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-slate-200 hover:bg-[#c6c9ce] rounded-xl p-2">
               <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" /> {/* Icon */}
               <span className="hidden sm:block text-base font-cursive">Buy me a Coffee</span> {/* Text */}
             </button>
