@@ -1,10 +1,44 @@
 import { RxCross1 } from "react-icons/rx";
 import { useEffect, useState, useRef } from "react";
-import { startDrawing, clearCanvas } from "./utils/canvas";
+import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
 import { FaRegEye, FaRegEyeSlash, FaMoon, FaSun } from "react-icons/fa";
+
+import Joyride from "react-joyride";
+
+const tourSteps = [
+  {
+    target: "body",
+    placement: "center",
+    title: "Lets Get Started",
+    content:
+      "Seems like it’s your first time here. Follow this quick walkthrough to know how get around. ",
+    disableBeacon: true,
+  },
+  {
+    target: ".board",
+    content: "Click here to select a tool.",
+    disableBeacon: true,
+  },
+  {
+    target: ".color-pallet",
+    content: "Select a Color from Here.",
+    disableBeacon: true,
+  },
+  {
+    target: "#draw",
+    content: "Explore your Inner Picasso here.",
+    disableBeacon: true,
+  },
+  {
+    target: "body",
+    placement: "center",
+    content: "Now All Set :)",
+    disableBeacon: true,
+  },
+];
 
 import { SiBuymeacoffee } from "react-icons/si";
 
@@ -16,16 +50,25 @@ function App() {
   const [bgColor, setBgColor] = useState("#B7BABF");
   const [darkMode, setDarkMode] = useState(null);
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
-  
+  const [steps] = useState(tourSteps);
 
   const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey"
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    
     if (canvas) {
       startDrawing(canvas, color, thickness, bgColor);
+      
     }
-  }, [bgColor, color, thickness]);
+  }, []);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    
+    if (canvas) {
+      handleUpdates(canvas, color, thickness, bgColor);
+    }
+  }, [thickness]);
 
 
   const toggleDarkMode = () => {
@@ -40,6 +83,8 @@ function App() {
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-black dark:text-white ">
 
 
+      <Joyride steps={steps} continuous showSkipButton={true} />
+      
          {/* Buy me a coffee element */}
          <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="sm:absolute flex items-center right-10 top-4 relative ml-[90%] sm:ml-0 ">
             <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2 dark:border-white">
@@ -48,8 +93,8 @@ function App() {
             </button>
           </a>
         {showMenuAndBgColor && (
-          <div className="gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
-            <input
+          <div className="color-pallet gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
+          <input
             type="color"
             name="color"
             id="color"

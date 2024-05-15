@@ -68,7 +68,10 @@ const Menu = ({
             value={thickness || 10}
             min={1}
             max={100}
-            onChange={(e) => setThickness(e.target.value)}
+            onChange={(e) => {
+              setThickness(e.target.value);
+            }}
+              
             className="cursor-pointer"
           />
         )}
