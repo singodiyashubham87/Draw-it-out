@@ -3,7 +3,8 @@ import { PiPencilSimpleFill } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { useState } from "react";
-import { takeSnapshot } from "../utils/canvas.js";
+import { takeSnapshot,convertToPDF,convertToSVG } from "../utils/canvas.js";
+
 
 const Menu = ({
   isDrawing,
@@ -13,6 +14,7 @@ const Menu = ({
   color,
   setColor,
   canvasRef,
+  bgColor,
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
 

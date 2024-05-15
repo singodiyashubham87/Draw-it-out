@@ -4,6 +4,7 @@ import { startDrawing, clearCanvas } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
+
 import { FaRegEye, FaRegEyeSlash, FaMoon, FaSun } from "react-icons/fa";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [bgColor, setBgColor] = useState("#B7BABF");
   const [darkMode, setDarkMode] = useState(null);
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
+  
 
   useEffect(() => {
     const canvas = canvasRef.current;
