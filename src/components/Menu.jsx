@@ -38,7 +38,7 @@ const Menu = ({
 
   return (
     <>
-      <div className="board max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center   items-center gap-[1rem] md:gap-[3rem] px-[2rem] py-6 rounded-[0.6rem]">
+      <div className="board max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center   items-center gap-[1rem] md:gap-[3rem] px-[2rem] pt-6 pb-10 rounded-[0.6rem]">
         <button className=" relative">
           <PiPencilSimpleFill
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
@@ -47,7 +47,7 @@ const Menu = ({
             onClick={toggleIsDrawing}
             title="Draw"
             />
-          <span className=" absolute left-0 ">Pencil</span>
+          <span className=" absolute left-0  top-14 ">Pencil</span>
         </button>
         <button className="relative">
           <FaFeatherPointed
@@ -57,7 +57,7 @@ const Menu = ({
             onClick={() => setPencilWidth(!pencilWidth)}
             title="Brush Thickness"
             />
-          <span className=" absolute -left-3">Thickness</span>
+          <span className=" absolute -left-3 top-14">Thickness</span>
         </button>
         {pencilWidth && (
           <input
@@ -83,7 +83,7 @@ const Menu = ({
             onChange={(e) => setColor(e.target.value)}
             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0`}
           />
-        <span className="absolute top-12 left-[0.3rem]">Color</span>
+        <span className="absolute top-14 left-[0.3rem]">Color</span>
         </div>
         <div className="relative">
           <button
