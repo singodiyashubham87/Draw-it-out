@@ -47,6 +47,7 @@ function App() {
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
+  const [height,setHeight]=useState(70)
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
   const [steps] = useState(tourSteps);
 
@@ -67,7 +68,14 @@ function App() {
       handleUpdates(canvas, color, thickness, bgColor);
     }
   }, [thickness]);
-
+const handleHeight=(val)=>setHeight(val)
+useEffect(()=>{
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
+  const imageData = ctx.getImageData(0, 0, canvas.width,height-(height-70));
+  console.log(height-(height-70))
+  ctx.putImageData(imageData, 0, 0);
+},[height])
   return (
     <>
       <Joyride steps={steps} continuous showSkipButton={true} />
@@ -114,6 +122,8 @@ function App() {
                 setColor={setColor}
                 canvasRef={canvasRef}
                 bgColor={bgColor}
+                handleheight={handleHeight}
+                height={height}
               />
             )}
             <div
@@ -129,6 +139,7 @@ function App() {
           </div>
           <canvas
             id="draw"
+            style={{height:`${height}vh`}}
             className={`whiteboard bg-[#DBDCDF] rounded-[0.6rem] shadow-mdm ${
               isDrawing
                 ? "cursor-crosshair"
