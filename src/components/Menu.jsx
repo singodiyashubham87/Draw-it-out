@@ -4,6 +4,7 @@ import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { useState } from "react";
 import { takeSnapshot } from "../utils/canvas.js";
+import DrawingShapes from "../components/DrawingShapes";
 
 const Menu = ({
   isDrawing,
@@ -59,6 +60,8 @@ const Menu = ({
             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0`}
           />
         </div>
+        <DrawingShapes className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+          title="DrawShape" />
         <RiScreenshot2Fill
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
           onClick={() => takeSnapshot(canvasRef.current, color)}
