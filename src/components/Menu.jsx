@@ -2,10 +2,15 @@
 import { PiPencilSimpleFill } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
-import {FaFilePdf} from 'react-icons/fa'
+import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
 import { useState } from "react";
-import { takeSnapshot,convertToPDF,convertToSVG } from "../utils/canvas.js";
+import {
+  convertToPDF,
+  convertToSVG,
+  convertToJPG,
+  convertToPng,
+} from "../utils/canvas.js";
 import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
 import { increaseHeight } from "../utils/canvas.js";
@@ -68,7 +73,6 @@ const Menu = ({
             onChange={(e) => {
               setThickness(e.target.value);
             }}
-              
             className="cursor-pointer"
           />
         )}
@@ -93,8 +97,20 @@ const Menu = ({
             onMouseLeave={handleMouseLeave}
           >
             Save As
-            <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+            <svg
+              className="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 1 4 4 4-4"
+              />
             </svg>
           </button>
 
@@ -102,27 +118,44 @@ const Menu = ({
             id="dropdownHover"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`absolute z-10 ${isOpen ? '' : 'hidden'} divide-y bg-[#CBCCCF] rounded-lg shadow w-48 top-[3.1rem]`}
+            className={`absolute z-10 ${
+              isOpen ? "" : "hidden"
+            } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem]`}
           >
-            <ul className="text-sm text-gray-700 flex space-x-3 p-3 justify-center" aria-labelledby="dropdownHoverButton">
+            <ul
+              className="text-sm text-gray-700 flex space-x-5 p-5 justify-center"
+              aria-labelledby="dropdownHoverButton"
+            >
               <li>
-                <RiScreenshot2Fill
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-                  onClick={() => takeSnapshot(canvasRef.current, color)}
-                  title="Snapshot"
-                />
+                <button
+                  className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  onClick={() => convertToPng(canvasRef.current)}
+                  title="ToPNG"
+                >
+                  <p>PNG</p>
+                </button>
+              </li>
+
+              <li>
+                <button
+                  className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  onClick={() => convertToJPG(canvasRef.current)}
+                  title="ToJPG"
+                >
+                  <p>JPG</p>
+                </button>
               </li>
               <li>
-                <FaFilePdf 
+                <FaFilePdf
                   className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-                  onClick={()=>convertToPDF(canvasRef.current)}
+                  onClick={() => convertToPDF(canvasRef.current)}
                   title="PDF"
                 />
               </li>
               <li>
                 <TbFileTypeSvg
                   className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
-                  onClick={()=>convertToSVG(canvasRef.current)}
+                  onClick={() => convertToSVG(canvasRef.current)}
                   title="SVG"
                 />
               </li>
