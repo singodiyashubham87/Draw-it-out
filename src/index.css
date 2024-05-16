@@ -14,3 +14,13 @@ body{
   height: 100%;
   width: 100%;
 }
+#draw{
+  width: 90%;
+  height: 70vh;
+}
+@media (max-width:570px) {
+  body #draw{
+    width: 100%;
+    height: 56vh;
+  }
+}

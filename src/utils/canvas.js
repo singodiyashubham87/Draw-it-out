@@ -16,7 +16,6 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
   ctx.lineWidth = lineThickness;
 
   let isDrawing = false;
-
   // Main draw function
   const draw = (e) => {
     if (!isDrawing) return;
