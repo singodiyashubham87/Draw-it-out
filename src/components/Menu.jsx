@@ -38,7 +38,7 @@ const Menu = ({
 
   return (
     <>
-      <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
+      <div className="board max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
         <button>
           <PiPencilSimpleFill
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
@@ -65,7 +65,10 @@ const Menu = ({
             value={thickness || 10}
             min={1}
             max={100}
-            onChange={(e) => setThickness(e.target.value)}
+            onChange={(e) => {
+              setThickness(e.target.value);
+            }}
+              
             className="cursor-pointer"
           />
         )}
