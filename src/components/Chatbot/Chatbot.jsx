@@ -102,7 +102,7 @@ const steps = [
                 <button onClick={() => window.location.reload()}>End Chat</button>
             </div>
         ),
-        asMessage: true, // Render the component as a chat message
+        asMessage: true, // Render the component as a message
         end: true,
     },
 ];
