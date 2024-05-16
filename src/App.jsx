@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
+import { SiBuymeacoffee } from "react-icons/si";
 import BgColor from "./components/BgColor";
+import Chatbot from "./components/Chatbot/Chatbot";
 import Menu from "./components/Menu";
 import { clearCanvas, startDrawing } from "./utils/canvas";
 import { rainbowColors } from "./utils/helpers";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { SiBuymeacoffee } from "react-icons/si";
-
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
@@ -103,6 +102,8 @@ function App() {
             !
           </h1>
         </div>
+        <div className="App"></div>
+        <Chatbot />
       </div>
     </>
   );
