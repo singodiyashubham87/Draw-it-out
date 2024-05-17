@@ -13,6 +13,7 @@ const Menu = ({
   color,
   setColor,
   canvasRef,
+  setBrushStyle
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
 
@@ -24,16 +25,24 @@ const Menu = ({
     <>
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
         <PiPencilSimpleFill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-            isDrawing ? "bg-gray-400" : ""
-          }`}
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${isDrawing ? "bg-gray-400" : ""
+            }`}
           onClick={toggleIsDrawing}
           title="Draw"
         />
+          <select
+            id="brushStyle"
+            className="ml-2 mt-1 p-1 border rounded"
+            onChange={(e) => setBrushStyle(e.target.value)}
+          >
+            <option value="solid">Solid</option>
+            <option value="dotted">Dotted</option>
+            <option value="dashed">Dashed</option>
+            <option value="faded">Faded</option>
+          </select>
         <FaFeatherPointed
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-            pencilWidth ? "bg-gray-400" : ""
-          }`}
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${pencilWidth ? "bg-gray-400" : ""
+            }`}
           onClick={() => setPencilWidth(!pencilWidth)}
           title="Brush Thickness"
         />

@@ -12,12 +12,14 @@ function App() {
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
 
+  const [brushStyle, setBrushStyle] = useState('solid');
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
-      startDrawing(canvas, color, thickness, bgColor);
+      startDrawing(canvas, color, thickness, bgColor,brushStyle);
     }
-  }, [bgColor, color, thickness]);
+  }, [bgColor, color, thickness,brushStyle]);
 
   return (
     <>
@@ -42,6 +44,7 @@ function App() {
             color={color}
             setColor={setColor}
             canvasRef={canvasRef}
+            setBrushStyle={setBrushStyle}
           />
           <canvas
             id="draw"

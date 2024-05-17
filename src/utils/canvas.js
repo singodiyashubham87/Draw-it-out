@@ -1,7 +1,13 @@
 // Array to store the drawing history
 let drawHistory = [];
 
-export function startDrawing(canvas, color, lineThickness, bgColor) {
+export function startDrawing(
+  canvas,
+  color,
+  lineThickness,
+  bgColor,
+  brushStyle
+) {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.8;
   canvas.height = window.innerHeight * 0.6;
@@ -66,6 +72,29 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
     const offsetY = touch.clientY - canvas.offsetTop;
     draw({ offsetX, offsetY });
   });
+
+  switch (brushStyle) {
+    case "solid":
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1.0;
+      break;
+    case "dotted":
+      ctx.setLineDash([2, 20]);
+      ctx.globalAlpha = 2.0;
+      break;
+    case "dashed":
+      const dotSpacing = 20; // Adjust the spacing between dots as needed
+      ctx.setLineDash([dotSpacing / 2, dotSpacing]); // Fixed dot spacing
+      ctx.globalAlpha = 1.0;
+      break;
+    case "faded":
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 0.1;
+      ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+      break;
+    default:
+      break;
+  }
 }
 
 // Function to clear the canvas
