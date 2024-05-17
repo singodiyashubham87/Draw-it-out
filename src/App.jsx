@@ -69,7 +69,7 @@ function App() {
     if (canvas) {
       handleUpdates(canvas, color, thickness, bgColor);
     }
-  }, [thickness]);
+  }, [thickness,color]);
 
   
   const toggleDarkMode = () => {
