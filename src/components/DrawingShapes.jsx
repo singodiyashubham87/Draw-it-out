@@ -12,31 +12,34 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
   const [selectedTool, setSelectedTool] = useState("brush");
   const [snapshot, setSnapshot] = useState(null);
 
-  const toggleIsDrawing = () => {
-    setIsDrawing(!isDrawing);
-  };
-
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
     const drawRect = (e) => {
+      const currentX = e.offsetX;
+      const currentY = e.offsetY;
+      const width = currentX - prevMouseX;
+      const height = currentY - prevMouseY;
+      ctx.putImageData(snapshot, 0, 0);
       if (!fillColor) {
-        ctx.strokeRect(prevMouseX, prevMouseY, e.offsetX - prevMouseX, e.offsetY - prevMouseY);
+        ctx.strokeRect(prevMouseX, prevMouseY, width, height);
       } else {
-        ctx.fillRect(prevMouseX, prevMouseY, e.offsetX - prevMouseX, e.offsetY - prevMouseY);
+        ctx.fillRect(prevMouseX, prevMouseY, width, height);
       }
     };
 
     const drawCircle = (e) => {
+      ctx.putImageData(snapshot, 0, 0);
       ctx.beginPath();
-      let radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2));
+      const radius = Math.sqrt(Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2));
       ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
       fillColor ? ctx.fill() : ctx.stroke();
     };
 
     const drawTriangle = (e) => {
+      ctx.putImageData(snapshot, 0, 0);
       ctx.beginPath();
       ctx.moveTo(prevMouseX, prevMouseY);
       ctx.lineTo(e.offsetX, e.offsetY);
@@ -50,6 +53,7 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
       setPrevMouseX(e.offsetX);
       setPrevMouseY(e.offsetY);
       ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
       ctx.lineWidth = brushWidth;
       ctx.strokeStyle = selectedColor;
       ctx.fillStyle = selectedColor;
@@ -58,7 +62,6 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
 
     const drawing = (e) => {
       if (!isDrawing) return;
-      ctx.putImageData(snapshot, 0, 0);
 
       if (selectedTool === "brush") {
         ctx.lineTo(e.offsetX, e.offsetY);
@@ -72,39 +75,38 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
       }
     };
 
-    const stopDrawing = () => setIsDrawing(false);
+    const stopDrawing = () => {
+      if (!isDrawing) return;
+      ctx.closePath();
+      setIsDrawing(false);
+    };
 
+    // Add event listeners
     canvas.addEventListener("mousedown", startDraw);
     canvas.addEventListener("mousemove", drawing);
     canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseout", stopDrawing);
 
+    // Cleanup event listeners
     return () => {
       canvas.removeEventListener("mousedown", startDraw);
       canvas.removeEventListener("mousemove", drawing);
       canvas.removeEventListener("mouseup", stopDrawing);
+      canvas.removeEventListener("mouseout", stopDrawing);
     };
   }, [brushWidth, fillColor, selectedTool, selectedColor, snapshot, canvasRef, isDrawing]);
-
 
   return (
     <div className="drawing-container flex">
       <div className="controls">
-        <button>
-          <PiPencilSimpleFill
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-              isDrawing? "bg-gray-400" : ""
-            }`}
-            onClick={()=>{
-              setSelectedTool("brush"),
-              toggleIsDrawing()
-            }
-          }
-            title="Draw"
-          />
-        </button>
-        {/* <label className="title">Shapes</label> */}
         <ul className="options flex space-x-4">
-          <li className="option tool" id="rectangle" onClick={() => setSelectedTool("rectangle")}>
+          <li className="option tool" id="brush" onClick={() => setSelectedTool("brush")}>
+            <PiPencilSimpleFill className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800 ${
+            isDrawing ? "bg-gray-400" : ""
+          }`} />
+          </li>
+          <div className="flex space-x-4 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800">
+          <li className="option tool " id="rectangle" onClick={() => setSelectedTool("rectangle")}>
             <img src={rectImg} alt="Rectangle" />
           </li>
           <li className="option tool" id="circle" onClick={() => setSelectedTool("circle")}>
@@ -113,9 +115,10 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
           <li className="option tool" id="triangle" onClick={() => setSelectedTool("triangle")}>
             <img src={triangleImg} alt="Triangle" />
           </li>
+          </div>
         </ul>
-        </div>
       </div>
+    </div>
   );
 };
 
