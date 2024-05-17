@@ -4,6 +4,7 @@ import { startDrawing, clearCanvas } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
+import Footer from "./components/Footer";
 
 function App() {
   const canvasRef = useRef(null);
@@ -73,8 +74,10 @@ function App() {
           </h1>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }
+
 
 export default App;
