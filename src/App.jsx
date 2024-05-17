@@ -8,7 +8,7 @@ import { rainbowColors } from "./utils/helpers";
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
-  const [thickness, setThickness] = useState(10);
+  const [thickness, setThickness] = useState(5);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
 
@@ -45,6 +45,7 @@ function App() {
             setColor={setColor}
             canvasRef={canvasRef}
             setBrushStyle={setBrushStyle}
+            brushStyle={brushStyle}
           />
           <canvas
             id="draw"

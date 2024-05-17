@@ -24,18 +24,33 @@ export function startDrawing(
   // Main draw function
   const draw = (e) => {
     if (!isDrawing) return;
+    
+    // Initialize lastX and lastY if not already initialized
     if (lastX === 0 && lastY === 0) {
       lastX = e.offsetX;
       lastY = e.offsetY;
     }
+  
+    // Begin a new path for the current stroke
     ctx.beginPath();
+  
+    // Move to the last drawn point
     ctx.moveTo(lastX, lastY);
+  
+    // Draw a line to the current mouse position
     ctx.lineTo(e.offsetX, e.offsetY);
+  
+    // Stroke the path to display it on the canvas
     ctx.stroke();
+  
+    // Update lastX and lastY for the next drawing action
     lastX = e.offsetX;
     lastY = e.offsetY;
+  
+    // Add the current position to the drawing history
     drawHistory.push({ x: e.offsetX, y: e.offsetY });
   };
+  
 
   let lastX = 0;
   let lastY = 0;
@@ -89,8 +104,8 @@ export function startDrawing(
       break;
     case "faded":
       ctx.setLineDash([]);
-      ctx.globalAlpha = 0.1;
-      ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.globalAlpha = 0.01;
+      
       break;
     default:
       break;

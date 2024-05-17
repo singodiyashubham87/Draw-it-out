@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { PiPencilSimpleFill } from "react-icons/pi";
+import { FaChevronDown } from "react-icons/fa";
+
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { useState } from "react";
@@ -13,33 +15,82 @@ const Menu = ({
   color,
   setColor,
   canvasRef,
-  setBrushStyle
+  setBrushStyle,
+  brushStyle
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const toggleIsDrawing = () => {
     setIsDrawing(!isDrawing);
   };
-
+  const handleBrushStyleChange = (style) => {
+    setBrushStyle(style);
+    setIsDropdownOpen(false); // Close the dropdown after selecting a style
+  };
   return (
     <>
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
-        <PiPencilSimpleFill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${isDrawing ? "bg-gray-400" : ""
+      <div className="relative">
+      <PiPencilSimpleFill
+        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+          isDropdownOpen ? "bg-gray-400" : ""
+        }`}
+        onClick={toggleDropdown}
+        title="Draw"
+      />
+      <div
+        className={`absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-md ${
+          isDropdownOpen ? "block" : "hidden"
+        }`}
+      >
+        {/* Dropdown content */}
+        <div className="py-2">
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "solid" ? "font-bold" : ""
             }`}
-          onClick={toggleIsDrawing}
-          title="Draw"
-        />
-          <select
-            id="brushStyle"
-            className="ml-2 mt-1 p-1 border rounded"
-            onChange={(e) => setBrushStyle(e.target.value)}
+            onClick={() => handleBrushStyleChange("solid")}
           >
-            <option value="solid">Solid</option>
-            <option value="dotted">Dotted</option>
-            <option value="dashed">Dashed</option>
-            <option value="faded">Faded</option>
-          </select>
+            Solid
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dotted" ? "font-bold" : ""
+            }`}
+            onClick={() => handleBrushStyleChange("dotted")}
+          >
+            Dotted
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dashed" ? "font-bold" : ""
+            }`}
+            onClick={() => handleBrushStyleChange("dashed")}
+          >
+            Dashed
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "faded" ? "font-bold" : ""
+            }`}
+            onClick={() => handleBrushStyleChange("faded")}
+          >
+            Faded
+          </button>
+        </div>
+      </div>
+      {/* Arrow */}
+      <FaChevronDown
+        className={`absolute top-full left-1/2 transform -translate-x-1/2 text-gray-600 ${
+          isDropdownOpen ? "rotate-180" : ""
+        }`}
+      />
+    </div>
         <FaFeatherPointed
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${pencilWidth ? "bg-gray-400" : ""
             }`}
