@@ -1,12 +1,21 @@
 
+
 import { useEffect, useRef, useState } from "react";
+
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 
-import BgColor from "./components/BgColor";
+import { SiBuymeacoffee } from "react-icons/si";
+
 import Menu from "./components/Menu";
 import { clearCanvas, handleUpdates, startDrawing } from "./utils/canvas";
+
+import BgColor from "./components/BgColor";
+import Chatbot from "./components/Chatbot/Chatbot";
 import { rainbowColors } from "./utils/helpers";
+
+
+
 
 import Joyride from "react-joyride";
 
@@ -42,8 +51,7 @@ const tourSteps = [
   },
 ];
 
-import { SiBuymeacoffee } from "react-icons/si";
-import Chatbot from "./components/Chatbot/Chatbot";
+
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
