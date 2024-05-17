@@ -4,17 +4,17 @@ import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import { rainbowColors } from "./utils/helpers";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash, FaMoon, FaSun } from "react-icons/fa";
 
 import Joyride from "react-joyride";
 
-const tourSteps = [
+const tourSteps = [ 
   {
     target: "body",
     placement: "center",
     title: "Lets Get Started",
     content:
-      "Seems like it’s your first time here. Follow this quick walkthrough to know how get around. ",
+      "Seems like it's your first time here. Follow this quick walkthrough to know how get around. ",
     disableBeacon: true,
   },
   {
@@ -39,6 +39,7 @@ const tourSteps = [
     disableBeacon: true,
   },
 ];
+
 import { SiBuymeacoffee } from "react-icons/si";
 
 function App() {
@@ -46,7 +47,8 @@ function App() {
   const [isDrawing, setIsDrawing] = useState(true);
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
-  const [bgColor, setBgColor] = useState("#B7BABF");
+  const [bgColor, setBgColor] = useState("#b7babf");
+  const [darkMode, setDarkMode] = useState(null);
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
   const [steps] = useState(tourSteps);
 
@@ -60,6 +62,7 @@ function App() {
       
     }
   }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     
@@ -68,8 +71,18 @@ function App() {
     }
   }, [thickness]);
 
+  
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark')
+  };
+  
+
   return (
     <>
+      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
+
+
       <Joyride steps={steps} continuous showSkipButton={true} />
       
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
@@ -117,9 +130,13 @@ function App() {
                 bgColor={bgColor}
               />
             )}
+
             <div
-              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer ${
-                !showMenuAndBgColor && "mt-12"
+              className = "flex flex-row justify-center align-center space-x-10"
+            >
+              <div
+              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md  transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
+                !showMenuAndBgColor && "mt-10"
               }`}
               onClick={() => {
                 setShowMenuAndBgColor((state) => !state);
@@ -127,26 +144,35 @@ function App() {
             >
               {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
             </div>
+
+            <div
+              className={`darkLightModeToggle  p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"}`}
+              onClick={toggleDarkMode}
+            >
+              {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+            </div>
+            </div>
           </div>
           <canvas
             id="draw"
-            className={`whiteboard bg-[#DBDCDF] rounded-[0.6rem] shadow-mdm ${
+            className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
               isDrawing
                 ? "cursor-crosshair"
                 : "cursor-default pointer-events-none"
-            }`}
+            }
+            `}
             ref={canvasRef}
           ></canvas>
           <div
-            className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-lg hover:bg-gray-400 cursor-pointer"
+            className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
             onClick={() => {
-              clearCanvas(canvasRef.current, "#B7BABF");
+              clearCanvas(canvasRef.current,bgColor);
               setIsDrawing(true);
             }}
           >
             <RxCross1 />
           </div>
-          <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4">
+          <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white ">
             Made with &#128157; by{" "}
             <a
               href="https://shubham-s-socials.vercel.app/"
@@ -158,8 +184,8 @@ function App() {
           </h1>
         </div>
       </div>
-    </>
-  );
-}
-
+    </div>
+  </>
+  )
+};
 export default App;
