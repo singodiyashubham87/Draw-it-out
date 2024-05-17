@@ -43,9 +43,7 @@ const Menu = ({
   const handleMouseLeave = () => {
     setIsOpen(false);
   };
-  const toggleIsDrawing = () => {
-    setIsDrawing(!isDrawing);
-  };
+
   const handleBrushStyleChange = (style) => {
     setBrushStyle(style);
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
@@ -73,7 +71,9 @@ const Menu = ({
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "solid" ? "font-bold" : ""
             }`}
-            onClick={() => handleBrushStyleChange("solid")}
+            onClick={() => {setBrushStyle("solid");setIsDropdownOpen(!isDropdownOpen);
+          } }
+            
           >
             Solid
           </button>
@@ -81,7 +81,7 @@ const Menu = ({
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "dotted" ? "font-bold" : ""
             }`}
-            onClick={() => handleBrushStyleChange("dotted")}
+            onClick={() => {setBrushStyle("dotted");setIsDropdownOpen(!isDropdownOpen);}}
           >
             Dotted
           </button>
@@ -89,7 +89,7 @@ const Menu = ({
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "dashed" ? "font-bold" : ""
             }`}
-            onClick={() => handleBrushStyleChange("dashed")}
+            onClick={() => {setBrushStyle("dashed") ;setIsDropdownOpen(!isDropdownOpen);}}
           >
             Dashed
           </button>
@@ -97,7 +97,7 @@ const Menu = ({
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "faded" ? "font-bold" : ""
             }`}
-            onClick={() => handleBrushStyleChange("faded")}
+            onClick={() => {setBrushStyle("faded") ;setIsDropdownOpen(!isDropdownOpen);}}
           >
             Faded
           </button>

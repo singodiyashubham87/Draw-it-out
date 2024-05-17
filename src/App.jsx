@@ -45,7 +45,7 @@ import { SiBuymeacoffee } from "react-icons/si";
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
-  const [thickness, setThickness] = useState(5);
+  const [thickness, setThickness] = useState(4);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#b7babf");
   const [darkMode, setDarkMode] = useState(null);
@@ -61,9 +61,9 @@ function App() {
     const canvas = canvasRef.current;
     
     if (canvas) {
-      handleUpdates(canvas, color, thickness, bgColor);
+      startDrawing(canvas, color, thickness, bgColor,brushStyle);
     }
-  }, [thickness]);
+  }, [thickness,color, bgColor,brushStyle]);
 
   
   const toggleDarkMode = () => {
