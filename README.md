@@ -132,9 +132,6 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
      npm run dev
      ```
 
-### Significance of the Changes
-
-By providing clear and detailed installation instructions for different operating systems, we significantly lower the barrier for new users to get started with Draw-it-out. This comprehensive guide ensures that users can set up the application smoothly regardless of their platform, thereby encouraging wider adoption and a better user experience.
 
 # Features
 
