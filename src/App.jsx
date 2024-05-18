@@ -110,49 +110,87 @@ function App() {
         )}
 
         <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
-          {/* Buy me a coffee element */}
-         <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="flex justify-end mt-4 w-[90%] sm:w-auto sm:ml-0">
-            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
-              <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" /> {/* Icon */}
-              <span className="hidden sm:block text-base font-cursive">Buy me a Coffee</span> {/* Text */}
-            </button>
-          </a>
-          <div className="flex flex-row items-center gap-4 sm:flex-row sm:items-center sm:gap-14">
-               {showMenuAndBgColor && (
-               <Menu
-               isDrawing={isDrawing}
-               setIsDrawing={setIsDrawing}
-               thickness={thickness}
-               setThickness={setThickness}
-               color={color}
-               setColor={setColor}
-               canvasRef={canvasRef}
-               bgColor={bgColor}
-               />
-               )}
+         {/* Buy me a coffee element */}
+<a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="flex justify-end mt-4 w-[90%] sm:w-auto sm:ml-0">
+  {/* Apply 'hidden' class for screen sizes below 'md' */}
+  <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2 hidden md:flex">
+    <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" /> {/* Icon */}
+    <span className="text-base font-cursive">Buy me a Coffee</span> {/* Text */}
+  </button>
+</a>
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:flex-row sm:items-center sm:gap-14">
+            {showMenuAndBgColor && (
+            <Menu
+            isDrawing={isDrawing}
+            setIsDrawing={setIsDrawing}
+            thickness={thickness}
+            setThickness={setThickness}
+            color={color}
+            setColor={setColor}
+            canvasRef={canvasRef}
+            bgColor={bgColor}
+           />
+          )}
 
-             <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-10">
-              <div
-                className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
-                !showMenuAndBgColor && "mt-4 sm:mt-0"
-                }`}
-                onClick={() => {
-                setShowMenuAndBgColor((state) => !state);
-                }}
-                >
-                {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
-             </div>
+         <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-10">
+          <div
+            className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
+            !showMenuAndBgColor && "mt-4 sm:mt-0"
+            }`}
+           onClick={() => {
+           setShowMenuAndBgColor((state) => !state);
+           }}
+           >
+          {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
+          <span className="hidden sm:inline">Pencil</span> {/* Hidden in small screens */}
+         </div>
 
-             <div
-               className={`darkLightModeToggle p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
-               !showMenuAndBgColor && "mt-4 sm:mt-0"
-               }`}
-               onClick={toggleDarkMode}
-               >
-               {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
-             </div>
-             </div>
-           </div>
+       <div
+      className={`darkLightModeToggle p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
+        !showMenuAndBgColor && "mt-4 sm:mt-0"
+      }`}
+      onClick={toggleDarkMode}
+    >
+      {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+      <span className="hidden sm:inline">Thickness</span> {/* Hidden in small screens */}
+    </div>
+
+    <div
+      className={`darkLightModeToggle p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
+        !showMenuAndBgColor && "mt-4 sm:mt-0"
+      }`}
+      onClick={toggleDarkMode}
+    >
+      {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+      <span className="hidden sm:inline">Color</span> {/* Hidden in small screens */}
+    </div>
+  </div>
+
+  {/* Eye Icon and Dark/Light Mode Buttons */}
+  <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-10 mt-4 sm:mt-0">
+    <div
+      className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
+        !showMenuAndBgColor && "mt-4 sm:mt-0"
+      }`}
+      onClick={() => {
+        setShowMenuAndBgColor((state) => !state);
+      }}
+    >
+      {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
+      <span className="hidden sm:inline">Show/Hide Menu</span> {/* Hidden in small screens */}
+    </div>
+
+    <div
+      className={`darkLightModeToggle p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
+        !showMenuAndBgColor && "mt-4 sm:mt-0"
+      }`}
+      onClick={toggleDarkMode}
+    >
+      {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+      <span className="hidden sm:inline">Toggle Dark/Light Mode</span> {/* Hidden in small screens */}
+    </div>
+  </div>
+</div>
           <canvas
             id="draw"
             className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
