@@ -24,3 +24,72 @@ body{
     height: 56vh;
   }
 }
+@media (max-width: 450px) {
+  body #draw {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 300px) {
+  body #draw {
+    height: 30vh;
+  }
+}
+@media (min-width: 700px) and (max-width: 1400px) {
+  .sm:absolute {
+    position: relative; /* Adjust the positioning for smaller screens */
+  }
+  
+  .right-10 {
+    right: 2rem; /* Adjust the right position of the element */
+  }
+
+  .top-4 {
+    top: 2rem; /* Adjust the top position of the element */
+  }
+}
+@media (max-width: 412px) {
+  .flex.items-center.gap-14 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .flex.items-center.gap-14 > div {
+    margin-top: 10px;
+  }
+
+  .flex.flex-row.justify-center.align-center.space-x-10 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .flex.flex-row.justify-center.align-center.space-x-10 > div {
+    margin-top: 0;
+  }
+}
+@media (max-width: 412px) {
+  .darkLightModeToggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 300px) {
+  .darkLightModeToggle {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 412px) {
+  .eyeIcon {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  }
+}
+@media (max-width: 300px) {
+  .eyeIcon {
+    font-size: 1.25rem; /* Further decrease font size for screens smaller than 300px */
+  }
+}
