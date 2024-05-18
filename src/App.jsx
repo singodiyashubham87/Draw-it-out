@@ -71,7 +71,9 @@ function App() {
       handleUpdates(canvas, color, thickness, bgColor);
     }
   }, [thickness]);
+  
 const handleHeight=(val)=>setHeight(val)
+
 useEffect(()=>{
   const canvas = canvasRef.current;
   const ctx = canvas.getContext("2d");
