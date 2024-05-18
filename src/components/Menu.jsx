@@ -120,6 +120,15 @@ const Menu = ({
           fillColor={fillColor}
           canvasRef={canvasRef}
         />
+        <button>
+          <input
+            type="checkbox"
+            id="fill-color"
+            onChange={(e) => setFillColor(e.target.checked)}
+            title="Fill Color"
+          />
+          <label htmlFor="fill-color">Fill color</label>
+        </button>
         <button className="relative">
         <FaFeatherPointed
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm mx-auto rounded-[0.5rem] text-black dark:bg-[#111111] dark:text-[#ffffff] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
@@ -157,15 +166,6 @@ const Menu = ({
           />
         <span className="absolute top-14 left-[0.3rem]">Color</span>
         </div>
-        <button>
-          <input
-            type="checkbox"
-            id="fill-color"
-            onChange={(e) => setFillColor(e.target.checked)}
-            title="Fill Color"
-          />
-          <label htmlFor="fill-color">Fill color</label>
-        </button>
         <div className="relative">
           <button
             id="dropdownHoverButton"
