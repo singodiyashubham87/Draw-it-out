@@ -61,7 +61,10 @@ export function startDrawing(
     drawHistory.push({ x: lastX, y: lastY });
   });
   canvas.addEventListener("mouseup", () => (isDrawing = false));
-  canvas.addEventListener("mouseout", () => (isDrawing = false));
+  canvas.addEventListener("mouseout", () => {
+    lastX = 0;
+    lastY = 0;
+  });
   canvas.addEventListener("mousemove", draw);
 
   //Event listeners for touch devices
