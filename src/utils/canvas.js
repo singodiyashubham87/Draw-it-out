@@ -79,12 +79,22 @@ export function clearCanvas(canvas, bgColor) {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-// Function to handle taking a snapshot
-export const takeSnapshot = (canvas) => {
-  const snapshot = canvas.toDataURL();
+// Snapshot by default saves files as png
+// here we broke its functionality to convertToPng for readability
+// and consistency with other export option functions
+export const convertToPng = (canvas) => {
+  let snapshot = canvas.toDataURL("image/png");
   const link = document.createElement("a");
   link.href = snapshot;
-  link.download = "snapshot.png";
+  link.download = `snapshot.png`;
+  link.click();
+};
+
+export const convertToJPG = (canvas) => {
+  let snapshot = canvas.toDataURL("image/jpeg");
+  const link = document.createElement("a");
+  link.href = snapshot;
+  link.download = `snapshot.jpg`;
   link.click();
 };
 
