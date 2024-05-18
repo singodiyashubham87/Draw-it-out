@@ -88,7 +88,7 @@ function App() {
   locale={{
     back: 'Back',
     close: 'Close',
-    last: 'Submit',
+    last: 'Start',
     next: 'Next',
     skip: 'Skip',
   }}
