@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "../style/drawShapes.css";
 import rectImg from "../assets/images/rectangle.svg";
 import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
