@@ -66,12 +66,12 @@ const Menu = ({
         title="Draw"
       />
       <div
-        className={`absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-md ${
+        className={`absolute top-full bg-[#CBCCCF] shadow-black  mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2  shadow-md ${
           isDropdownOpen ? "block" : "hidden"
         }`}
       >
         {/* Dropdown content */}
-        <div className="py-2">
+        <div className="py-2  ">
           <button
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "solid" ? "font-bold" : ""
