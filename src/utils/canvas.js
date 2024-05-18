@@ -3,7 +3,13 @@ import jsPdf from "jspdf";
 import { Context } from "svgcanvas";
 let drawHistory = [];
 
-export function startDrawing(canvas, color, lineThickness, bgColor) {
+export function startDrawing(
+  canvas,
+  color,
+  lineThickness,
+  bgColor,
+  brushStyle
+) {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.8;
   canvas.height = window.innerHeight * 0.6;
@@ -19,16 +25,30 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
   // Main draw function
   const draw = (e) => {
     if (!isDrawing) return;
+
+    // Initialize lastX and lastY if not already initialized
     if (lastX === 0 && lastY === 0) {
       lastX = e.offsetX;
       lastY = e.offsetY;
     }
+
+    // Begin a new path for the current stroke
     ctx.beginPath();
+
+    // Move to the last drawn point
     ctx.moveTo(lastX, lastY);
+
+    // Draw a line to the current mouse position
     ctx.lineTo(e.offsetX, e.offsetY);
+
+    // Stroke the path to display it on the canvas
     ctx.stroke();
+
+    // Update lastX and lastY for the next drawing action
     lastX = e.offsetX;
     lastY = e.offsetY;
+
+    // Add the current position to the drawing history
     drawHistory.push({ x: e.offsetX, y: e.offsetY });
   };
 
@@ -69,6 +89,29 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
     const offsetY = touch.clientY - canvas.offsetTop;
     draw({ offsetX, offsetY });
   });
+  switch (brushStyle) {
+    case "solid":
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1.0;
+      break;
+    case "dotted":
+      ctx.setLineDash([2, 20]);
+      ctx.globalAlpha = 2.0;
+      break;
+    case "dashed":
+      const dotSpacing = 20; // Adjust the spacing between dots as needed
+      ctx.setLineDash([dotSpacing / 2, dotSpacing]); // Fixed dot spacing
+      ctx.globalAlpha = 1.0;
+      break;
+    case "faded":
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 0.01;
+
+      break;
+    default:
+      break;
+  }
+
 }
 
 // Function to clear the canvas
@@ -184,11 +227,19 @@ export function decreaseHeight(canvas, bgColor) {
   drawHistory = histArray.filter((point) => point.y <= newHeight);
 }
 
-export function handleUpdates(canvas, color, lineThickness, bgColor) {
+export function handleUpdates(
+  canvas,
+  color,
+  lineThickness,
+  bgColor,
+  brushStyle
+) {
   const ctx = canvas.getContext("2d");
   ctx.lineWidth = lineThickness;
   ctx.strokeStyle = `${color}`;
   canvas.style.backgroundColor = bgColor;
   ctx.fillStyle = bgColor;
   console.log("update called");
+
+  
 }
