@@ -85,13 +85,8 @@ function App() {
 
       <Joyride steps={steps} continuous showSkipButton={true} />
       
-         {/* Buy me a coffee element */}
-         <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="sm:absolute flex items-center right-10 top-4 relative ml-[90%] sm:ml-0 ">
-            <button className="flex items-center bg-transparent border-4 border-black text-black focus:outline-none bg-[#d4d5d7] transform transition duration-300 ease-in-out hover:bg-gray-400 rounded-xl p-2 dark:border-black dark:border-4 dark:bg-gray-400  dark:hover:md:bg-gray-100 hover:md:scale-110 dark:shadow-lg dark:shadow-black">
-              <SiBuymeacoffee className="text-xl mx-auto sm:mr-2 dark:text-black" /> {/* Icon */}
-              <span className="hidden sm:block text-base font-cursive dark:text-black ">Buy me a Coffee</span> {/* Text */}
-            </button>
-          </a>
+      <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
+         
         {showMenuAndBgColor && (
           <div className="color-pallet gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
           <input
@@ -114,8 +109,15 @@ function App() {
           </div>
         )}
 
-        <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0 dark:text-black shadow-none">
-          <div className="flex items-center gap-14 shadow-black">
+        <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
+          {/* Buy me a coffee element */}
+         <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="flex justify-end mt-4 w-[90%] sm:ml-0">
+            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
+              <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" /> {/* Icon */}
+              <span className="hidden sm:block text-base font-cursive">Buy me a Coffee</span> {/* Text */}
+            </button>
+          </a>
+          <div className="flex items-center gap-14">
             {showMenuAndBgColor && (
               <Menu
                 isDrawing={isDrawing}
@@ -182,7 +184,8 @@ function App() {
           </h1>
         </div>
       </div>
-    </>
+    </div>
+  </>
   )
 };
 export default App;
