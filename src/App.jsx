@@ -8,7 +8,7 @@ import { FaRegEye, FaRegEyeSlash, FaMoon, FaSun } from "react-icons/fa";
 
 import Joyride from "react-joyride";
 
-const tourSteps = [ 
+const tourSteps = [
   {
     target: "body",
     placement: "center",
@@ -81,8 +81,19 @@ function App() {
 
 
 
-      <Joyride steps={steps} continuous showSkipButton={true} />
-      
+      <Joyride
+  steps={steps}
+  continuous
+  showSkipButton={true}
+  locale={{
+    back: 'Back',
+    close: 'Close',
+    last: 'Submit',
+    next: 'Next',
+    skip: 'Skip',
+  }}
+/>
+
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
          
         {showMenuAndBgColor && (
