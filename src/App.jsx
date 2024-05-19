@@ -1,12 +1,12 @@
+import { useEffect, useRef, useState } from "react";
+import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { useEffect, useState, useRef } from "react";
-import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
-import Menu from "./components/Menu";
-import BgColor from "./components/BgColor";
-import { rainbowColors } from "./utils/helpers";
-import { FaRegEye, FaRegEyeSlash, FaMoon, FaSun } from "react-icons/fa";
-
 import Joyride from "react-joyride";
+import BgColor from "./components/BgColor";
+import Chatbot from "./components/Chatbot/Chatbot";
+import Menu from "./components/Menu";
+import { clearCanvas, handleUpdates, startDrawing } from "./utils/canvas";
+import { rainbowColors } from "./utils/helpers";
 
 const tourSteps = [ 
   {
@@ -181,7 +181,9 @@ function App() {
             </a>
             !
           </h1>
-        </div>
+          </div>
+        <div className="App"></div>
+        <Chatbot />
       </div>
     </div>
   </>
