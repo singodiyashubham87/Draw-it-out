@@ -45,7 +45,7 @@ import { SiBuymeacoffee } from "react-icons/si";
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
-  const [thickness, setThickness] = useState(10);
+  const [thickness, setThickness] = useState(4);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#b7babf");
   const [darkMode, setDarkMode] = useState(null);
@@ -54,22 +54,19 @@ function App() {
 
   const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey"
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    
-    if (canvas) {
-      startDrawing(canvas, color, thickness, bgColor);
-      
-    }
-  }, []);
+  const [brushStyle, setBrushStyle] = useState('solid');
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
     
     if (canvas) {
-      handleUpdates(canvas, color, thickness, bgColor);
+      startDrawing(canvas, color, thickness, bgColor,brushStyle);
     }
-  }, [thickness,color]);
+
+  }, [thickness,color, bgColor,brushStyle]);
+
+
 
   
   const toggleDarkMode = () => {
@@ -81,6 +78,7 @@ function App() {
   return (
     <>
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
+
 
 
       <Joyride steps={steps} continuous showSkipButton={true} />
@@ -120,14 +118,15 @@ function App() {
           <div className="flex items-center gap-14">
             {showMenuAndBgColor && (
               <Menu
-                isDrawing={isDrawing}
-                setIsDrawing={setIsDrawing}
-                thickness={thickness}
-                setThickness={setThickness}
-                color={color}
-                setColor={setColor}
-                canvasRef={canvasRef}
-                bgColor={bgColor}
+              isDrawing={isDrawing}
+              setIsDrawing={setIsDrawing}
+              thickness={thickness}
+              setThickness={setThickness}
+              color={color}
+              setColor={setColor}
+              canvasRef={canvasRef}
+              setBrushStyle={setBrushStyle}
+              brushStyle={brushStyle}
               />
             )}
 
