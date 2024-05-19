@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { PiPencilSimpleFill } from "react-icons/pi";
-import { FaFeatherPointed } from "react-icons/fa6";
+import { FaFeatherPointed, FaEraser } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { useState } from "react";
 import { takeSnapshot } from "../utils/canvas.js";
@@ -15,14 +15,21 @@ const Menu = ({
   canvasRef,
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
+  const [isEraser, setIsEraser] = useState(false);
 
   const toggleIsDrawing = () => {
     setIsDrawing(!isDrawing);
+    setIsEraser(false); // Reset isEraser when toggling drawing mode
+  };
+
+  const toggleEraser = () => {
+    setIsEraser(!isEraser);
+    setIsDrawing(false); // Reset isDrawing when toggling eraser mode
   };
 
   return (
     <>
-      <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
+      <div className="max-w-[90%] flex-wrap tools bg-[#CBCCCF] shadow-mdm flex justify-center items-stretch gap-[1rem] md:gap-[2rem] px-[2rem] py-4 rounded-[0.6rem]">
         <PiPencilSimpleFill
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
             isDrawing ? "bg-gray-400" : ""
@@ -49,6 +56,13 @@ const Menu = ({
             className="cursor-pointer"
           />
         )}
+        <FaEraser
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+            isEraser ? "bg-gray-400" : ""
+          }`}
+          onClick={toggleEraser}
+          title="Eraser"
+        />
         <div className="p-[1rem] px-[1.5rem] rounded-[0.5rem] relative shadow-vsm hover:bg-[#B7BABF] cursor-pointer">
           <input
             type="color"

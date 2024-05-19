@@ -11,13 +11,14 @@ function App() {
   const [thickness, setThickness] = useState(10);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#B7BABF");
+  const [isErasing, setIsErasing] = useState(false); // New state for eraser
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
-      startDrawing(canvas, color, thickness, bgColor);
+      startDrawing(canvas, color, thickness, bgColor, isErasing); // Pass isErasing state
     }
-  }, [bgColor, color, thickness]);
+  }, [bgColor, color, thickness, isErasing]); // Include isErasing in dependencies
 
   return (
     <>
@@ -37,6 +38,8 @@ function App() {
           <Menu
             isDrawing={isDrawing}
             setIsDrawing={setIsDrawing}
+            isErasing={isErasing} // Pass isErasing state to Menu
+            setIsErasing={setIsErasing} // Update isErasing state
             thickness={thickness}
             setThickness={setThickness}
             color={color}
@@ -57,6 +60,7 @@ function App() {
             onClick={() => {
               clearCanvas(canvasRef.current, bgColor);
               setIsDrawing(true);
+              setIsErasing(false); // Reset isErasing state
             }}
           >
             <RxCross1 />

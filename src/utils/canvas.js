@@ -1,7 +1,7 @@
 // Array to store the drawing history
 let drawHistory = [];
 
-export function startDrawing(canvas, color, lineThickness, bgColor) {
+export function startDrawing(canvas, color, lineThickness, bgColor, isErasing) {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.8;
   canvas.height = window.innerHeight * 0.6;
@@ -17,18 +17,19 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
 
   // Main draw function
   const draw = (e) => {
-    if (!isDrawing) return;
-    if (lastX === 0 && lastY === 0) {
-      lastX = e.offsetX;
-      lastY = e.offsetY;
+    if ((!isDrawing && !isErasing) || (isErasing && e.buttons !== 1)) {
+      return;
     }
+    ctx.globalCompositeOperation = isErasing ? "destination-out" : "source-over";
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
     lastX = e.offsetX;
     lastY = e.offsetY;
-    drawHistory.push({ x: e.offsetX, y: e.offsetY });
+    if (!isErasing) {
+      drawHistory.push({ x: e.offsetX, y: e.offsetY });
+    }
   };
 
   let lastX = 0;
@@ -39,8 +40,12 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
     isDrawing = true;
     drawHistory.push({ x: lastX, y: lastY });
   });
-  canvas.addEventListener("mouseup", () => (isDrawing = false));
-  canvas.addEventListener("mouseout", () => (isDrawing = false));
+  canvas.addEventListener("mouseup", () => {
+    isDrawing = false;
+  });
+  canvas.addEventListener("mouseout", () => {
+    isDrawing = false;
+  });
   canvas.addEventListener("mousemove", draw);
 
   //Event listeners for touch devices
@@ -49,6 +54,7 @@ export function startDrawing(canvas, color, lineThickness, bgColor) {
     lastX = touch.clientX - canvas.offsetLeft;
     lastY = touch.clientY - canvas.offsetTop;
     isDrawing = true;
+    drawHistory.push({ x: lastX, y: lastY });
   });
 
   canvas.addEventListener("touchend", () => {
