@@ -109,7 +109,7 @@ function App() {
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
          {/* Buy me a coffee element */}
          <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="sm:absolute flex items-center right-10 top-4 relative ml-[90%] sm:ml-0">
-            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-slate-200 hover:bg-[#c6c9ce] rounded-xl p-2">
+            <button className="flex items-center bg-transparent border border-slate-200 text-white focus:outline-none bg-slate-200 hover:bg-[#c6c9ce] hover:text-black rounded-xl p-2">
               <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" /> {/* Icon */}
               <span className="hidden sm:block text-base font-cursive">Buy me a Coffee</span> {/* Text */}
             </button>
