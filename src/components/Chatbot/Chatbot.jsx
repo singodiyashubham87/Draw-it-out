@@ -107,37 +107,38 @@ const steps = [
     },
 ];
 
-
 const theme = {
-    background: '#FFC0CB', 
+    background: 'gray', 
     headerBgColor: '#F8F8FF', 
-    headerFontSize: '20px',
-    botBubbleColor: '#FF6347', 
-    headerFontColor: 'gray',
-    botFontColor: 'white',
-    userBubbleColor: '#00CED1', 
-    userFontColor: 'white',
+    headerFontSize: '20px', 
+    botBubbleColor: '#D3D3D3', 
+    headerFontColor: 'gray', 
+    botFontColor: 'black', 
+    userBubbleColor: '#B0C4DE', 
+    userFontColor: 'black', 
   };
+  
 
 
 const config = {
-	botAvatar: "chatbot.jpg",
-	floating: true,
+    botAvatar: "/src/assets/images/chatbot.jpg",
+    floating: true,
 };
 
 function Chatbot() {
-	return (
-		<div className="App">
-			<ThemeProvider theme={theme}>
-				<ChatBot
-					headerTitle="Drawbot"
-					steps={steps}
-					{...config}
+    return (
+        <div className="App">
+            <ThemeProvider theme={theme}>
+                <ChatBot
+                    headerTitle="Drawbot"
+                    steps={steps}
+                    {...config}
 
-				/>
-			</ThemeProvider>
-		</div>
-	);
+                />
+            </ThemeProvider>
+        </div>
+    );
 }
 
 export default Chatbot;
+ 
