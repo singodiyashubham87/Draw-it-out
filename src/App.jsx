@@ -113,7 +113,9 @@ function App() {
 
     <div className="relative">
       <div className="flex flex-col justify-center text-center items-center bg-gray-800 pb-8 pt-8">
-        <h1 className="headingfont text-4xl font-bold text-slate-100 p-2">Draw it Out!</h1>
+      <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
+       Draw it Out!
+      </h1>
         <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
       </div>
       
