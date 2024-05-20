@@ -117,15 +117,39 @@ function App() {
             ))}
           </div>
         )}
+         <div
+              className = "flex flex-row justify-center align-center space-x-10"
+            >
+              <div
+              className={`showMenu bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md  transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
+                !showMenuAndBgColor && "mt-10"
+              }`}
+              onClick={() => {
+                setShowMenuAndBgColor((state) => !state);
+              }}
+            >
+              {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
+            </div>
+            <div
+            className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
+            onClick={() => {
+              clearCanvas(canvasRef.current,bgColor);
+              setIsDrawing(true);
+            }}
+          >
+            <RxCross1 />
+          </div>
 
+            <div
+              className={`darkLightModeToggle  p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"}`}
+              onClick={toggleDarkMode}
+            >
+              {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+            </div>
+          </div>
         <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
           {/* Buy me a coffee element */}
-         <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="flex justify-end mt-4 w-[90%] sm:ml-0">
-            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
-              <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" /> {/* Icon */}
-              <span className="hidden sm:block text-base font-cursive">Buy me a Coffee</span> {/* Text */}
-            </button>
-          </a>
+         
           <div className="flex items-center gap-14">
             {showMenuAndBgColor && (
               <Menu
@@ -140,29 +164,7 @@ function App() {
               brushStyle={brushStyle}
               />
             )}
-
-            <div
-              className = "flex flex-row justify-center align-center space-x-10"
-            >
-              <div
-              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md  transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
-                !showMenuAndBgColor && "mt-10"
-              }`}
-              onClick={() => {
-                setShowMenuAndBgColor((state) => !state);
-              }}
-            >
-              {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
-            </div>
-
-            <div
-              className={`darkLightModeToggle  p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"}`}
-              onClick={toggleDarkMode}
-            >
-              {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
-            </div>
-            </div>
-          </div>
+            </div>          
           <canvas
             id="draw"
             className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
@@ -173,15 +175,13 @@ function App() {
             `}
             ref={canvasRef}
           ></canvas>
-          <div
-            className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
-            onClick={() => {
-              clearCanvas(canvasRef.current,bgColor);
-              setIsDrawing(true);
-            }}
-          >
-            <RxCross1 />
-          </div>
+          
+          <a href={BUY_ME_COFFEE_LINK} target="_blank" rel="noopener noreferrer" className="flex justify-end mt-4 w-[90%] sm:ml-0">
+            <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
+              <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" /> {/* Icon */}
+              <span className="hidden sm:block text-base font-cursive">Buy me a Coffee</span> {/* Text */}
+            </button>
+          </a>
           <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white ">
             Made with &#128157; by{" "}
             <a
