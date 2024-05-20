@@ -8,30 +8,130 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
 
 # Getting Started
 
-### Prerequisite
+### Comprehensive Guide for Installing and Setting Up Draw-it-out
 
-- Node.js (https://nodejs.org/) installed on your machine.
+#### Prerequisites
+- **Node.js**: Ensure that Node.js is installed on your machine. You can download it from the [official Node.js website](https://nodejs.org/).
 
-### Installation
+### Installation Instructions
 
-1. Clone the repository:
+#### For Windows
 
-```bash
-git clone https://github.com/singodiyashubham87/Draw-it-out.git
-cd Draw-it-out
-```
+1. **Install Node.js**
+   - Download the Node.js installer from the [Node.js download page](https://nodejs.org/).
+   - Run the installer and follow the setup instructions.
+   - Confirm the installation by opening Command Prompt and typing:
+     ```sh
+     node -v
+     npm -v
+     ```
 
-2. Install dependencies:
+2. **Clone the Repository**
+   - Open Command Prompt.
+   - Navigate to the directory where you want to clone the repository:
+     ```sh
+     cd path\to\your\directory
+     ```
+   - Clone the repository:
+     ```sh
+     git clone https://github.com/singodiyashubham87/Draw-it-out.git
+     ```
+   - Navigate into the project directory:
+     ```sh
+     cd Draw-it-out
+     ```
 
-```bash
-npm install
-```
+3. **Install Dependencies**
+   - Install the required dependencies by running:
+     ```sh
+     npm install
+     ```
 
-3. Start the app:
+4. **Start the Application**
+   - Start the application in development mode:
+     ```sh
+     npm run dev
+     ```
 
-```bash
-npm run dev
-```
+#### For macOS
+
+1. **Install Node.js**
+   - Download the macOS installer from the [Node.js download page](https://nodejs.org/).
+   - Run the installer and follow the instructions.
+   - Verify the installation by opening Terminal and typing:
+     ```sh
+     node -v
+     npm -v
+     ```
+
+2. **Clone the Repository**
+   - Open Terminal.
+   - Navigate to the desired directory:
+     ```sh
+     cd /path/to/your/directory
+     ```
+   - Clone the repository:
+     ```sh
+     git clone https://github.com/singodiyashubham87/Draw-it-out.git
+     ```
+   - Navigate into the project directory:
+     ```sh
+     cd Draw-it-out
+     ```
+
+3. **Install Dependencies**
+   - Install the project dependencies by running:
+     ```sh
+     npm install
+     ```
+
+4. **Start the Application**
+   - Start the app in development mode:
+     ```sh
+     npm run dev
+     ```
+
+#### For Linux
+
+1. **Install Node.js**
+   - Open Terminal.
+   - Use the following commands to install Node.js (example for Ubuntu/Debian-based systems):
+     ```sh
+     curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+     sudo apt-get install -y nodejs
+     ```
+   - Confirm the installation by typing:
+     ```sh
+     node -v
+     npm -v
+     ```
+
+2. **Clone the Repository**
+   - Navigate to the desired directory:
+     ```sh
+     cd /path/to/your/directory
+     ```
+   - Clone the repository:
+     ```sh
+     git clone https://github.com/singodiyashubham87/Draw-it-out.git
+     ```
+   - Navigate into the project directory:
+     ```sh
+     cd Draw-it-out
+     ```
+
+3. **Install Dependencies**
+   - Install the dependencies with:
+     ```sh
+     npm install
+     ```
+
+4. **Start the Application**
+   - Run the app in development mode:
+     ```sh
+     npm run dev
+     ```
+
 
 # Features
 
