@@ -8,7 +8,7 @@ import Menu from "./components/Menu";
 import { clearCanvas, handleUpdates, startDrawing } from "./utils/canvas";
 import { rainbowColors } from "./utils/helpers";
 
-const tourSteps = [ 
+const tourSteps = [
   {
     target: "body",
     placement: "center",
@@ -81,8 +81,19 @@ function App() {
 
 
 
-      <Joyride steps={steps} continuous showSkipButton={true} />
-      
+      <Joyride
+  steps={steps}
+  continuous
+  showSkipButton={true}
+  locale={{
+    back: 'Back',
+    close: 'Close',
+    last: 'Start',
+    next: 'Next',
+    skip: 'Skip',
+  }}
+/>
+
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
          
         {showMenuAndBgColor && (
