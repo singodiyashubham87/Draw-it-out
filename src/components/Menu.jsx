@@ -1,30 +1,44 @@
 /* eslint-disable react/prop-types */
 import { PiPencilSimpleFill } from "react-icons/pi";
+import { FaChevronDown } from "react-icons/fa";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
-import {FaFilePdf} from 'react-icons/fa'
+import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
 import { useState } from "react";
-import { takeSnapshot,convertToPDF,convertToSVG } from "../utils/canvas.js";
 
+import {
+  convertToPDF,
+  convertToSVG,
+  convertToJPG,
+  convertToPng,
+} from "../utils/canvas.js";
 import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
 import { increaseHeight } from "../utils/canvas.js";
 import { decreaseHeight } from "../utils/canvas.js";
+import DrawingShapes from "./DrawingShapes.jsx";
 // import BgColor from "./BgColor.jsx";
 
 const Menu = ({
-  isDrawing,
-  setIsDrawing,
   thickness,
   setThickness,
   color,
   setColor,
   canvasRef,
+  setBrushStyle,
   bgColor,
+  brushStyle
+  
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [fillColor, setFillColor] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const handleMouseEnter = () => {
     setIsOpen(true);
@@ -33,22 +47,87 @@ const Menu = ({
   const handleMouseLeave = () => {
     setIsOpen(false);
   };
-  const toggleIsDrawing = () => {
-    setIsDrawing(!isDrawing);
-  };
 
+  const handleBrushStyleChange = (style) => {
+    setBrushStyle(style);
+    setIsDropdownOpen(false); // Close the dropdown after selecting a style
+  };
   return (
     <>
+
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm shadow-black flex justify-center   items-center gap-[1rem] md:gap-[3rem] px-[2rem] pt-6 pb-10 rounded-[0.6rem] dark:shadow-white dark:shadow-md ">
-        <button className=" relative">
-        <PiPencilSimpleFill
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800 ${
-            isDrawing ? "bg-gray-400" : ""
-          }`}
-          onClick={toggleIsDrawing}
-          title="Draw"
+      <div className="relative">
+      <PiPencilSimpleFill
+        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+          isDropdownOpen ? "bg-gray-400" : ""
+        }`}
+        onClick={toggleDropdown}
+        title="Draw"
+      />
+      <div
+        className={`absolute top-full bg-[#CBCCCF] shadow-black  mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2  shadow-md ${
+          isDropdownOpen ? "block" : "hidden"
+        }`}
+      >
+        {/* Dropdown content */}
+        <div className="py-2  ">
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "solid" ? "font-bold" : ""
+            }`}
+            onClick={() => {setBrushStyle("solid");setIsDropdownOpen(!isDropdownOpen);
+          } }
+            
+          >
+            Solid
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dotted" ? "font-bold" : ""
+            }`}
+            onClick={() => {setBrushStyle("dotted");setIsDropdownOpen(!isDropdownOpen);}}
+          >
+            Dotted
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dashed" ? "font-bold" : ""
+            }`}
+            onClick={() => {setBrushStyle("dashed") ;setIsDropdownOpen(!isDropdownOpen);}}
+          >
+            Dashed
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "faded" ? "font-bold" : ""
+            }`}
+            onClick={() => {setBrushStyle("faded") ;setIsDropdownOpen(!isDropdownOpen);}}
+          >
+            Faded
+          </button>
+        </div>
+      </div>
+      {/* Arrow */}
+      <FaChevronDown
+        className={`absolute top-full left-1/2 transform -translate-x-1/2 text-gray-600 ${
+          isDropdownOpen ? "rotate-180" : ""
+        }`}
+      />
+    </div>
+      <DrawingShapes
+          brushWidth={thickness}
+          selectedColor={color}
+          fillColor={fillColor}
+          canvasRef={canvasRef}
+        />
+        <button>
+          <input
+            type="checkbox"
+            id="fill-color"
+            onChange={(e) => setFillColor(e.target.checked)}
+            title="Fill Color"
           />
-          <span className=" absolute left-0  top-14 ">Pencil</span>
+          <label htmlFor="fill-color">Fill color</label>
         </button>
         <button className="relative">
         <FaFeatherPointed
@@ -73,7 +152,6 @@ const Menu = ({
             onChange={(e) => {
               setThickness(e.target.value);
             }}
-              
             className="cursor-pointer"
           />
         )}
@@ -99,8 +177,20 @@ const Menu = ({
             onMouseLeave={handleMouseLeave}
           >
             Save As
-            <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+            <svg
+              className="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 1 4 4 4-4"
+              />
             </svg>
           </button>
 
@@ -108,25 +198,45 @@ const Menu = ({
             id="dropdownHover"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`absolute z-10 ${isOpen ? '' : 'hidden'} divide-y bg-[#CBCCCF] rounded-lg shadow w-48 top-[3.1rem] `}
+
+            className={`absolute z-10 ${
+              isOpen ? "" : "hidden"
+            } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem]`}
           >
-            <ul className="text-sm text-gray-700 flex space-x-3 p-3 justify-center  " aria-labelledby="dropdownHoverButton">
+            <ul
+              className="text-sm text-gray-700 flex space-x-5 p-5 justify-center"
+              aria-labelledby="dropdownHoverButton"
+            >
               <li>
-                <RiScreenshot2Fill
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff]  `}
-                  onClick={() => takeSnapshot(canvasRef.current, color)}
-                  title="Snapshot"
-                />
+                <button
+                  className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  onClick={() => convertToPng(canvasRef.current)}
+                  title="ToPNG"
+                >
+                  <p>PNG</p>
+                </button>
+              </li>
+
+              <li>
+                <button
+                  className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  onClick={() => convertToJPG(canvasRef.current)}
+                  title="ToJPG"
+                >
+                  <p>JPG</p>
+                </button>
               </li>
               <li>
-                <FaFilePdf 
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff]  `}
-                  onClick={()=>convertToPDF(canvasRef.current)}
+                <FaFilePdf
+                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  onClick={() => convertToPDF(canvasRef.current)}
+
                   title="PDF"
                 />
               </li>
               <li>
                 <TbFileTypeSvg
+
                   className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff]  `}
                   onClick={()=>convertToSVG(canvasRef.current)}
                   title="SVG"
@@ -155,3 +265,4 @@ const Menu = ({
 };
 
 export default Menu;
+
