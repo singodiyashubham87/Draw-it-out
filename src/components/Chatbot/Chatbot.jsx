@@ -1,5 +1,5 @@
 import ChatBot from 'react-simple-chatbot';
-// import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 const steps = [
     {
@@ -129,14 +129,14 @@ const config = {
 function Chatbot() {
 	return (
 		<div className="App">
-			{/* <ThemeProvider theme={theme}> */}
+			<ThemeProvider theme={theme}>
 				<ChatBot
 					headerTitle="Drawbot"
 					steps={steps}
 					{...config}
 
 				/>
-			{/* </ThemeProvider> */}
+			 </ThemeProvider> 
 		</div>
 	);
 }
