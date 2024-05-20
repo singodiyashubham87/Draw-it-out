@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { PiPencilSimpleFill } from "react-icons/pi";
 import { FaChevronDown } from "react-icons/fa";
-
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { FaFilePdf } from "react-icons/fa";
@@ -18,11 +17,10 @@ import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
 import { increaseHeight } from "../utils/canvas.js";
 import { decreaseHeight } from "../utils/canvas.js";
+import DrawingShapes from "./DrawingShapes.jsx";
 // import BgColor from "./BgColor.jsx";
 
 const Menu = ({
-  isDrawing,
-  setIsDrawing,
   thickness,
   setThickness,
   color,
@@ -36,6 +34,7 @@ const Menu = ({
   const [pencilWidth, setPencilWidth] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [fillColor, setFillColor] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -115,7 +114,21 @@ const Menu = ({
         }`}
       />
     </div>
-        
+      <DrawingShapes
+          brushWidth={thickness}
+          selectedColor={color}
+          fillColor={fillColor}
+          canvasRef={canvasRef}
+        />
+        <button>
+          <input
+            type="checkbox"
+            id="fill-color"
+            onChange={(e) => setFillColor(e.target.checked)}
+            title="Fill Color"
+          />
+          <label htmlFor="fill-color">Fill color</label>
+        </button>
         <button className="relative">
         <FaFeatherPointed
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm mx-auto rounded-[0.5rem] text-black dark:bg-[#111111] dark:text-[#ffffff] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
@@ -252,3 +265,4 @@ const Menu = ({
 };
 
 export default Menu;
+
