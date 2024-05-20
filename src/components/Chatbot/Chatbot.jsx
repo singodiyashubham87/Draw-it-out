@@ -122,7 +122,7 @@ const theme = {
 
 
 const config = {
-	botAvatar: "chatbot.jpg",
+	botAvatar: "src/assets/images/readmeLogo.png",
 	floating: true,
 };
 
