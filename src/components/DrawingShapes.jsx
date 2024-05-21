@@ -96,7 +96,7 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
   }, [brushWidth, fillColor, selectedTool, selectedColor, snapshot, canvasRef, isDrawing]);
 
   return (
-    <div className="drawing-container flex">
+    <div className="drawing-container flex  ">
       <div className="controls">
         <ul className="options flex space-x-4">
           {/* <li className="option tool" id="brush" onClick={() => setSelectedTool("brush")}>
@@ -104,7 +104,7 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
             isDrawing ? "bg-gray-400" : ""
           }`} />
           </li> */}
-          <div className="flex space-x-4 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800">
+          <div className="flex space-x-4 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800">
           <li className="option tool " id="rectangle" onClick={() => setSelectedTool("rectangle")}>
             <img src={rectImg} alt="Rectangle" />
           </li>
