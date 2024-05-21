@@ -114,7 +114,6 @@ export function startDrawing(
     default:
       break;
   }
-
 }
 
 // Function to clear the canvas
@@ -181,7 +180,7 @@ export function changeBG(canvas, color) {
   drawHistory = [];
 }
 
-export function increaseHeight(canvas, bgColor) {
+export function increaseHeight(canvas, bgColor, thickness, color) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
   let newHeight = canvas.height + canvas.height * 0.1;
@@ -199,13 +198,11 @@ export function increaseHeight(canvas, bgColor) {
   // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
 
-  //retaining the bg
-  canvas.style.backgroundColor = bgColor;
-
   drawHistory = histArray.filter((point) => point.y <= newHeight);
+  handleUpdates(canvas, color, thickness, bgColor);
 }
 
-export function decreaseHeight(canvas, bgColor) {
+export function decreaseHeight(canvas, bgColor, thickness, color) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
   let newHeight = canvas.height - canvas.height * 0.1;
@@ -225,7 +222,7 @@ export function decreaseHeight(canvas, bgColor) {
   ctx.putImageData(imageData, 0, 0);
 
   //retaining the bg
-  ctx.fillStyle = bgColor;
+  handleUpdates(canvas, color, thickness, bgColor);
 
   drawHistory = histArray.filter((point) => point.y <= newHeight);
 }
@@ -243,6 +240,4 @@ export function handleUpdates(
   canvas.style.backgroundColor = bgColor;
   ctx.fillStyle = bgColor;
   console.log("update called");
-
-  
 }

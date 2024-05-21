@@ -137,6 +137,7 @@ function App() {
                   canvasRef={canvasRef}
                   setBrushStyle={setBrushStyle}
                   brushStyle={brushStyle}
+                  bgColor={bgColor}
                 />
               )}
 

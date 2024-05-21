@@ -28,8 +28,7 @@ const Menu = ({
   canvasRef,
   setBrushStyle,
   bgColor,
-  brushStyle
-  
+  brushStyle,
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -54,67 +53,76 @@ const Menu = ({
   };
   return (
     <>
-
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm shadow-black flex justify-center   items-center gap-[1rem] md:gap-[3rem] px-[2rem] pt-6 pb-10 rounded-[0.6rem] dark:shadow-white dark:shadow-md ">
-      <div className="relative">
-      <PiPencilSimpleFill
-        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
-          isDropdownOpen ? "bg-gray-400" : ""
-        }`}
-        onClick={toggleDropdown}
-        title="Draw"
-      />
-      <div
-        className={`absolute top-full bg-[#CBCCCF] shadow-black  mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2  shadow-md ${
-          isDropdownOpen ? "block" : "hidden"
-        }`}
-      >
-        {/* Dropdown content */}
-        <div className="py-2  ">
-          <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "solid" ? "font-bold" : ""
+        <div className="relative">
+          <PiPencilSimpleFill
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+              isDropdownOpen ? "bg-gray-400" : ""
             }`}
-            onClick={() => {setBrushStyle("solid");setIsDropdownOpen(!isDropdownOpen);
-          } }
-            
-          >
-            Solid
-          </button>
-          <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "dotted" ? "font-bold" : ""
+            onClick={toggleDropdown}
+            title="Draw"
+          />
+          <div
+            className={`absolute top-full bg-[#CBCCCF] shadow-black  mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2  shadow-md ${
+              isDropdownOpen ? "block" : "hidden"
             }`}
-            onClick={() => {setBrushStyle("dotted");setIsDropdownOpen(!isDropdownOpen);}}
           >
-            Dotted
-          </button>
-          <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "dashed" ? "font-bold" : ""
+            {/* Dropdown content */}
+            <div className="py-2  ">
+              <button
+                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+                  brushStyle === "solid" ? "font-bold" : ""
+                }`}
+                onClick={() => {
+                  setBrushStyle("solid");
+                  setIsDropdownOpen(!isDropdownOpen);
+                }}
+              >
+                Solid
+              </button>
+              <button
+                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+                  brushStyle === "dotted" ? "font-bold" : ""
+                }`}
+                onClick={() => {
+                  setBrushStyle("dotted");
+                  setIsDropdownOpen(!isDropdownOpen);
+                }}
+              >
+                Dotted
+              </button>
+              <button
+                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+                  brushStyle === "dashed" ? "font-bold" : ""
+                }`}
+                onClick={() => {
+                  setBrushStyle("dashed");
+                  setIsDropdownOpen(!isDropdownOpen);
+                }}
+              >
+                Dashed
+              </button>
+              <button
+                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+                  brushStyle === "faded" ? "font-bold" : ""
+                }`}
+                onClick={() => {
+                  setBrushStyle("faded");
+                  setIsDropdownOpen(!isDropdownOpen);
+                }}
+              >
+                Faded
+              </button>
+            </div>
+          </div>
+          {/* Arrow */}
+          <FaChevronDown
+            className={`absolute top-full left-1/2 transform -translate-x-1/2 text-gray-600 ${
+              isDropdownOpen ? "rotate-180" : ""
             }`}
-            onClick={() => {setBrushStyle("dashed") ;setIsDropdownOpen(!isDropdownOpen);}}
-          >
-            Dashed
-          </button>
-          <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "faded" ? "font-bold" : ""
-            }`}
-            onClick={() => {setBrushStyle("faded") ;setIsDropdownOpen(!isDropdownOpen);}}
-          >
-            Faded
-          </button>
+          />
         </div>
-      </div>
-      {/* Arrow */}
-      <FaChevronDown
-        className={`absolute top-full left-1/2 transform -translate-x-1/2 text-gray-600 ${
-          isDropdownOpen ? "rotate-180" : ""
-        }`}
-      />
-    </div>
-      <DrawingShapes
+        <DrawingShapes
           brushWidth={thickness}
           selectedColor={color}
           fillColor={fillColor}
@@ -130,17 +138,16 @@ const Menu = ({
           <label htmlFor="fill-color">Fill color</label>
         </button>
         <button className="relative">
-        <FaFeatherPointed
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm mx-auto rounded-[0.5rem] text-black dark:bg-[#111111] dark:text-[#ffffff] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
-            pencilWidth ? "bg-gray-200" : ""
-          }`}
-          onClick={() => setPencilWidth(!pencilWidth)}
-          title="Brush Thickness"
+          <FaFeatherPointed
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm mx-auto rounded-[0.5rem] text-black dark:bg-[#111111] dark:text-[#ffffff] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
+              pencilWidth ? "bg-gray-200" : ""
+            }`}
+            onClick={() => setPencilWidth(!pencilWidth)}
+            title="Brush Thickness"
           />
           <span className=" absolute -left-3 top-14">Thickness</span>
-          
         </button>
-        
+
         {pencilWidth && (
           <input
             type="range"
@@ -164,7 +171,7 @@ const Menu = ({
             onChange={(e) => setColor(e.target.value)}
             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0 dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
           />
-        <span className="absolute top-14 left-[0.3rem]">Color</span>
+          <span className="absolute top-14 left-[0.3rem]">Color</span>
         </div>
         <div className="relative">
           <button
@@ -198,7 +205,6 @@ const Menu = ({
             id="dropdownHover"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-
             className={`absolute z-10 ${
               isOpen ? "" : "hidden"
             } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem]`}
@@ -230,15 +236,13 @@ const Menu = ({
                 <FaFilePdf
                   className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={() => convertToPDF(canvasRef.current)}
-
                   title="PDF"
                 />
               </li>
               <li>
                 <TbFileTypeSvg
-
                   className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff]  `}
-                  onClick={()=>convertToSVG(canvasRef.current)}
+                  onClick={() => convertToSVG(canvasRef.current)}
                   title="SVG"
                 />
               </li>
@@ -248,14 +252,18 @@ const Menu = ({
         <button>
           <PiPlus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
-            onClick={() => increaseHeight(canvasRef.current, bgColor)}
+            onClick={() =>
+              increaseHeight(canvasRef.current, bgColor, thickness, color)
+            }
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
-            onClick={() => decreaseHeight(canvasRef.current, bgColor)}
+            onClick={() =>
+              decreaseHeight(canvasRef.current, bgColor, thickness, color)
+            }
             title="DecreaseHeight"
           />
         </button>
@@ -265,4 +273,3 @@ const Menu = ({
 };
 
 export default Menu;
-
