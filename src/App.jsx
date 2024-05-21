@@ -1,8 +1,11 @@
+import { useEffect, useRef, useState } from "react";
+import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { useEffect, useState, useRef } from "react";
-import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
-import Menu from "./components/Menu";
+import Joyride from "react-joyride";
 import BgColor from "./components/BgColor";
+import Chatbot from "./components/Chatbot/Chatbot";
+import Menu from "./components/Menu";
+import { clearCanvas, handleUpdates, startDrawing } from "./utils/canvas";
 import { rainbowColors } from "./utils/helpers";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FaBookOpen } from "react-icons/fa";
@@ -16,6 +19,7 @@ import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
 import { FaMoon, FaSun } from "react-icons/fa";
 import Joyride from "react-joyride";
+
 
 const tourSteps = [
   {
@@ -151,11 +155,13 @@ function App() {
 />
 
 
+
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
                   {/* Buy me a coffee element */}
         
+
         {showMenuAndBgColor && (
-          <div className="color-pallet gsm:w-[10%] w-[85%] py-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:py-[5rem] gsm:mb-8 mx-auto">
+          <div className="color-pallet gsm:w-[10%] w-[85%] h-[50rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
           <input
             type="color"
             name="color"
@@ -244,6 +250,7 @@ function App() {
             </a>
             !
           </h1>
+
         </div>
         <div className={modal ? 'z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100': 'fixed right-[-100%]'} onClick={showGuidelines} >
         <VscClose
@@ -264,6 +271,8 @@ function App() {
               <li className={style.guideline}><FaRegEye/><span className="ml-2">View only your canvas.</span></li>
             </ul>
         </div>
+        <div className="App"></div>
+        <Chatbot />
       </div>
     </div>
   </>

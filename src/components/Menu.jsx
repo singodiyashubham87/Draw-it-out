@@ -55,10 +55,10 @@ const Menu = ({
   return (
     <>
 
-      <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm shadow-black flex justify-center   items-center gap-[1rem] md:gap-[3rem] px-[2rem] pt-6 pb-10 rounded-[0.6rem] dark:shadow-white dark:shadow-md ">
-      <div className="relative">
+      <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] shadow-black flex justify-center   items-center gap-[1rem] md:gap-[3rem] px-[2rem] pt-6 pb-10 rounded-[0.6rem]  ">
+      <div className="relative ">
       <PiPencilSimpleFill
-        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] ${
+        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
           isDropdownOpen ? "bg-gray-400" : ""
         }`}
         onClick={toggleDropdown}
@@ -70,7 +70,7 @@ const Menu = ({
         }`}
       >
         {/* Dropdown content */}
-        <div className="py-2  ">
+        <div className="py-2 bg-[#CBCCCF] ">
           <button
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "solid" ? "font-bold" : ""
@@ -119,6 +119,7 @@ const Menu = ({
           selectedColor={color}
           fillColor={fillColor}
           canvasRef={canvasRef}
+         
         />
         <button>
           <input
@@ -131,7 +132,7 @@ const Menu = ({
         </button>
         <button className="relative">
         <FaFeatherPointed
-          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm mx-auto rounded-[0.5rem] text-black dark:bg-[#111111] dark:text-[#ffffff] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm mx-auto rounded-[0.5rem] text-black  bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
             pencilWidth ? "bg-gray-200" : ""
           }`}
           onClick={() => setPencilWidth(!pencilWidth)}
@@ -155,23 +156,23 @@ const Menu = ({
             className="cursor-pointer"
           />
         )}
-        <div className="py-[1rem] px-[1.5rem] rounded-[0.5rem] w-12 h-12 relative shadow-black shadow-vsm hover:bg-[#B7BABF] text-black text-blackcursor-pointer">
+        <div className="py-[1rem] px-[1.5rem] rounded-[0.5rem] w-12 h-12 relative shadow-black shadow-vsm  hover:bg-[#B7BABF] text-black text-blackcursor-pointer">
           <input
             type="color"
             name="color"
             id="color"
             title="Color Picker"
             onChange={(e) => setColor(e.target.value)}
-            className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0 dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
+            className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0  transform transition duration-300 ease-in-out `}
           />
-        <span className="absolute top-14 left-[0.3rem]">Color</span>
+        <span className="absolute top-14 left-[0.3rem] dark:text-[#ffffff]">Color</span>
         </div>
         <div className="relative">
           <button
             id="dropdownHoverButton"
             data-dropdown-toggle="dropdownHover"
             data-dropdown-trigger="hover"
-            className="text-gray-700 bg-[#B7BABF] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out "
+            className="text-gray-700 bg-[#B7BABF] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center   transform transition duration-300 ease-in-out "
             type="button"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -237,7 +238,7 @@ const Menu = ({
               <li>
                 <TbFileTypeSvg
 
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff]  `}
+                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]  `}
                   onClick={()=>convertToSVG(canvasRef.current)}
                   title="SVG"
                 />
@@ -247,14 +248,14 @@ const Menu = ({
         </div>
         <button>
           <PiPlus
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
             onClick={() => increaseHeight(canvasRef.current, bgColor)}
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
             onClick={() => decreaseHeight(canvasRef.current, bgColor)}
             title="DecreaseHeight"
           />
