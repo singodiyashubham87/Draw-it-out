@@ -4,23 +4,111 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
+:root {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body{
+body {
+  margin: 0;
   height: 100%;
   width: 100%;
 }
-#draw{
-  width: 90%;
-  height: 70vh;
+
+#draw {
+  margin: 0px -7px 1px 0px;
+  width: 86%;
+  height: 75vh;
 }
-@media (max-width:570px) {
-  body #draw{
+
+@media (max-width: 570px) {
+  #draw {
     width: 100%;
     height: 56vh;
   }
+}
+
+.color-pallet {
+  height: 100px;
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-pallet input,
+.color-pallet div {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+
+.clearAll,
+.darkLightModeToggle {
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+}
+.showMenu
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-left: 37px;
+}
+
+.clearAll:hover,
+.darkLightModeToggle:hover {
+  transform: scale(1.1);
+}
+
+.gap-14 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.bg-main {
+  background-color: #d3d5d8;
+  min-height: 100vh;
+}
+
+.flex-row {
+  margin-bottom: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #cbcccf;
+  border-radius: 10px;
+}
+.justify-end
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
