@@ -5,10 +5,4 @@ export const rainbowColors = [
   "#fdae61",
   "#fee08b",
   "#e6f598",
-  "#abdda4",
-  "#66c2a5",
-  "#3288bd",
-  "#5e4fa2",
-  "#ffffff",
-  "#000000",
 ];
