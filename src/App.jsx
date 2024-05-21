@@ -208,7 +208,6 @@ function App() {
             </h1>
           </div>
           <div className="App"></div>
-          <Chatbot />
         </div>
       </div>
     </>
