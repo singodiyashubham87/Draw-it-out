@@ -253,7 +253,13 @@ const Menu = ({
           <PiPlus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
             onClick={() =>
-              increaseHeight(canvasRef.current, bgColor, thickness, color)
+              increaseHeight(
+                canvasRef.current,
+                bgColor,
+                thickness,
+                color,
+                brushStyle
+              )
             }
             title="IncreaseHeight"
           />
@@ -262,7 +268,13 @@ const Menu = ({
           <PiMinus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer hover:bg-[#B7BABF] dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out `}
             onClick={() =>
-              decreaseHeight(canvasRef.current, bgColor, thickness, color)
+              decreaseHeight(
+                canvasRef.current,
+                bgColor,
+                thickness,
+                color,
+                brushStyle
+              )
             }
             title="DecreaseHeight"
           />

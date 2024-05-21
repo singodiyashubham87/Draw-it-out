@@ -51,6 +51,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(null);
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
   const [steps] = useState(tourSteps);
+  const [canvasInitialized, setCanvasInitialized] = useState(false);
 
   const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey";
 
@@ -59,10 +60,14 @@ function App() {
   useEffect(() => {
     const canvas = canvasRef.current;
 
-    if (canvas) {
+    if (canvas && !canvasInitialized) {
       startDrawing(canvas, color, thickness, bgColor, brushStyle);
+      setCanvasInitialized(true);
+      console.log("starting");
+    } else if (canvasInitialized) {
+      handleUpdates(canvas, color, thickness, bgColor, brushStyle);
     }
-  }, [thickness, color, bgColor, brushStyle]);
+  }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -121,7 +126,7 @@ function App() {
                 {/* Icon */}
                 <span className="hidden sm:block text-base font-cursive">
                   Buy me a Coffee
-                </span>{" "}
+                </span>
                 {/* Text */}
               </button>
             </a>
@@ -178,7 +183,9 @@ function App() {
             <div
               className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
-                clearCanvas(canvasRef.current, "#B7BABF");
+                setBgColor("#B7BABF");
+                setBrushStyle("solid");
+                setCanvasInitialized(false);
                 setIsDrawing(true);
               }}
             >
