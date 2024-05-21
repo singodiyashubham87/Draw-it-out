@@ -3,7 +3,6 @@ import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import Joyride from "react-joyride";
 import BgColor from "./components/BgColor";
-import Chatbot from "./components/Chatbot/Chatbot";
 import Menu from "./components/Menu";
 import { clearCanvas, handleUpdates, startDrawing } from "./utils/canvas";
 import { rainbowColors } from "./utils/helpers";
@@ -208,7 +207,6 @@ function App() {
             </h1>
           </div>
           <div className="App"></div>
-          <Chatbot />
         </div>
       </div>
     </>
