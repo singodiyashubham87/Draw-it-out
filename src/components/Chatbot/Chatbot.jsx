@@ -121,7 +121,7 @@ const theme = {
 
 
 const config = {
-    botAvatar: "/src/assets/images/chatbot.jpg",
+    botAvatar: "./Resources/images/chatbot.jpg",
     floating: true,
 };
 
