@@ -5,42 +5,11 @@ import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
 
 import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
-import { rainbowColors } from "./utils/helpers";
+import { rainbowColors, tourSteps } from "./utils/helpers";
 import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
 import Chatbot from "./components/Chatbot/Chatbot";
 import Footer from "./components/Footer";
-
-const tourSteps = [
-  {
-    target: "body",
-    placement: "center",
-    title: "Let's Get Started",
-    content: "Seems like it's your first time here. Follow this quick walkthrough to know how to get around.",
-    disableBeacon: true,
-  },
-  {
-    target: ".board",
-    content: "Click here to select a tool.",
-    disableBeacon: true,
-  },
-  {
-    target: ".color-pallet",
-    content: "Select a color from here.",
-    disableBeacon: true,
-  },
-  {
-    target: "#draw",
-    content: "Explore your inner Picasso here.",
-    disableBeacon: true,
-  },
-  {
-    target: "body",
-    placement: "center",
-    content: "Now all set :)",
-    disableBeacon: true,
-  },
-];
 
 function App() {
   const canvasRef = useRef(null);
@@ -78,7 +47,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
+      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out font-primary">
         <Joyride
           steps={steps}
           continuous
