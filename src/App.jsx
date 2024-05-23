@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import Joyride from "react-joyride";
 import BgColor from "./components/BgColor";
 import Menu from "./components/Menu";
 import { handleUpdates, startDrawing } from "./utils/canvas";
 import { rainbowColors } from "./utils/helpers";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FaBookOpen } from "react-icons/fa";
 import { VscClose } from "react-icons/vsc";
 import { PiPencilSimpleFill } from "react-icons/pi";
@@ -16,7 +14,6 @@ import {FaFilePdf} from 'react-icons/fa'
 import { TbFileTypeSvg } from "react-icons/tb";
 import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
-import { FaMoon, FaSun } from "react-icons/fa";
 import Joyride from "react-joyride";
 
 
@@ -53,7 +50,7 @@ const tourSteps = [
 ];
 
 import { SiBuymeacoffee } from "react-icons/si";
-import { tourSteps } from "./utils/helpers";
+
 
 
 
@@ -192,6 +189,9 @@ function App() {
               canvasRef={canvasRef}
               setBrushStyle={setBrushStyle}
               brushStyle={brushStyle}
+              bgColor={bgColor}
+              selectedTool={selectedTool}
+              setSelectedTool={setSelectedTool}
               />
             )}
 
