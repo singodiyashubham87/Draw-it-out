@@ -3,9 +3,8 @@ import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import Joyride from "react-joyride";
 import BgColor from "./components/BgColor";
-import Chatbot from "./components/Chatbot/Chatbot";
 import Menu from "./components/Menu";
-import { clearCanvas, handleUpdates, startDrawing } from "./utils/canvas";
+import { handleUpdates, startDrawing } from "./utils/canvas";
 import { rainbowColors } from "./utils/helpers";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FaBookOpen } from "react-icons/fa";
@@ -54,6 +53,8 @@ const tourSteps = [
 ];
 
 import { SiBuymeacoffee } from "react-icons/si";
+import { tourSteps } from "./utils/helpers";
+
 
 
 function App() {
@@ -66,15 +67,16 @@ function App() {
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
   const [steps] = useState(tourSteps);
   const [modal,setModal]=useState(false)
+  
+    const [canvasInitialized, setCanvasInitialized] = useState(false);
+
+  const [brushStyle, setBrushStyle] = useState("solid");
+  const [selectedTool, setSelectedTool] = useState("brush");
+  
   const style={
     guideline:`p-4 flex text-xs`,
   }
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      startDrawing(canvas, color, thickness, bgColor);
-    }
-  }, [bgColor, color, thickness]);
+
   const showGuidelines=()=>{
     setModal(!modal)
   }
@@ -84,32 +86,26 @@ function App() {
   
   const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey"
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    
-    if (canvas) {
-      handleUpdates(canvas, color, thickness, bgColor);
-    }
-      }, [thickness]);
-  
-  const [brushStyle, setBrushStyle] = useState('solid');
+ 
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    
-    if (canvas) {
-      startDrawing(canvas, color, thickness, bgColor,brushStyle);
+
+    if (canvas && !canvasInitialized) {
+      setCanvasInitialized(true);
+      startDrawing(canvas, color, thickness, bgColor, brushStyle);
+      console.log("starting");
+      console.log(brushStyle);
+    } else if (canvasInitialized) {
+      handleUpdates(canvas, color, thickness, bgColor, brushStyle);
     }
+  }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
-  }, [thickness,color, bgColor,brushStyle]);
-
-
-
-  
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    document.body.classList.toggle('dark')
+    document.body.classList.toggle("dark");
   };
+
 
 
   return (
@@ -199,46 +195,51 @@ function App() {
               />
             )}
 
+              <div className="flex flex-row justify-center align-center space-x-10">
+                <div
+                  className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md  transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${!showMenuAndBgColor &&
+                    "mt-10"}`}
+                  onClick={() => {
+                    setShowMenuAndBgColor((state) => !state);
+                  }}
+                >
+                  {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
+                </div>
+
+                <div
+                  className={`darkLightModeToggle  p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor &&
+                    "mt-10"}`}
+                  onClick={toggleDarkMode}
+                >
+                  {darkMode ? (
+                    <FaSun className="text-black" />
+                  ) : (
+                    <FaMoon className="text-white" />
+                  )}
+                </div>
+              </div>
+            </div>
+            <canvas
+              id="draw"
+              className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+                isDrawing
+                  ? "cursor-crosshair"
+                  : "cursor-default pointer-events-none"
+              }
+            `}
+              ref={canvasRef}
+            ></canvas>
             <div
-              className = "flex flex-row justify-center align-center space-x-10"
-            >
-              <div
-              className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md  transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
-                !showMenuAndBgColor && "mt-10"
-              }`}
+              className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
-                setShowMenuAndBgColor((state) => !state);
+                setBgColor("#B7BABF");
+                setBrushStyle("solid");
+                setSelectedTool("brush");
+                setCanvasInitialized(false);
+                setIsDrawing(true);
               }}
             >
-              {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
-            </div>
-
-            <div
-              className={`darkLightModeToggle  p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"}`}
-              onClick={toggleDarkMode}
-            >
-              {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
-            </div>
-            </div>
-          </div>
-          <canvas
-            id="draw"
-            className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-              isDrawing
-                ? "cursor-crosshair"
-                : "cursor-default pointer-events-none"
-            }
-            `}
-            ref={canvasRef}
-          ></canvas>
-          <div
-            className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
-            onClick={() => {
-              clearCanvas(canvasRef.current,bgColor);
-              setIsDrawing(true);
-            }}
-          >
-            <RxCross1 />
+   <RxCross1 />
           </div>
           <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white ">
             Made with &#128157; by{" "}
@@ -250,7 +251,6 @@ function App() {
             </a>
             !
           </h1>
-
         </div>
         <div className={modal ? 'z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100': 'fixed right-[-100%]'} onClick={showGuidelines} >
         <VscClose
@@ -271,11 +271,9 @@ function App() {
               <li className={style.guideline}><FaRegEye/><span className="ml-2">View only your canvas.</span></li>
             </ul>
         </div>
-        <div className="App"></div>
-        <Chatbot />
       </div>
     </div>
   </>
   )
-};
+}
 export default App;
