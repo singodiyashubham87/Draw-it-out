@@ -4,11 +4,18 @@ import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
 import { PiPencilSimpleFill } from "react-icons/pi";
 
-const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
+const DrawingShapes = ({
+  brushWidth,
+  selectedColor,
+  fillColor,
+  canvasRef,
+  selectedTool,
+  setSelectedTool,
+}) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [prevMouseX, setPrevMouseX] = useState(0);
   const [prevMouseY, setPrevMouseY] = useState(0);
-  const [selectedTool, setSelectedTool] = useState("brush");
+
   const [snapshot, setSnapshot] = useState(null);
 
   useEffect(() => {
@@ -32,7 +39,10 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
     const drawCircle = (e) => {
       ctx.putImageData(snapshot, 0, 0);
       ctx.beginPath();
-      const radius = Math.sqrt(Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2));
+      const radius = Math.sqrt(
+        Math.pow(prevMouseX - e.offsetX, 2) +
+          Math.pow(prevMouseY - e.offsetY, 2)
+      );
       ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
       fillColor ? ctx.fill() : ctx.stroke();
     };
@@ -93,10 +103,18 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
       canvas.removeEventListener("mouseup", stopDrawing);
       canvas.removeEventListener("mouseout", stopDrawing);
     };
-  }, [brushWidth, fillColor, selectedTool, selectedColor, snapshot, canvasRef, isDrawing]);
+  }, [
+    brushWidth,
+    fillColor,
+    selectedTool,
+    selectedColor,
+    snapshot,
+    canvasRef,
+    isDrawing,
+  ]);
 
   return (
-    <div className="drawing-container flex">
+    <div className="drawing-container flex  ">
       <div className="controls">
         <ul className="options flex space-x-4">
           {/* <li className="option tool" id="brush" onClick={() => setSelectedTool("brush")}>
@@ -104,16 +122,28 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
             isDrawing ? "bg-gray-400" : ""
           }`} />
           </li> */}
-          <div className="flex space-x-4 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800">
-          <li className="option tool " id="rectangle" onClick={() => setSelectedTool("rectangle")}>
-            <img src={rectImg} alt="Rectangle" />
-          </li>
-          <li className="option tool" id="circle" onClick={() => setSelectedTool("circle")}>
-            <img src={circleImg} alt="Circle" />
-          </li>
-          <li className="option tool" id="triangle" onClick={() => setSelectedTool("triangle")}>
-            <img src={triangleImg} alt="Triangle" />
-          </li>
+          <div className="flex space-x-4 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800">
+            <li
+              className="option tool "
+              id="rectangle"
+              onClick={() => setSelectedTool("rectangle")}
+            >
+              <img src={rectImg} alt="Rectangle" />
+            </li>
+            <li
+              className="option tool"
+              id="circle"
+              onClick={() => setSelectedTool("circle")}
+            >
+              <img src={circleImg} alt="Circle" />
+            </li>
+            <li
+              className="option tool"
+              id="triangle"
+              onClick={() => setSelectedTool("triangle")}
+            >
+              <img src={triangleImg} alt="Triangle" />
+            </li>
           </div>
         </ul>
       </div>

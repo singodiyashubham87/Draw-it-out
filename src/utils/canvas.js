@@ -92,29 +92,7 @@ export function startDrawing(
     const offsetY = touch.clientY - canvas.offsetTop;
     draw({ offsetX, offsetY });
   });
-  switch (brushStyle) {
-    case "solid":
-      ctx.setLineDash([]);
-      ctx.globalAlpha = 1.0;
-      break;
-    case "dotted":
-      ctx.setLineDash([2, 20]);
-      ctx.globalAlpha = 2.0;
-      break;
-    case "dashed":
-      const dotSpacing = 20; // Adjust the spacing between dots as needed
-      ctx.setLineDash([dotSpacing / 2, dotSpacing]); // Fixed dot spacing
-      ctx.globalAlpha = 1.0;
-      break;
-    case "faded":
-      ctx.setLineDash([]);
-      ctx.globalAlpha = 0.01;
-
-      break;
-    default:
-      break;
-  }
-
+  setBrushStyle(ctx, brushStyle);
 }
 
 // Function to clear the canvas
@@ -181,7 +159,32 @@ export function changeBG(canvas, color) {
   drawHistory = [];
 }
 
-export function increaseHeight(canvas, bgColor) {
+//Updating the brush style
+function setBrushStyle(ctx, brushStyle) {
+  switch (brushStyle) {
+    case "solid":
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1.0;
+      break;
+    case "dotted":
+      ctx.setLineDash([2, 20]);
+      ctx.globalAlpha = 1.0;
+      break;
+    case "dashed":
+      const dotSpacing = 20;
+      ctx.setLineDash([dotSpacing / 2, dotSpacing]);
+      ctx.globalAlpha = 1.0;
+      break;
+    case "faded":
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 0.01;
+      break;
+    default:
+      break;
+  }
+}
+
+export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
   let newHeight = canvas.height + canvas.height * 0.1;
@@ -199,13 +202,11 @@ export function increaseHeight(canvas, bgColor) {
   // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
 
-  //retaining the bg
-  canvas.style.backgroundColor = bgColor;
-
   drawHistory = histArray.filter((point) => point.y <= newHeight);
+  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
 
-export function decreaseHeight(canvas, bgColor) {
+export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
   let newHeight = canvas.height - canvas.height * 0.1;
@@ -225,7 +226,7 @@ export function decreaseHeight(canvas, bgColor) {
   ctx.putImageData(imageData, 0, 0);
 
   //retaining the bg
-  ctx.fillStyle = bgColor;
+  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 
   drawHistory = histArray.filter((point) => point.y <= newHeight);
 }
@@ -242,7 +243,6 @@ export function handleUpdates(
   ctx.strokeStyle = `${color}`;
   canvas.style.backgroundColor = bgColor;
   ctx.fillStyle = bgColor;
+  setBrushStyle(ctx, brushStyle);
   console.log("update called");
-
-  
 }
