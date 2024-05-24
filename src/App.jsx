@@ -154,7 +154,7 @@ function App() {
         
 
         {showMenuAndBgColor && (
-          <div className="color-pallet gsm:w-[10%] w-[85%] h-[42rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
+          <div className="color-pallet gsm:w-[10%] w-[85%] h-[44rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
           <input
             type="color"
             name="color"
@@ -175,7 +175,7 @@ function App() {
           </div>
         )}
 
-<div className="container w-[85%] flex flex-col justify-center items-center gap-[1.2rem] font-primary m-auto">
+<div className="container w-[85%] flex flex-col justify-center items-center gap-[0.6rem] font-primary m-auto">
             <div className="flex items-center gap-14">
               {showMenuAndBgColor && (
                 <Menu
