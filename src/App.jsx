@@ -109,7 +109,7 @@ function App() {
     <>
 
     <div className="relative">
-      <div className="flex flex-col justify-center text-center items-center bg-gray-800 pb-8 pt-8">
+      <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
       <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
        Draw it Out!
       </h1>
@@ -149,7 +149,7 @@ function App() {
 
 
 
-      <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row">
+      <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
                   {/* Buy me a coffee element */}
         
 
