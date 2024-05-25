@@ -108,11 +108,11 @@ function App() {
   return (
     <>
 
-    <div className="relative">
+<div className="relative "> 
       <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
-      <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
-       Draw it Out!
-      </h1>
+        <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
+          Draw it Out!
+        </h1>
         <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
       </div>
       
@@ -133,6 +133,7 @@ function App() {
         </button>
       </a>
     </div>
+    <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
       <Joyride
         steps={steps}
@@ -146,15 +147,12 @@ function App() {
           skip: 'Skip',
   }}
 />
-
-
-
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
                   {/* Buy me a coffee element */}
         
 
         {showMenuAndBgColor && (
-          <div className="color-pallet gsm:w-[10%] w-[85%] h-[50rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
+          <div className="color-pallet gsm:w-[10%] w-[85%] h-[44rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
           <input
             type="color"
             name="color"
@@ -162,7 +160,7 @@ function App() {
             title="Color Picker"
             // defaultValue={bgColor}
             onChange={(e) => setBgColor(e.target.value)}
-            className={`cursor-pointer m-auto w-[2rem] h-[2rem] vsm:w-[3rem] vsm:h-[3rem]  rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600 `}
+            className={`cursor-pointer m-auto w-[2rem] h-[3rem] vsm:w-[3rem] vsm:h-[3rem]  rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600 `}
           />
             {rainbowColors?.map((val, i) => (
               <BgColor
@@ -175,29 +173,28 @@ function App() {
           </div>
         )}
 
-        <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
-         
-          <div className="flex items-center gap-14">
-            {showMenuAndBgColor && (
-              <Menu
-              isDrawing={isDrawing}
-              setIsDrawing={setIsDrawing}
-              thickness={thickness}
-              setThickness={setThickness}
-              color={color}
-              setColor={setColor}
-              canvasRef={canvasRef}
-              setBrushStyle={setBrushStyle}
-              brushStyle={brushStyle}
-              bgColor={bgColor}
-              selectedTool={selectedTool}
-              setSelectedTool={setSelectedTool}
-              />
-            )}
+<div className="container w-[85%] flex flex-col justify-center items-center gap-[0.6rem] font-primary m-auto">
+            <div className="flex items-center gap-14">
+              {showMenuAndBgColor && (
+                <Menu
+                  isDrawing={isDrawing}
+                  setIsDrawing={setIsDrawing}
+                  thickness={thickness}
+                  setThickness={setThickness}
+                  color={color}
+                  setColor={setColor}
+                  canvasRef={canvasRef}
+                  setBrushStyle={setBrushStyle}
+                  brushStyle={brushStyle}
+                  bgColor={bgColor}
+                  selectedTool={selectedTool}
+                  setSelectedTool={setSelectedTool}
+                />
+              )}
 
               <div className="flex flex-row justify-center align-center space-x-10">
                 <div
-                  className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md  transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${!showMenuAndBgColor &&
+                  className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${!showMenuAndBgColor &&
                     "mt-10"}`}
                   onClick={() => {
                     setShowMenuAndBgColor((state) => !state);
@@ -207,7 +204,7 @@ function App() {
                 </div>
 
                 <div
-                  className={`darkLightModeToggle  p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor &&
+                  className={`darkLightModeToggle p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor &&
                     "mt-10"}`}
                   onClick={toggleDarkMode}
                 >
@@ -221,16 +218,11 @@ function App() {
             </div>
             <canvas
               id="draw"
-              className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing
-                  ? "cursor-crosshair"
-                  : "cursor-default pointer-events-none"
-              }
-            `}
+              className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"}`}
               ref={canvasRef}
             ></canvas>
             <div
-              className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
+              className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111] hover:md:scale-110"
               onClick={() => {
                 setBgColor("#B7BABF");
                 setBrushStyle("solid");
@@ -239,19 +231,19 @@ function App() {
                 setIsDrawing(true);
               }}
             >
-   <RxCross1 />
+              <RxCross1 />
+            </div>
+            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
+              Made with &#128157; by{" "}
+              <a
+                href="https://shubham-s-socials.vercel.app/"
+                className="decoration-none font-semibold hover:underline"
+              >
+                Master Mickey
+              </a>
+              !
+            </h1>
           </div>
-          <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white ">
-            Made with &#128157; by{" "}
-            <a
-              href="https://shubham-s-socials.vercel.app/"
-              className="decoration-none font-semibold hover:underline"
-            >
-              Master Mickey
-            </a>
-            !
-          </h1>
-        </div>
         <div className={modal ? 'z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100': 'fixed right-[-100%]'} onClick={showGuidelines} >
         <VscClose
               size={20}
