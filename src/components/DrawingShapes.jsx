@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import rectImg from "../assets/images/rectangle.svg";
 import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
+import { FaShapes } from "react-icons/fa6";
+import { FaChevronDown } from "react-icons/fa";
 import { PiPencilSimpleFill } from "react-icons/pi";
 
 const DrawingShapes = ({
@@ -17,6 +19,9 @@ const DrawingShapes = ({
   const [prevMouseY, setPrevMouseY] = useState(0);
 
   const [snapshot, setSnapshot] = useState(null);
+
+  const [show, setShow] = useState(false);
+  const [imagePath, setImagePath] = useState("");
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -114,39 +119,48 @@ const DrawingShapes = ({
   ]);
 
   return (
-    <div className="drawing-container flex  ">
-      <div className="controls">
-        <ul className="options flex space-x-4">
+    <div className="drawing-container flex relative   p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] "  onClick={()=>setShow((prev)=>!prev)}>
+      <div className="controls cursor-pointer text-[1rem] md:text-[1.5rem] ">
+         {imagePath==""?<FaShapes />:<img src={imagePath} className="h-[1rem] md:h-[1.5rem]" alt="" />} 
+        <ul className="options flex space-x-4 " >
           {/* <li className="option tool" id="brush" onClick={() => setSelectedTool("brush")}>
             <PiPencilSimpleFill className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800 ${
             isDrawing ? "bg-gray-400" : ""
           }`} />
           </li> */}
-          <div className="flex space-x-4 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800">
-            <li
-              className="option tool "
+          <div className={`flex absolute top-full bg-[#CBCCCF] shadow-black  mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2  shadow-md flex-col w-32 space-y-2 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem]  text-black cursor-pointer   ${show?"block":"hidden"}`}>
+            <div
+              className="option tool flex gap-2 p-2 rounded-md  transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800 "
               id="rectangle"
-              onClick={() => setSelectedTool("rectangle")}
+              onClick={() => { setSelectedTool("rectangle");setImagePath(rectImg) }}
             >
               <img src={rectImg} alt="Rectangle" />
-            </li>
-            <li
-              className="option tool"
+              <span className=" text-sm">Rectangle</span>
+            </div>
+            <div
+              className="option tool flex gap-2 p-2 rounded-md  transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800"
               id="circle"
-              onClick={() => setSelectedTool("circle")}
+              onClick={() => { setSelectedTool("circle");setImagePath(circleImg) }}
             >
               <img src={circleImg} alt="Circle" />
-            </li>
-            <li
-              className="option tool"
+              <span className=" text-sm">Circle</span>
+            </div>
+            <div
+              className="option tool flex gap-2 p-2 rounded-md  transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800"
               id="triangle"
-              onClick={() => setSelectedTool("triangle")}
+              onClick={() => { setSelectedTool("triangle");setImagePath(triangleImg) }}
             >
               <img src={triangleImg} alt="Triangle" />
-            </li>
+              <span className=" text-sm">Triangle</span>
+            </div>
           </div>
         </ul>
       </div>
+      <FaChevronDown
+            className={`absolute top-full left-1/2 transform -translate-x-1/2 text-gray-600 ${
+              show ? "rotate-180" : ""
+            }`}
+          />
     </div>
   );
 };
