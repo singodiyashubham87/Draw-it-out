@@ -5,8 +5,9 @@ import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
-import { useState } from "react";
 import TextEditor from './TextEditor';
+import React, { useState,useEffect } from 'react';
+
 
 import {
   convertToPDF,
@@ -37,6 +38,13 @@ const Menu = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [fillColor, setFillColor] = useState(false);
+  const [textObjects, setTextObjects] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -55,14 +63,47 @@ const Menu = ({
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
   };
   
-  let yPosition = 50;
-const handleAddText = ({ text, fontSize, fontFamily }) => {
-  const ctx = canvasRef.current.getContext('2d');
-  ctx.font = `${fontSize}px ${fontFamily}`;
-  ctx.fillStyle = color;
-  ctx.fillText(text, 50, yPosition);
-  yPosition += fontSize + 5; 
-};
+  const handleAddText = ({ text, fontSize, fontFamily }) => {
+    const newTextObject = { text, fontSize, fontFamily, x: 300, y: 400 };
+    setTextObjects([...textObjects, newTextObject]);
+  };
+
+  const handleClearText = () => {
+    setTextObjects([]);
+  };
+
+  const handleMouseDown = (e, index) => {
+    e.preventDefault();
+    setIsDragging(true);
+    setDraggedIndex(index);
+    setStartX(e.clientX);
+    setStartY(e.clientY);
+    setOffsetX(textObjects[index].x - e.clientX);
+    setOffsetY(textObjects[index].y - e.clientY);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || draggedIndex === null) return;
+    const updatedTextObjects = [...textObjects];
+    updatedTextObjects[draggedIndex].x = e.clientX + offsetX;
+    updatedTextObjects[draggedIndex].y = e.clientY + offsetY;
+    setTextObjects(updatedTextObjects);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setDraggedIndex(null);
+  };
+  
+  useEffect(() => {
+    if (!isDragging) return;
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging]);
 
   return (
     <>
@@ -298,9 +339,29 @@ const handleAddText = ({ text, fontSize, fontFamily }) => {
         </button>
         <div className="text-editor">
           {/* TextEditor component for entering text */}
-          <TextEditor addText={handleAddText} />
-
+          <TextEditor addText={handleAddText} clearText={handleClearText}/>
+          <button onClick={handleClearText} className="mt-2 bg-red-500 text-white rounded-md hover:bg-red-400" title="Clear text">Clear All Text</button>
+      </div>
+      <div>
+        {textObjects.map((textObj, index) => (
+          <div
+            key={index}
+            style={{
+              position: "absolute",
+              top: textObj.y,
+              left: textObj.x,
+              fontSize: textObj.fontSize,
+              fontFamily: textObj.fontFamily,
+              cursor: "move",
+              userSelect: "none",
+            }}
+            onMouseDown={(e) => handleMouseDown(e, index)}
+          >
+            {textObj.text}
+          </div>
+        ))}
         </div>
+        
       </div>
     </>
   );
