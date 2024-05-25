@@ -133,7 +133,7 @@ function App() {
         </button>
       </a>
     </div>
-    <div className="bg-[#d3d4d9] dark:bg-black pb-8"></div>
+    <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
       <Joyride
         steps={steps}
