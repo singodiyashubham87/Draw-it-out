@@ -108,11 +108,11 @@ function App() {
   return (
     <>
 
-    <div className="relative">
+<div className="relative "> 
       <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
-      <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
-       Draw it Out!
-      </h1>
+        <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
+          Draw it Out!
+        </h1>
         <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
       </div>
       
@@ -133,6 +133,7 @@ function App() {
         </button>
       </a>
     </div>
+    <div className="bg-[#d3d4d9] dark:bg-black pb-8"></div>
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
       <Joyride
         steps={steps}
@@ -146,9 +147,6 @@ function App() {
           skip: 'Skip',
   }}
 />
-
-
-
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
                   {/* Buy me a coffee element */}
         
