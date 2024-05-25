@@ -6,6 +6,7 @@ import { RiScreenshot2Fill } from "react-icons/ri";
 import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
 import { useState } from "react";
+import TextEditor from './TextEditor';
 
 import {
   convertToPDF,
@@ -53,6 +54,16 @@ const Menu = ({
     setBrushStyle(style);
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
   };
+  
+  let yPosition = 50;
+const handleAddText = ({ text, fontSize, fontFamily }) => {
+  const ctx = canvasRef.current.getContext('2d');
+  ctx.font = `${fontSize}px ${fontFamily}`;
+  ctx.fillStyle = color;
+  ctx.fillText(text, 50, yPosition);
+  yPosition += fontSize + 5; 
+};
+
   return (
     <>
       <div className="max-w-[90%] flex-wrap	 tools bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] shadow-black flex justify-center   items-center gap-[1rem] md:gap-[3rem] px-[2rem] pt-6 pb-10 rounded-[0.6rem]  ">
@@ -285,6 +296,11 @@ const Menu = ({
             title="DecreaseHeight"
           />
         </button>
+        <div className="text-editor">
+          {/* TextEditor component for entering text */}
+          <TextEditor addText={handleAddText} />
+
+        </div>
       </div>
     </>
   );
