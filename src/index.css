@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Love+Ya+Like+A+Sister&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,11 +12,14 @@
 body{
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
 }
+
 #draw{
   width: 90%;
   /* height: 70vh; */
 }
+
 @media (max-width:570px) {
   body #draw{
     width: 100%;

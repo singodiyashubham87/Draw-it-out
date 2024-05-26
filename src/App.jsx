@@ -1,15 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
+import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun, FaBookOpen } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
+import { VscClose } from "react-icons/vsc";
+import { PiPencilSimpleFill, PiPlus, PiMinus } from "react-icons/pi";
+import { FaFeatherPointed, FaFilePdf } from "react-icons/fa6";
+import { RiScreenshot2Fill } from "react-icons/ri";
+import { TbFileTypeSvg } from "react-icons/tb";
 import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
-
-import { startDrawing, clearCanvas, handleUpdates } from "./utils/canvas";
-import { rainbowColors, tourSteps } from "./utils/helpers";
-import Menu from "./components/Menu";
 import BgColor from "./components/BgColor";
+import Menu from "./components/Menu";
 import Chatbot from "./components/Chatbot/Chatbot";
 import Footer from "./components/Footer";
+import { handleUpdates, startDrawing, clearCanvas } from "./utils/canvas";
+import { rainbowColors, tourSteps } from "./utils/helpers";
+
+const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey";
 
 function App() {
   const canvasRef = useRef(null);
@@ -20,16 +26,25 @@ function App() {
   const [darkMode, setDarkMode] = useState(null);
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
   const [steps] = useState(tourSteps);
+  const [modal, setModal] = useState(false);
   const [canvasInitialized, setCanvasInitialized] = useState(false);
-
-  const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey";
-
   const [brushStyle, setBrushStyle] = useState("solid");
   const [selectedTool, setSelectedTool] = useState("brush");
 
+  const style = {
+    guideline: `p-4 flex text-xs`,
+  };
+
+  const showGuidelines = () => {
+    setModal(!modal);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
-
     if (canvas && !canvasInitialized) {
       setCanvasInitialized(true);
       startDrawing(canvas, color, thickness, bgColor, brushStyle);
@@ -47,7 +62,40 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out font-primary">
+      <div className="relative">
+        <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
+          <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
+            Draw it Out!
+          </h1>
+          <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
+        </div>
+
+        <button className="absolute top-0 left-0 p-6">
+          <FaBookOpen
+            size={28}
+            color="white"
+            className="bg-black p-1 rounded-xl"
+            aria-label="show-guidelines"
+            onClick={showGuidelines}
+          />
+        </button>
+
+        <a
+          href={BUY_ME_COFFEE_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-0 right-0 p-6"
+        >
+          <button className="flex items-center bg-transparent border border-slate-200 text-white focus:outline-none hover:bg-slate-900 hover:text-white rounded-xl p-2">
+            <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" />
+            <span className="hidden sm:block text-base text-white font-cursive">
+              Buy me a Coffee
+            </span>
+          </button>
+        </a>
+      </div>
+      <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
+      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
         <Joyride
           steps={steps}
           continuous
@@ -60,47 +108,24 @@ function App() {
             skip: "Skip",
           }}
         />
-
-        <div className=" flex flex-col min-w-full justify-center gsm:flex-row">
+        <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
           {showMenuAndBgColor && (
-            <div className="color-pallet gsm:w-[10%] w-[85%] h-[50rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
+            <div className="color-pallet gsm:w-[10%] w-[85%] h-[44rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
               <input
                 type="color"
                 name="color"
                 id="color"
                 title="Color Picker"
-                // defaultValue={bgColor}
                 onChange={(e) => setBgColor(e.target.value)}
-                className={`cursor-pointer m-auto w-[2rem] h-[2rem] vsm:w-[3rem] vsm:h-[3rem]  rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600 `}
+                className={`cursor-pointer m-auto w-[2rem] h-[3rem] vsm:w-[3rem] vsm:h-[3rem] rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600`}
               />
               {rainbowColors?.map((val, i) => (
-                <BgColor
-                  key={i}
-                  color={val}
-                  setBgColor={setBgColor}
-                  canvas={canvasRef.current}
-                />
+                <BgColor key={i} color={val} setBgColor={setBgColor} canvas={canvasRef.current} />
               ))}
             </div>
           )}
 
-          <div className="container w-[90%] gsm:min-h-[100dvh] flex flex-col justify-center items-center gap-[2rem] font-primary m-auto gsm:m-0">
-            {/* Buy me a coffee element */}
-            <a
-              href={BUY_ME_COFFEE_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-end mt-4 w-[90%] sm:ml-0"
-            >
-              <button className="flex items-center bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
-                <SiBuymeacoffee className="text-xl mx-auto sm:mr-2" />{" "}
-                {/* Icon */}
-                <span className="hidden sm:block text-base font-cursive">
-                  Buy me a Coffee
-                </span>{" "}
-                {/* Text */}
-              </button>
-            </a>
+          <div className="container w-[85%] flex flex-col justify-center items-center gap-[0.6rem] font-primary m-auto">
             <div className="flex items-center gap-14">
               {showMenuAndBgColor && (
                 <Menu
@@ -121,8 +146,9 @@ function App() {
 
               <div className="flex flex-row justify-center align-center space-x-10">
                 <div
-                  className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md  transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${!showMenuAndBgColor &&
-                    "mt-10"}`}
+                  className={`clearAll bg-[#CBCCCF] p-[1rem] text-[1.5rem] rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-110 ${
+                    !showMenuAndBgColor && "mt-10"
+                  }`}
                   onClick={() => {
                     setShowMenuAndBgColor((state) => !state);
                   }}
@@ -131,30 +157,24 @@ function App() {
                 </div>
 
                 <div
-                  className={`darkLightModeToggle  p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor &&
-                    "mt-10"}`}
+                  className={`darkLightModeToggle p-[1rem] text-[1.5rem] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-110 cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
+                    !showMenuAndBgColor && "mt-10"
+                  }`}
                   onClick={toggleDarkMode}
                 >
-                  {darkMode ? (
-                    <FaSun className="text-black" />
-                  ) : (
-                    <FaMoon className="text-white" />
-                  )}
+                  {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
                 </div>
               </div>
             </div>
             <canvas
               id="draw"
               className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing
-                  ? "cursor-crosshair"
-                  : "cursor-default pointer-events-none"
-              }
-            `}
+                isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"
+              }`}
               ref={canvasRef}
             ></canvas>
             <div
-              className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111]  hover:md:scale-110"
+              className="clearAll bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:bg-red-700 dark:text-[#111111] hover:md:scale-110"
               onClick={() => {
                 setBgColor("#B7BABF");
                 setBrushStyle("solid");
@@ -165,12 +185,9 @@ function App() {
             >
               <RxCross1 />
             </div>
-            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white ">
+            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
               Made with &#128157; by{" "}
-              <a
-                href="https://shubham-s-socials.vercel.app/"
-                className="decoration-none font-semibold hover:underline"
-              >
+              <a href="https://shubham-s-socials.vercel.app/" className="decoration-none font-semibold hover:underline">
                 Master Mickey
               </a>
               !
@@ -178,9 +195,57 @@ function App() {
           </div>
           <div className="App"></div>
           <Chatbot />
+          <Footer />
+        </div>
+        <div
+          className={modal ? "z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100" : "fixed right-[-100%]"}
+          onClick={showGuidelines}
+        >
+          <VscClose
+            size={20}
+            color="white"
+            onClick={closeModal}
+            className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
+          />
+          <ul className="pt-18 p-4">
+            <li className="p-2 font-bold text-lg uppercase">Guidelines</li>
+            <li className={style.guideline}>
+              <PiPencilSimpleFill />
+              <span className="ml-2">Draw your heart out using the pen.</span>
+            </li>
+            <li className={style.guideline}>
+              <FaFeatherPointed />
+              <span className="ml-2"> Use a light touch for delicate lines.</span>
+            </li>
+            <li className={style.guideline}>
+              <RiScreenshot2Fill />
+              <span className="ml-2"> Capture your screen for reference.</span>
+            </li>
+            <li className={style.guideline}>
+              <FaFilePdf />
+              <span className="ml-2">Export your work as a PDF for easy sharing.</span>
+            </li>
+            <li className={style.guideline}>
+              <TbFileTypeSvg />
+              <span className="ml-2"> Save your artwork as an SVG for scalability.</span>
+            </li>
+            <li className={style.guideline}>
+              <PiPlus />
+              <span className="ml-2"> Zoom in to work on finer details.</span>
+            </li>
+            <li className={style.guideline}>
+              <PiMinus />
+              <span className="ml-2"> Zoom out for an overview of your drawing.</span>
+            </li>
+            <li className={style.guideline}>
+              <FaRegEye />
+              <span className="ml-2">View only your canvas.</span>
+            </li>
+          </ul>
         </div>
       </div>
     </>
   );
 }
+
 export default App;
