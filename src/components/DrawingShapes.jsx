@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import rectImg from "../assets/images/rectangle.svg";
 import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
-import { FaChevronDown } from "react-icons/fa";
 
 const DrawingShapes = ({
   brushWidth,
@@ -133,7 +132,7 @@ const DrawingShapes = ({
     <div className="drawing-container flex hover:bg-[#B7BABF] flex-shrink-0" onClick={toggleDropDown}>
       <div className="relative controls">
         <ul className="options flex relative w-[50px]">
-          <div className="absolute md:top-[-20px] top-[-16px] flex flex-col gap-5 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out dark:hover:bg-gray-800">
+          <div className="absolute md:top-[-20px] top-[-16px] flex flex-col gap-5 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF]">
             {isDropdownOpen ? (
               <>
                 <li id="rectangle" onClick={() => setSelectedTool("rectangle")}>
@@ -147,19 +146,12 @@ const DrawingShapes = ({
                 </li>
               </>
             ) : (
-              <li id="triangle" className="hover:bg-[#B7BABF]" onClick={() => setSelectedTool("triangle")}>
+              <li id="triangle" onClick={() => setSelectedTool("triangle")}>
                 {currentShapeImageElement()}
               </li>
             )}
           </div>
         </ul>
-        {!isDropdownOpen && (
-          <FaChevronDown
-            className={`absolute md:top-[24px] top-[16px] md:left-[20px] left-[15px] transform -translate-x-1/2 text-gray-600 ${
-              isDropdownOpen ? "rotate-180" : ""
-            }`}
-          />
-        )}
       </div>
     </div>
   );

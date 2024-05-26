@@ -1,97 +1,86 @@
 /* eslint-disable react/prop-types */
 import { PiPencilSimpleFill } from "react-icons/pi";
-import { FaChevronDown } from "react-icons/fa";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
 import { useState } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
+import { BiSolidPolygon } from "react-icons/bi";
+import { BiPolygon } from "react-icons/bi";
 
-import {
-  convertToPDF,
-  convertToSVG,
-  convertToJPG,
-  convertToPng,
-} from "../utils/canvas.js";
+import { convertToPDF, convertToSVG, convertToJPG, convertToPng } from "../utils/canvas.js";
 import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
 import { increaseHeight } from "../utils/canvas.js";
 import { decreaseHeight } from "../utils/canvas.js";
 import DrawingShapes from "./DrawingShapes.jsx";
-// import BgColor from "./BgColor.jsx";
 
 function Brush(props) {
   const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle } = props;
   return (
     <div className="relative ">
-          <PiPencilSimpleFill
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
-              isDropdownOpen ? "bg-gray-400" : ""
+      <PiPencilSimpleFill
+        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
+          isDropdownOpen ? "bg-gray-400" : ""
+        }`}
+        onClick={toggleDropdown}
+        title="Draw"
+      />
+      <div
+        className={`absolute top-full bg-[#CBCCCF]   mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2 ${
+          isDropdownOpen ? "block" : "hidden"
+        }`}
+      >
+        {/* Dropdown content */}
+        <div className="py-2 bg-[#CBCCCF] ">
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "solid" ? "font-bold" : ""
             }`}
-            onClick={toggleDropdown}
-            title="Draw"
-          />
-          <div
-            className={`absolute top-full bg-[#CBCCCF]   mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2 ${
-              isDropdownOpen ? "block" : "hidden"
-            }`}
+            onClick={() => {
+              setBrushStyle("solid");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
           >
-            {/* Dropdown content */}
-            <div className="py-2 bg-[#CBCCCF] ">
-              <button
-                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-                  brushStyle === "solid" ? "font-bold" : ""
-                }`}
-                onClick={() => {
-                  setBrushStyle("solid");
-                  setIsDropdownOpen(!isDropdownOpen);
-                }}
-              >
-                Solid
-              </button>
-              <button
-                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-                  brushStyle === "dotted" ? "font-bold" : ""
-                }`}
-                onClick={() => {
-                  setBrushStyle("dotted");
-                  setIsDropdownOpen(!isDropdownOpen);
-                }}
-              >
-                Dotted
-              </button>
-              <button
-                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-                  brushStyle === "dashed" ? "font-bold" : ""
-                }`}
-                onClick={() => {
-                  setBrushStyle("dashed");
-                  setIsDropdownOpen(!isDropdownOpen);
-                }}
-              >
-                Dashed
-              </button>
-              <button
-                className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-                  brushStyle === "faded" ? "font-bold" : ""
-                }`}
-                onClick={() => {
-                  setBrushStyle("faded");
-                  setIsDropdownOpen(!isDropdownOpen);
-                }}
-              >
-                Faded
-              </button>
-            </div>
-          </div>
-          {/* Arrow */}
-          <FaChevronDown
-            className={`absolute top-full left-1/2 transform -translate-x-1/2 text-gray-600 ${
-              isDropdownOpen ? "rotate-180" : ""
+            Solid
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dotted" ? "font-bold" : ""
             }`}
-          />
+            onClick={() => {
+              setBrushStyle("dotted");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
+          >
+            Dotted
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dashed" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              setBrushStyle("dashed");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
+          >
+            Dashed
+          </button>
+          <button
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "faded" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              setBrushStyle("faded");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
+          >
+            Faded
+          </button>
         </div>
-  )
+      </div>
+    </div>
+  );
 }
 
 const Menu = ({
@@ -146,16 +135,20 @@ const Menu = ({
           selectedTool={selectedTool}
           setSelectedTool={setSelectedTool}
         />
-        <button className="flex flex-col items-center gap-1 mt-2">
-          <input
-            type="checkbox"
-            id="fill-color"
-            onChange={(e) => setFillColor(e.target.checked)}
-            title="Fill Color"
-          />
-          <label htmlFor="fill-color">Fill</label>
+
+        {/* Shape fill mode */}
+        <button className="flex flex-col items-center" onClick={(e) => setFillColor(!fillColor)}>
+          {fillColor ? (
+            <BiSolidPolygon
+              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out`}
+            />
+          ) : (
+            <BiPolygon
+              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out`}
+            />
+          )}
         </button>
-        
+
         <div className="flex flex-col relative">
           <button className="relative">
             <FaFeatherPointed
@@ -164,7 +157,6 @@ const Menu = ({
               }`}
               onClick={() => setPencilWidth(!pencilWidth)}
             />
-            {/* <span className=" absolute -left-3 top-14">Thickness</span> */}
           </button>
           {pencilWidth && (
             <input
@@ -190,9 +182,7 @@ const Menu = ({
             onChange={(e) => setColor(e.target.value)}
             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0  transform transition duration-300 ease-in-out `}
           />
-          <span className="absolute top-14 left-[0.3rem] dark:text-[#ffffff]">
-            {/* Color */}
-          </span>
+          <span className="absolute top-14 left-[0.3rem] dark:text-[#ffffff]">{/* Color */}</span>
         </div>
         <div className="relative">
           <button
@@ -205,7 +195,7 @@ const Menu = ({
             onMouseLeave={handleMouseLeave}
           >
             {/* Save As */}
-            <IoCloudDownloadOutline/>
+            <IoCloudDownloadOutline />
             <svg
               className="w-2.5 h-2.5 ms-3"
               aria-hidden="true"
@@ -274,30 +264,14 @@ const Menu = ({
         <button>
           <PiPlus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
-            onClick={() =>
-              increaseHeight(
-                canvasRef.current,
-                bgColor,
-                thickness,
-                color,
-                brushStyle
-              )
-            }
+            onClick={() => increaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
-            onClick={() =>
-              decreaseHeight(
-                canvasRef.current,
-                bgColor,
-                thickness,
-                color,
-                brushStyle
-              )
-            }
+            onClick={() => decreaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
             title="DecreaseHeight"
           />
         </button>
