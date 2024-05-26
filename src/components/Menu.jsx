@@ -101,7 +101,7 @@ const Menu = ({
   const [fillColor, setFillColor] = useState(false);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsOpen(!isOpen);
   };
 
   const handleMouseEnter = () => {
@@ -186,18 +186,14 @@ const Menu = ({
         </div>
         <div className="relative">
           <button
-            id="dropdownHoverButton"
-            data-dropdown-toggle="dropdownHover"
-            data-dropdown-trigger="hover"
             className="text-gray-700 bg-[#B7BABF] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center   transform transition duration-300 ease-in-out "
             type="button"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onClick={toggleDropdown}
           >
             {/* Save As */}
             <IoCloudDownloadOutline />
             <svg
-              className="w-2.5 h-2.5 ms-3"
+              className={`w-2.5 h-2.5 ms-3 ${isOpen ? "rotate-180" : ""}`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -214,9 +210,6 @@ const Menu = ({
           </button>
 
           <div
-            id="dropdownHover"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             className={`absolute z-10 ${
               isOpen ? "" : "hidden"
             } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem]`}
