@@ -36,9 +36,15 @@ const Menu = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [fillColor, setFillColor] = useState(false);
+  const [isVisible,setIsVisible] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    
+  };
+  
+  const toggleDiv = () =>{
+    setIsVisible(!isVisible);
   };
 
   const handleMouseEnter = () => {
@@ -59,9 +65,12 @@ const Menu = ({
         <div className="relative ">
           <PiPencilSimpleFill
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
-              isDropdownOpen ? "bg-gray-400" : ""
+              isDropdownOpen  ? "bg-gray-400" : ""
+            } ${
+              isVisible  ? "bg-gray-400" : ""
             }`}
-            onClick={toggleDropdown}
+            onClick={toggleDiv}
+            
             title="Draw"
           />
           <div
@@ -122,6 +131,7 @@ const Menu = ({
             className={`absolute top-full left-1/2 transform -translate-x-1/2 text-gray-600 ${
               isDropdownOpen ? "rotate-180" : ""
             }`}
+            onClick={toggleDropdown}
           />
         </div>
         <DrawingShapes
@@ -145,11 +155,13 @@ const Menu = ({
           <FaFeatherPointed
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm mx-auto rounded-[0.5rem] text-black  bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
               pencilWidth ? "bg-gray-200" : ""
-            }`}
+            }  ${ isVisible ? 'flex' : 'hidden'}`}
             onClick={() => setPencilWidth(!pencilWidth)}
             title="Brush Thickness"
           />
-          <span className=" absolute -left-3 top-14">Thickness</span>
+          <span className={`absolute -left-3 top-14  ${
+          isVisible ? 'flex' : 'hidden'
+        }`}>Thickness</span>
         </button>
 
         {pencilWidth && (
