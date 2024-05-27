@@ -21,8 +21,11 @@ const DrawingShapes = ({
   const [snapshot, setSnapshot] = useState(null);
 
   const [show, setShow] = useState(false);
-  const [imagePath, setImagePath] = useState("");
-
+  const imagePaths = {
+    'rectangle': rectImg,
+    'circle': circleImg,
+    'triangle': triangleImg
+  }
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -121,7 +124,7 @@ const DrawingShapes = ({
   return (
     <div className="drawing-container flex relative   p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] "  onClick={()=>setShow((prev)=>!prev)}>
       <div className="controls cursor-pointer text-[1rem] md:text-[1.5rem] ">
-         {imagePath==""?<FaShapes />:<img src={imagePath} className="h-[1rem] md:h-[1.5rem]" alt="" />} 
+         {imagePaths[selectedTool]===undefined?<FaShapes />:<img src={imagePaths[selectedTool]} className="h-[1rem] md:h-[1.5rem]" alt="" />} 
         <ul className="options flex space-x-4 " >
           {/* <li className="option tool" id="brush" onClick={() => setSelectedTool("brush")}>
             <PiPencilSimpleFill className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800 ${
@@ -132,7 +135,7 @@ const DrawingShapes = ({
             <div
               className="option tool flex gap-2 p-2 rounded-md  transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800 "
               id="rectangle"
-              onClick={() => { setSelectedTool("rectangle");setImagePath(rectImg) }}
+              onClick={() => setSelectedTool("rectangle") }
             >
               <img src={rectImg} alt="Rectangle" />
               <span className=" text-sm">Rectangle</span>
@@ -140,7 +143,7 @@ const DrawingShapes = ({
             <div
               className="option tool flex gap-2 p-2 rounded-md  transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800"
               id="circle"
-              onClick={() => { setSelectedTool("circle");setImagePath(circleImg) }}
+              onClick={() =>setSelectedTool("circle") }
             >
               <img src={circleImg} alt="Circle" />
               <span className=" text-sm">Circle</span>
@@ -148,7 +151,7 @@ const DrawingShapes = ({
             <div
               className="option tool flex gap-2 p-2 rounded-md  transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800"
               id="triangle"
-              onClick={() => { setSelectedTool("triangle");setImagePath(triangleImg) }}
+              onClick={() => setSelectedTool("triangle")}
             >
               <img src={triangleImg} alt="Triangle" />
               <span className=" text-sm">Triangle</span>
