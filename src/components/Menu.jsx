@@ -101,16 +101,12 @@ const Menu = ({
   const [fillColor, setFillColor] = useState(false);
 
   const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleSaveAs = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
+  }
 
   const handleBrushStyleChange = (style) => {
     setBrushStyle(style);
@@ -188,7 +184,7 @@ const Menu = ({
           <button
             className="text-gray-700 bg-[#B7BABF] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center   transform transition duration-300 ease-in-out "
             type="button"
-            onClick={toggleDropdown}
+            onClick={toggleSaveAs}
           >
             {/* Save As */}
             <IoCloudDownloadOutline />
