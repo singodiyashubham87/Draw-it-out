@@ -1,21 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
+import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun, FaBookOpen } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { tourSteps } from "./utils/helpers";
-import BgColorSidePanel from "./components/BgColorSidePanel";
-import Menu from "./components/Menu";
-import { handleUpdates, startDrawing } from "./utils/canvas";
-import { FaBookOpen } from "react-icons/fa";
 import { VscClose } from "react-icons/vsc";
-import { PiPencilSimpleFill } from "react-icons/pi";
-import { FaFeatherPointed } from "react-icons/fa6";
+import { PiPencilSimpleFill, PiPlus, PiMinus } from "react-icons/pi";
+import { FaFeatherPointed, FaFilePdf } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
-import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
-import { PiPlus } from "react-icons/pi";
-import { PiMinus } from "react-icons/pi";
 import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
+import Menu from "./components/Menu";
+import Chatbot from "./components/Chatbot/Chatbot";
+import Footer from "./components/Footer";
+import { handleUpdates, startDrawing } from "./utils/canvas";
 
 function App() {
   const canvasRef = useRef(null);
@@ -46,7 +42,6 @@ function App() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-
     if (canvas && !canvasInitialized) {
       setCanvasInitialized(true);
       startDrawing(canvas, color, thickness, bgColor, brushStyle);
@@ -64,7 +59,7 @@ function App() {
 
   return (
     <>
-      <div className="relative ">
+      <div className="relative">
         <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
           <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
             Draw it Out!
@@ -162,10 +157,9 @@ function App() {
             {/* ----- Canvas ------ */}
             <canvas
               id="draw"
-              className={`whiteboard bg-slate-950 w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+              className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
                 isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"
-              }
-            `}
+              }`}
               ref={canvasRef}
             ></canvas>
 
@@ -183,65 +177,61 @@ function App() {
             </div>
             <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
               Made with &#128157; by{" "}
-              <a
-                href="https://shubham-s-socials.vercel.app/"
-                className="decoration-none font-semibold hover:underline"
-              >
+              <a href="https://shubham-s-socials.vercel.app/" className="decoration-none font-semibold hover:underline">
                 Master Mickey
               </a>
               !
             </h1>
           </div>
-          <div
-            className={
-              modal
-                ? "z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100"
-                : "fixed right-[-100%]"
-            }
-            onClick={showGuidelines}
-          >
-            <VscClose
-              size={20}
-              color="white"
-              onClick={closeModal}
-              className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
-            />
-            <ul className="pt-18 p-4">
-              <li className="p-2 font-bold text-lg uppercase">Guidelines</li>
-              <li className={style.guideline}>
-                <PiPencilSimpleFill />
-                <span className="ml-2">Draw your heart out using the pen.</span>
-              </li>
-              <li className={style.guideline}>
-                <FaFeatherPointed />
-                <span className="ml-2"> Use a light touch for delicate lines.</span>
-              </li>
-              <li className={style.guideline}>
-                <RiScreenshot2Fill />
-                <span className="ml-2"> Capture your screen for reference.</span>
-              </li>
-              <li className={style.guideline}>
-                <FaFilePdf />{" "}
-                <span className="ml-2">Export your work as a PDF for easy sharing.</span>
-              </li>
-              <li className={style.guideline}>
-                <TbFileTypeSvg />
-                <span className="ml-2"> Save your artwork as an SVG for scalability.</span>
-              </li>
-              <li className={style.guideline}>
-                <PiPlus />
-                <span className="ml-2"> Zoom in to work on finer details.</span>
-              </li>
-              <li className={style.guideline}>
-                <PiMinus />
-                <span className="ml-2"> Zoom out for an overview of your drawing.</span>
-              </li>
-              <li className={style.guideline}>
-                <FaRegEye />
-                <span className="ml-2">View only your canvas.</span>
-              </li>
-            </ul>
-          </div>
+          <div className="App"></div>
+          <Chatbot />
+          <Footer />
+        </div>
+        <div
+          className={modal ? "z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100" : "fixed right-[-100%]"}
+          onClick={showGuidelines}
+        >
+          <VscClose
+            size={20}
+            color="white"
+            onClick={closeModal}
+            className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
+          />
+          <ul className="pt-18 p-4">
+            <li className="p-2 font-bold text-lg uppercase">Guidelines</li>
+            <li className={style.guideline}>
+              <PiPencilSimpleFill />
+              <span className="ml-2">Draw your heart out using the pen.</span>
+            </li>
+            <li className={style.guideline}>
+              <FaFeatherPointed />
+              <span className="ml-2"> Use a light touch for delicate lines.</span>
+            </li>
+            <li className={style.guideline}>
+              <RiScreenshot2Fill />
+              <span className="ml-2"> Capture your screen for reference.</span>
+            </li>
+            <li className={style.guideline}>
+              <FaFilePdf />
+              <span className="ml-2">Export your work as a PDF for easy sharing.</span>
+            </li>
+            <li className={style.guideline}>
+              <TbFileTypeSvg />
+              <span className="ml-2"> Save your artwork as an SVG for scalability.</span>
+            </li>
+            <li className={style.guideline}>
+              <PiPlus />
+              <span className="ml-2"> Zoom in to work on finer details.</span>
+            </li>
+            <li className={style.guideline}>
+              <PiMinus />
+              <span className="ml-2"> Zoom out for an overview of your drawing.</span>
+            </li>
+            <li className={style.guideline}>
+              <FaRegEye />
+              <span className="ml-2">View only your canvas.</span>
+            </li>
+          </ul>
         </div>
       </div>
     </>
