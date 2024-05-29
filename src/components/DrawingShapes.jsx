@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import rectImg from "../assets/images/rectangle.svg";
 import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
-import { PiPencilSimpleFill } from "react-icons/pi";
 
-const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
+const DrawingShapes = ({
+  brushWidth,
+  selectedColor,
+  fillColor,
+  canvasRef,
+  selectedTool,
+  setSelectedTool,
+}) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [prevMouseX, setPrevMouseX] = useState(0);
   const [prevMouseY, setPrevMouseY] = useState(0);
-  const [selectedTool, setSelectedTool] = useState("brush");
+
   const [snapshot, setSnapshot] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,7 +39,9 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
     const drawCircle = (e) => {
       ctx.putImageData(snapshot, 0, 0);
       ctx.beginPath();
-      const radius = Math.sqrt(Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2));
+      const radius = Math.sqrt(
+        Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2)
+      );
       ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
       fillColor ? ctx.fill() : ctx.stroke();
     };
@@ -95,25 +104,52 @@ const DrawingShapes = ({ brushWidth, selectedColor, fillColor, canvasRef }) => {
     };
   }, [brushWidth, fillColor, selectedTool, selectedColor, snapshot, canvasRef, isDrawing]);
 
+  function toggleDropDown() {
+    setIsDropdownOpen(!isDropdownOpen);
+  }
+
+  function currentShapeImageElement() {
+    console.log("image element req");
+    let imgElement = null;
+    switch (selectedTool) {
+      case "rectangle":
+        imgElement = <img src={rectImg} alt="Rectangle" />;
+        break;
+      case "circle":
+        imgElement = <img src={circleImg} alt="Circle" />;
+        break;
+      case "triangle":
+        imgElement = <img src={triangleImg} alt="Triangle" />;
+        break;
+      default:
+        imgElement = <img src={rectImg} alt="Rectangle" />;
+        break;
+    }
+    return imgElement;
+  }
+
   return (
-    <div className="drawing-container flex  ">
-      <div className="controls">
-        <ul className="options flex space-x-4">
-          {/* <li className="option tool" id="brush" onClick={() => setSelectedTool("brush")}>
-            <PiPencilSimpleFill className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer dark:bg-[#111111] dark:text-[#ffffff] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800 ${
-            isDrawing ? "bg-gray-400" : ""
-          }`} />
-          </li> */}
-          <div className="flex space-x-4 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-black shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF] dark:hover:bg-gray-800">
-          <li className="option tool " id="rectangle" onClick={() => setSelectedTool("rectangle")}>
-            <img src={rectImg} alt="Rectangle" />
-          </li>
-          <li className="option tool" id="circle" onClick={() => setSelectedTool("circle")}>
-            <img src={circleImg} alt="Circle" />
-          </li>
-          <li className="option tool" id="triangle" onClick={() => setSelectedTool("triangle")}>
-            <img src={triangleImg} alt="Triangle" />
-          </li>
+    <div className="drawing-container flex hover:bg-[#B7BABF] flex-shrink-0" onClick={toggleDropDown}>
+      <div className="relative controls">
+        <ul className="options flex relative w-[50px]">
+          <div className="absolute md:top-[-20px] top-[-16px] flex flex-col gap-5 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF]">
+            {isDropdownOpen ? (
+              <>
+                <li id="rectangle" onClick={() => setSelectedTool("rectangle")}>
+                  <img src={rectImg} alt="Rectangle" />
+                </li>
+                <li id="circle" onClick={() => setSelectedTool("circle")}>
+                  <img src={circleImg} alt="Circle" />
+                </li>
+                <li id="triangle" onClick={() => setSelectedTool("triangle")}>
+                  <img src={triangleImg} alt="Triangle" />
+                </li>
+              </>
+            ) : (
+              <li id="triangle" onClick={() => setSelectedTool("triangle")}>
+                {currentShapeImageElement()}
+              </li>
+            )}
           </div>
         </ul>
       </div>
