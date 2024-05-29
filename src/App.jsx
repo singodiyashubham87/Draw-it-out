@@ -207,7 +207,7 @@ function App() {
               onClick={closeModal}
               className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
             />
-            <ul className="pt-18 p-4">
+            <ul className="pt-18 p-4 bg-white dark:bg-dark-bg text-black dark:text-dark-text">
               <li className="p-2 font-bold text-lg uppercase">Guidelines</li>
               <li className={style.guideline}>
                 <PiPencilSimpleFill />
