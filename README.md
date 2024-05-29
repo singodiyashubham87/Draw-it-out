@@ -138,6 +138,7 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
 - **Drawing Tools:** Users can select between different drawing tools like pencil and brush thickness.
 - **Color Picker:** Choose from a wide range of colors using the color picker tool.
 - **Brush Thickness:** Adjust the thickness of the brush stroke using a range slider.
+- **Shapes:** Users can select between different shapes like circle and triangle to use in the their drawings.
 - **Snapshot:** Capture and download snapshots of the whiteboard canvas.
 - **Clear Canvas:** Clear the canvas with a single click.
 - **Responsive Design:** The application is responsive and works seamlessly across different screen sizes.
