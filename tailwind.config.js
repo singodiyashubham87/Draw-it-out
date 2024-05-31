@@ -31,7 +31,7 @@ export default {
         'dark-bg': '#2E3136', 
       },
       textColor: {
-        'dark-text': '#F4CBB2', 
+        'dark-text': '#FFFFFF', 
       },
     },
   },
