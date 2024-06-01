@@ -20,7 +20,7 @@ import Footer from "./components/Footer";
 
 function App() {
   const canvasRef = useRef(null);
-  const [isDrawing, setIsDrawing] = useState(true);
+  const [isDrawing, setIsDrawing] = useState(false);
   const [thickness, setThickness] = useState(4);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#b7babf");
