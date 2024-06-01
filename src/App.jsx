@@ -171,7 +171,7 @@ function App() {
             ></canvas>
 
             <div
-              className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
+              className="bg-[#CBCCCF] p-[1rem] mt-4 mr-8 text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
                 setBgColor("#B7BABF");
                 setBrushStyle("solid");
@@ -182,7 +182,7 @@ function App() {
             >
               <RxCross1 />
             </div>
-            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
+            <h1 className="text-[0.7rem] mr-4 vvsm:text-[1rem] pb-4 dark:text-white">
               Made with &#128157; by{" "}
               <a
                 href="https://shubham-s-socials.vercel.app/"
