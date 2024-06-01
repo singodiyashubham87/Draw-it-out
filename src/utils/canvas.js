@@ -247,9 +247,6 @@ export function handleUpdates(
   console.log("update called");
 }
 
-
-// canvas.js
-// canvas.js
 export const importImage = (canvas, file, width, height) => {
   const ctx = canvas.getContext("2d");
   const reader = new FileReader();
