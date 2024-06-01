@@ -111,7 +111,6 @@ const Menu = ({
   };
   const toggleVisible = () =>{
     setIsVisible(!isVisible);
-    setIsDrawing(!isDrawing);
   }
 
   const toggleSaveAs = () => {
