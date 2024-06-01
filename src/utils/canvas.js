@@ -246,3 +246,27 @@ export function handleUpdates(
   setBrushStyle(ctx, brushStyle);
   console.log("update called");
 }
+
+
+// canvas.js
+// canvas.js
+export const importImage = (canvas, file, width, height) => {
+  const ctx = canvas.getContext("2d");
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    const img = new Image();
+    img.onload = () => {
+      // Clear the canvas before drawing the new image
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Set the canvas width and height
+      canvas.width = width;
+      canvas.height = height;
+      // Draw the image on the canvas
+      ctx.drawImage(img, 0, 0, width, height);
+    };
+    img.src = event.target.result;
+  };
+
+  reader.readAsDataURL(file);
+};
