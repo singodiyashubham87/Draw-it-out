@@ -1,6 +1,7 @@
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 
+// Define the steps for the chatbot
 const steps = [
     {
         id: '0',
@@ -24,7 +25,7 @@ const steps = [
     },
     {
         id: 'drawingConfirmation',
-        message: "Sure, do you want any suggestions on what to draw?",
+        message: 'Sure, do you want any suggestions on what to draw?',
         trigger: 'waitForResponse3',
     },
     {
@@ -91,40 +92,42 @@ const steps = [
             { value: 47, label: 'A beautiful garden with beautiful flowers and plants', trigger: 'end' },
             { value: 48, label: 'Showcase all four seasons on one piece of paper', trigger: 'end' },
             { value: 49, label: 'Draw how innocent and happy children are', trigger: 'end' },
-            { value: 50, label: 'Various breeds of dogs in one picture', trigger: 'end' }
+            { value: 50, label: 'Various breeds of dogs in one picture', trigger: 'end' },
         ],
     },
     {
         id: 'end',
         component: (
             <div>
-                Great Choice! Good luck with your drawing!
-                <button onClick={() => window.location.reload()}>End Chat</button>
+                Great Choice! Good luck with your drawing!<br />
+                <button onClick={() => window.location.reload()} 
+                    className="text-blue-500">End Chat</button>
             </div>
         ),
-        asMessage: true, // Render the component as a message
+        asMessage: true,
         end: true,
     },
 ];
 
+// Define the theme for the chatbot
 const theme = {
-    background: 'gray', 
-    headerBgColor: '#F8F8FF', 
-    headerFontSize: '20px', 
-    botBubbleColor: '#D3D3D3', 
-    headerFontColor: 'gray', 
-    botFontColor: 'black', 
-    userBubbleColor: '#B0C4DE', 
-    userFontColor: 'black', 
-  };
-  
+    background: 'gray',
+    headerBgColor: '#F8F8FF',
+    headerFontSize: '20px',
+    botBubbleColor: '#D3D3D3',
+    headerFontColor: 'gray',
+    botFontColor: 'black',
+    userBubbleColor: '#B0C4DE',
+    userFontColor: 'black',
+};
 
-
+// Define the configuration for the chatbot
 const config = {
     botAvatar: "/src/assets/images/chatbot.jpg",
     floating: true,
 };
 
+// Chatbot component
 function Chatbot() {
     return (
         <div className="App">
@@ -133,7 +136,6 @@ function Chatbot() {
                     headerTitle="Drawbot"
                     steps={steps}
                     {...config}
-
                 />
             </ThemeProvider>
         </div>
@@ -141,4 +143,3 @@ function Chatbot() {
 }
 
 export default Chatbot;
- 
