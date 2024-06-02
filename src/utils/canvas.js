@@ -171,10 +171,12 @@ function setBrushStyle(ctx, brushStyle) {
       ctx.globalAlpha = 1.0;
       break;
     case "dashed":
-      const dotSpacing = 20;
-      ctx.setLineDash([dotSpacing / 2, dotSpacing]);
-      ctx.globalAlpha = 1.0;
-      break;
+      {
+        const dotSpacing = 20;
+        ctx.setLineDash([dotSpacing / 2, dotSpacing]);
+        ctx.globalAlpha = 1.0;
+        break;
+      }
     case "faded":
       ctx.setLineDash([]);
       ctx.globalAlpha = 0.01;
