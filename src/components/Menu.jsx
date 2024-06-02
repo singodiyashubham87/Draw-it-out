@@ -21,20 +21,16 @@ import { decreaseHeight } from "../utils/canvas.js";
 import DrawingShapes from "./DrawingShapes.jsx";
 
 function Brush(props) {
-  const {
-    isDropdownOpen,
-    toggleDropdown,
-    setBrushStyle,
-    setIsDropdownOpen,
-    brushStyle,
-  } = props;
+
+  const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle,isVisible,toggleVisible } = props;
+
   return (
     <div className="relative ">
       <PiPencilSimpleFill
         className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
           isDropdownOpen ? "bg-gray-400" : ""
-        }`}
-        onClick={toggleDropdown}
+        } ${isVisible?'bg-gray-400':''}`}
+        onClick={()=>{toggleDropdown();toggleVisible();}}
         title="Draw"
       />
       <div
@@ -43,7 +39,7 @@ function Brush(props) {
         }`}
       >
         {/* Dropdown content */}
-        <div className="py-2 bg-[#CBCCCF] ">
+        <div className={`py-2 bg-[#CBCCCF]`}>
           <button
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "solid" ? "font-bold" : ""
@@ -105,15 +101,23 @@ const Menu = ({
   brushStyle,
   selectedTool,
   setSelectedTool,
+  isDrawing,
+  setIsDrawing,
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [fillColor, setFillColor] = useState(false);
+  const [isVisible,setIsVisible] = useState(false);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    if (!isVisible){
+      setIsDropdownOpen(!isDropdownOpen);
+    }
   };
+  const toggleVisible = () =>{
+    setIsVisible(!isVisible);
+  }
 
   const toggleSaveAs = () => {
     setIsOpen(!isOpen);
@@ -133,6 +137,8 @@ const Menu = ({
           setBrushStyle={setBrushStyle}
           setIsDropdownOpen={setIsDropdownOpen}
           brushStyle={brushStyle}
+          isVisible={isVisible}
+          toggleVisible={toggleVisible}
         />
         <DrawingShapes
           brushWidth={thickness}
@@ -162,9 +168,8 @@ const Menu = ({
         <div className="flex flex-col relative">
           <button className="relative">
             <FaFeatherPointed
-              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
-                pencilWidth ? "bg-gray-200" : ""
-              }`}
+              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${isVisible? 'block' :'hidden'} ${
+                pencilWidth ? "bg-gray-200" : ""}  `}
               onClick={() => setPencilWidth(!pencilWidth)}
             />
           </button>
@@ -179,7 +184,7 @@ const Menu = ({
               onChange={(e) => {
                 setThickness(e.target.value);
               }}
-              className="cursor-pointer absolute bottom-[-40px]"
+              className={`cursor-pointer absolute bottom-[-40px] ${isVisible? 'block' :'hidden'}`}
             />
           )}
         </div>
