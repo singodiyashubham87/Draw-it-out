@@ -70,11 +70,7 @@ const DrawingShapes = ({
 
     const drawing = (e) => {
       if (!isDrawing) return;
-
-      if (selectedTool === "brush") {
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
-      } else if (selectedTool === "rectangle") {
+      else if (selectedTool === "rectangle") {
         drawRect(e);
       } else if (selectedTool === "circle") {
         drawCircle(e);
@@ -109,7 +105,6 @@ const DrawingShapes = ({
   }
 
   function currentShapeImageElement() {
-    console.log("image element req");
     let imgElement = null;
     switch (selectedTool) {
       case "rectangle":
@@ -146,9 +141,7 @@ const DrawingShapes = ({
                 </li>
               </>
             ) : (
-              <li id="triangle" onClick={() => setSelectedTool("triangle")}>
-                {currentShapeImageElement()}
-              </li>
+              <li>{currentShapeImageElement()}</li>
             )}
           </div>
         </ul>
@@ -158,3 +151,4 @@ const DrawingShapes = ({
 };
 
 export default DrawingShapes;
+
