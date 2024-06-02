@@ -1,8 +1,4 @@
 import React from 'react';
-import LinkedInIcon from '../assets/images/linkedin.jpg';
-import TwitterIcon from '../assets/images/X.png'; 
-import GitHubIcon from '../assets/images/github.png'; 
-import EmailIcon from '../assets/images/GMail.webp';
 
 const Footer = () => {
     return (
@@ -19,16 +15,16 @@ const Footer = () => {
                 </div>
                 <div className="socialicons flex gap-4">
                     <a href="https://www.linkedin.com/in/singodiyashubham87/" className="hover:bg-blue-300 p-1 rounded-full">
-                        <img src={LinkedInIcon} alt="LinkedIn" className="rounded-full w-8 h-8 hover:bg-blue-500" />
+                        <img src="/assets/images/linkedin.jpg" alt="LinkedIn" className="rounded-full w-8 h-8 hover:bg-blue-500" />
                     </a>
                     <a href="https://twitter.com/_master_mickey" className="hover:bg-blue-300 p-1 rounded-full">
-                        <img src={TwitterIcon} alt="Twitter" className="rounded-full w-8 h-8 hover:bg-blue-500" />
+                        <img src="/assets/images/X.png" alt="Twitter" className="rounded-full w-8 h-8 hover:bg-blue-500" />
                     </a>
                     <a href="https://github.com/singodiyashubham87" className="hover:bg-blue-300 p-1 rounded-full">
-                        <img src={GitHubIcon} alt="GitHub" className="rounded-full w-8 h-8 hover:bg-blue-500" />
+                        <img src="/assets/images/github.png" alt="GitHub" className="rounded-full w-8 h-8 hover:bg-blue-500" />
                     </a>
                     <a href="mailto:singodiyashubham87@gmail.com" className="hover:bg-blue-300 p-1 rounded-full">
-                        <img src={EmailIcon} alt="Email" className="rounded-full w-8 h-8 hover:bg-blue-500" />
+                        <img src="/assets/images/GMail.webp" alt="Email" className="rounded-full w-8 h-8 hover:bg-blue-500" />
                     </a>
                 </div>
             </div>
