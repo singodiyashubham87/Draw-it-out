@@ -160,8 +160,7 @@ function App() {
 
             {/* ----- Canvas ------ */}
             <canvas
-              // id="draw"
-              className={`whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-crosshair`}
+              className="whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-crosshair"
               ref={canvasRef}></canvas>
 
             <div
