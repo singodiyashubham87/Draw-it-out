@@ -2,7 +2,6 @@
 import jsPdf from "jspdf";
 import { Context } from "svgcanvas";
 let drawHistory = [];
-
 export function startDrawing(
   canvas,
   color,
@@ -187,15 +186,19 @@ function setBrushStyle(ctx, brushStyle) {
   }
 }
 
+// Assuming drawHistory is declared somewhere in the global scope
+
 export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
-  let newHeight = canvas.height + canvas.height * 0.1;
+
+  // Ensure the new height increases by at least 50 pixels
+  let newHeight = canvas.height + Math.max(50, canvas.height * 0.1);
   if (newHeight > window.innerHeight) {
     newHeight = window.innerHeight;
   }
 
-  // Save the current drawing and clear canvas
+  // Save the current drawing and clear the canvas
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   clearCanvas(canvas, bgColor);
 
@@ -205,6 +208,7 @@ export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
 
+  // Update drawHistory to fit within new height
   drawHistory = histArray.filter((point) => point.y <= newHeight);
   handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
@@ -212,27 +216,30 @@ export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
 export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
+  
+  // Calculate new height, reducing by 10% of the current height
   let newHeight = canvas.height - canvas.height * 0.1;
+  
+  // Ensure new height does not go below 1 pixel
   if (newHeight < 1) {
-    // Ensure height doesn't go below 1
     newHeight = 1;
   }
 
-  // Save the current drawing and clear canvas
+  // Save the current drawing and clear the canvas
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  // clearCanvas(canvas, bgColor);
+  clearCanvas(canvas, bgColor);
 
   // Resize the canvas
   canvas.height = newHeight;
 
-  // Redraw the portion of the drawing that fits in the new canvas sizes
+  // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
 
-  //retaining the bg
-  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
-
+  // Update drawHistory to fit within new height
   drawHistory = histArray.filter((point) => point.y <= newHeight);
+  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
+
 
 export function handleUpdates(
   canvas,
