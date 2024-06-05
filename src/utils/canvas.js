@@ -83,6 +83,7 @@ export function startDrawing(
     isDrawing = false;
   });
 
+  canvas.addEventListener("mouseleave", () => (isDrawing = false));
   canvas.addEventListener("touchmove", (e) => {
     // added e.preventDefault();
     e.preventDefault();
