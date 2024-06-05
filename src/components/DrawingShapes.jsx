@@ -40,7 +40,8 @@ const DrawingShapes = ({
       ctx.putImageData(snapshot, 0, 0);
       ctx.beginPath();
       const radius = Math.sqrt(
-        Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2)
+        Math.pow(prevMouseX - e.offsetX, 2) +
+          Math.pow(prevMouseY - e.offsetY, 2)
       );
       ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
       fillColor ? ctx.fill() : ctx.stroke();
@@ -102,7 +103,17 @@ const DrawingShapes = ({
       canvas.removeEventListener("mouseup", stopDrawing);
       canvas.removeEventListener("mouseout", stopDrawing);
     };
-  }, [brushWidth, fillColor, selectedTool, selectedColor, snapshot, canvasRef, isDrawing]);
+  }, [
+    brushWidth,
+    fillColor,
+    selectedTool,
+    selectedColor,
+    snapshot,
+    canvasRef,
+    isDrawing,
+    prevMouseX,
+    prevMouseY,
+  ]);
 
   function toggleDropDown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -129,7 +140,12 @@ const DrawingShapes = ({
   }
 
   return (
-    <div className="drawing-container flex hover:bg-[#B7BABF] flex-shrink-0" onClick={toggleDropDown}>
+    <div
+      className="drawing-container flex hover:bg-[#B7BABF] flex-shrink-0"
+      onClick={toggleDropDown}
+      //add title to drawing shape button
+      title=""
+    >
       <div className="relative controls">
         <ul className="options flex relative w-[50px]">
           <div className="absolute md:top-[-20px] top-[-16px] flex flex-col gap-5 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF]">
