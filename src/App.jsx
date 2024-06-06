@@ -18,13 +18,62 @@ import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
 import Footer from "./components/Footer";
 
+function ToolbarRightSection({ showMenuAndBgColor }) {
+  const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey";
+  const [darkMode, setDarkMode] = useState(null);
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle("dark");
+  };
+
+  return (
+    <>
+      {/* Toolbar right menu section */}
+      <div className="flex md:flex-row flex-col justify-center align-center items-center absolute top-0 md:right-4 right-2">
+        {/* Eye button */}
+        <div
+          className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
+            !showMenuAndBgColor && "mt-10"
+          }`}
+          onClick={() => {
+            setShowMenuAndBgColor((state) => !state);
+          }}
+        >
+          {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
+        </div>
+
+        {/* Theme Changer */}
+        <div
+          className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
+            !showMenuAndBgColor && "mt-10"
+          }`}
+          onClick={toggleDarkMode}
+        >
+          {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+        </div>
+
+        {/* Buy me a coffee */}
+        <a
+          href={BUY_ME_COFFEE_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex justify-end sm:ml-0"
+        >
+          <button className="flex mt-2 mb-2 items-center ml-1 mr-1 bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
+            <SiBuymeacoffee className="text-xl" />
+          </button>
+        </a>
+      </div>
+    </>
+  );
+}
+
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
   const [thickness, setThickness] = useState(4);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#b7babf");
-  const [darkMode, setDarkMode] = useState(null);
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
   const [steps] = useState(tourSteps);
   const [modal, setModal] = useState(false);
@@ -43,8 +92,6 @@ function App() {
     setModal(false);
   };
 
-  const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey";
-
   useEffect(() => {
     const canvas = canvasRef.current;
 
@@ -57,11 +104,6 @@ function App() {
       handleUpdates(canvas, color, thickness, bgColor, brushStyle);
     }
   }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("dark");
-  };
 
   return (
     <>
@@ -122,42 +164,8 @@ function App() {
                   setSelectedTool={setSelectedTool}
                 />
               )}
-              {/* Toolbar right menu section */}
-              <div className="flex md:flex-row flex-col justify-center align-center items-center absolute top-0 md:right-4 right-2">
-                {/* Eye button */}
-                <div
-                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
-                    !showMenuAndBgColor && "mt-10"
-                  }`}
-                  onClick={() => {
-                    setShowMenuAndBgColor((state) => !state);
-                  }}
-                >
-                  {showMenuAndBgColor ? <FaRegEyeSlash /> : <FaRegEye />}
-                </div>
 
-                {/* Theme Changer */}
-                <div
-                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
-                    !showMenuAndBgColor && "mt-10"
-                  }`}
-                  onClick={toggleDarkMode}
-                >
-                  {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
-                </div>
-
-                {/* Buy me a coffee */}
-                <a
-                  href={BUY_ME_COFFEE_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-end sm:ml-0"
-                >
-                  <button className="flex mt-2 mb-2 items-center ml-1 mr-1 bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
-                    <SiBuymeacoffee className="text-xl" />
-                  </button>
-                </a>
-              </div>
+              <ToolbarRightSection showMenuAndBgColor={showMenuAndBgColor} />
             </div>
 
             {/* ----- Canvas ------ */}
