@@ -23,6 +23,7 @@ export const tourSteps = [
   },
   {
     target: ".color-pallet",
+    placement: "right",
     content: "Select a Color from Here.",
     disableBeacon: true,
   },

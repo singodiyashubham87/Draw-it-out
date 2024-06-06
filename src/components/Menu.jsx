@@ -8,7 +8,12 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 import { BiSolidPolygon } from "react-icons/bi";
 import { BiPolygon } from "react-icons/bi";
 
-import { convertToPDF, convertToSVG, convertToJPG, convertToPng } from "../utils/canvas.js";
+import {
+  convertToPDF,
+  convertToSVG,
+  convertToJPG,
+  convertToPng,
+} from "../utils/canvas.js";
 import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
 import { increaseHeight } from "../utils/canvas.js";
@@ -16,14 +21,16 @@ import { decreaseHeight } from "../utils/canvas.js";
 import DrawingShapes from "./DrawingShapes.jsx";
 
 function Brush(props) {
-  const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle } = props;
+
+  const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle,isVisible,toggleVisible } = props;
+
   return (
     <div className="relative ">
       <PiPencilSimpleFill
         className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
           isDropdownOpen ? "bg-gray-400" : ""
-        }`}
-        onClick={toggleDropdown}
+        } ${isVisible?'bg-gray-400':''}`}
+        onClick={()=>{toggleDropdown();toggleVisible();}}
         title="Draw"
       />
       <div
@@ -32,7 +39,7 @@ function Brush(props) {
         }`}
       >
         {/* Dropdown content */}
-        <div className="py-2 bg-[#CBCCCF] ">
+        <div className={`py-2 bg-[#CBCCCF]`}>
           <button
             className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
               brushStyle === "solid" ? "font-bold" : ""
@@ -94,24 +101,32 @@ const Menu = ({
   brushStyle,
   selectedTool,
   setSelectedTool,
+  isDrawing,
+  setIsDrawing,
 }) => {
   const [pencilWidth, setPencilWidth] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [fillColor, setFillColor] = useState(false);
+  const [isVisible,setIsVisible] = useState(false);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    if (!isVisible){
+      setIsDropdownOpen(!isDropdownOpen);
+    }
   };
+  const toggleVisible = () =>{
+    setIsVisible(!isVisible);
+  }
 
   const toggleSaveAs = () => {
     setIsOpen(!isOpen);
-  }
-
-  const handleBrushStyleChange = (style) => {
-    setBrushStyle(style);
-    setIsDropdownOpen(false); // Close the dropdown after selecting a style
   };
+
+  // const handleBrushStyleChange = (style) => {
+  //   setBrushStyle(style);
+  //   setIsDropdownOpen(false); // Close the dropdown after selecting a style
+  // };
 
   return (
     <>
@@ -122,6 +137,8 @@ const Menu = ({
           setBrushStyle={setBrushStyle}
           setIsDropdownOpen={setIsDropdownOpen}
           brushStyle={brushStyle}
+          isVisible={isVisible}
+          toggleVisible={toggleVisible}
         />
         <DrawingShapes
           brushWidth={thickness}
@@ -133,7 +150,10 @@ const Menu = ({
         />
 
         {/* Shape fill mode */}
-        <button className="flex flex-col items-center" onClick={(e) => setFillColor(!fillColor)}>
+        <button
+          className="flex flex-col items-center"
+          onClick={() => setFillColor(!fillColor)}
+        >
           {fillColor ? (
             <BiSolidPolygon
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out`}
@@ -148,9 +168,8 @@ const Menu = ({
         <div className="flex flex-col relative">
           <button className="relative">
             <FaFeatherPointed
-              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${
-                pencilWidth ? "bg-gray-200" : ""
-              }`}
+              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF]transform transition duration-300 ease-in-out ${isVisible? 'block' :'hidden'} ${
+                pencilWidth ? "bg-gray-200" : ""}  `}
               onClick={() => setPencilWidth(!pencilWidth)}
             />
           </button>
@@ -165,7 +184,7 @@ const Menu = ({
               onChange={(e) => {
                 setThickness(e.target.value);
               }}
-              className="cursor-pointer absolute bottom-[-40px]"
+              className={`cursor-pointer absolute bottom-[-40px] ${isVisible? 'block' :'hidden'}`}
             />
           )}
         </div>
@@ -178,7 +197,9 @@ const Menu = ({
             onChange={(e) => setColor(e.target.value)}
             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0  transform transition duration-300 ease-in-out `}
           />
-          <span className="absolute top-14 left-[0.3rem] dark:text-[#ffffff]">{/* Color */}</span>
+          <span className="absolute top-14 left-[0.3rem] dark:text-[#ffffff]">
+            {/* Color */}
+          </span>
         </div>
         <div className="relative">
           <button
@@ -218,7 +239,7 @@ const Menu = ({
                 <button
                   className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={() => convertToPng(canvasRef.current)}
-                  title="ToPNG"
+                  title="toPNG"
                 >
                   <p>PNG</p>
                 </button>
@@ -253,14 +274,30 @@ const Menu = ({
         <button>
           <PiPlus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
-            onClick={() => increaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
+            onClick={() =>
+              increaseHeight(
+                canvasRef.current,
+                bgColor,
+                thickness,
+                color,
+                brushStyle
+              )
+            }
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
-            onClick={() => decreaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
+            onClick={() =>
+              decreaseHeight(
+                canvasRef.current,
+                bgColor,
+                thickness,
+                color,
+                brushStyle
+              )
+            }
             title="DecreaseHeight"
           />
         </button>

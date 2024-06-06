@@ -122,6 +122,8 @@ const DrawingShapes = ({
     snapshot,
     canvasRef,
     isDrawing,
+    prevMouseX,
+
   ]);
 
   function toggleDropDown() {
