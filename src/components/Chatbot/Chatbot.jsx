@@ -121,7 +121,7 @@ const theme = {
 
 
 const config = {
-    botAvatar: "/src/assets/images/chatbot.jpg",
+    botAvatar: "https://raw.githubusercontent.com/singodiyashubham87/Draw-it-out/main/src/assets/images/chatbot.jpg",
     floating: true,
 };
 
