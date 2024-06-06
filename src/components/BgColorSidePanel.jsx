@@ -4,7 +4,7 @@ import { rainbowColors } from "../utils/helpers";
 
 const BgColorSidePanel = ({ canvasRef, setBgColor }) => {
   return (
-    <div className="color-pallet gsm:w-[10%] w-[85%] h-[50rem] p-7 grid grid-cols-7 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
+    <div className="color-pallet gsm:w-[60%] w-[85%] h-[20px] p-7 grid grid-cols-1 vsm:grid-cols-4 gsm:grid-cols-7 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[4rem] gsm:mb-8 mx-auto">
       <input
         type="color"
         name="color"
