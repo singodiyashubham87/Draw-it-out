@@ -29,7 +29,7 @@ function ToolbarRightSection({ showMenuAndBgColor }) {
   return (
     <>
       {/* Toolbar right menu section */}
-      <div className="flex md:flex-row flex-col justify-center align-center items-center absolute top-0 md:right-4 right-2">
+      <div className="flex md:flex-row flex-col sm:scale-[1] scale-[0.9]  justify-center align-center items-center absolute top-0 md:right-4 right-2">
         {/* Eye button */}
         <div
           className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
@@ -141,65 +141,72 @@ function App() {
         />
       </div>
       {/* Buy me a coffee element */}
-      <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
-        <div className="flex flex-col min-w-full justify-center gsm:flex-row">
-          {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+      <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
+        <div className="relative flex flex-col min-w-full justify-center w-full">
+          {/* Drawing Toolbar */}
+          <div className="flex items-center justify-center">
+            {showMenuAndBgColor && (
+              <Menu
+                isDrawing={isDrawing}
+                setIsDrawing={setIsDrawing}
+                thickness={thickness}
+                setThickness={setThickness}
+                color={color}
+                setColor={setColor}
+                canvasRef={canvasRef}
+                setBrushStyle={setBrushStyle}
+                brushStyle={brushStyle}
+                bgColor={bgColor}
+                selectedTool={selectedTool}
+                setSelectedTool={setSelectedTool}
+              />
+            )}
+            <ToolbarRightSection showMenuAndBgColor={showMenuAndBgColor} />
+          </div>
 
-          <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
-            {/* Drawing Toolbar */}
-            <div className="flex items-center gap-14">
-              {showMenuAndBgColor && (
-                <Menu
-                  isDrawing={isDrawing}
-                  setIsDrawing={setIsDrawing}
-                  thickness={thickness}
-                  setThickness={setThickness}
-                  color={color}
-                  setColor={setColor}
-                  canvasRef={canvasRef}
-                  setBrushStyle={setBrushStyle}
-                  brushStyle={brushStyle}
-                  bgColor={bgColor}
-                  selectedTool={selectedTool}
-                  setSelectedTool={setSelectedTool}
-                />
-              )}
+          {/* Background color changer and Canvas */}
+          <div className="flex justify-between font-primary">
+            {showMenuAndBgColor && (
+              <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />
+            )}
 
-              <ToolbarRightSection showMenuAndBgColor={showMenuAndBgColor} />
-            </div>
-
-            {/* ----- Canvas ------ */}
-            <canvas
-              id="draw"
-              className={`whiteboard bg-slate-950 w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"
-              }
+            <div className="flex w-full flex-col gap-5 items-center">
+              {/* ----- Canvas ------ */}
+              <canvas
+                id="draw"
+                className={`whiteboard bg-slate-950  w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+                  isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"
+                }
             `}
-              ref={canvasRef}
-            ></canvas>
+                ref={canvasRef}
+              ></canvas>
 
-            <div
-              className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
-              onClick={() => {
-                setBgColor("#B7BABF");
-                setBrushStyle("solid");
-                setSelectedTool("brush");
-                setCanvasInitialized(false);
-                setIsDrawing(true);
-              }}
-            >
-              <RxCross1 />
+              <div className="flex flex-col items-center gap-2">
+                <div
+                  className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] w-[62px] aspect-square shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
+                  onClick={() => {
+                    setBgColor("#B7BABF");
+                    setBrushStyle("solid");
+                    setSelectedTool("brush");
+                    setCanvasInitialized(false);
+                    setIsDrawing(true);
+                  }}
+                >
+                  <RxCross1 />
+                </div>
+
+                <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
+                  Made with &#128157; by{" "}
+                  <a
+                    href="https://shubham-s-socials.vercel.app/"
+                    className="decoration-none font-semibold hover:underline"
+                  >
+                    Master Mickey
+                  </a>
+                  !
+                </h1>
+              </div>
             </div>
-            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
-              Made with &#128157; by{" "}
-              <a
-                href="https://shubham-s-socials.vercel.app/"
-                className="decoration-none font-semibold hover:underline"
-              >
-                Master Mickey
-              </a>
-              !
-            </h1>
           </div>
           <div
             className={

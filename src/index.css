@@ -19,10 +19,3 @@ body{
   width: 90%;
   /* height: 70vh; */
 }
-
-@media (max-width:570px) {
-  body #draw{
-    width: 100%;
-    height: 56vh;
-  }
-}

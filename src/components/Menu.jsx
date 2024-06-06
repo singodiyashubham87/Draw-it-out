@@ -130,7 +130,7 @@ const Menu = ({
 
   return (
     <>
-      <div className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111]  flex justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
+      <div className="sm:scale-[0.8] scale-[0.7] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111]  flex justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
         <Brush
           isDropdownOpen={isDropdownOpen}
           toggleDropdown={toggleDropdown}
