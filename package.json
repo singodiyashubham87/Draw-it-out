@@ -32,5 +32,10 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.11"
-  }
+  },
+  "description": "<h1 align=\"center\">Draw-it-out: Online Whiteboard App</h1>",
+  "main": "postcss.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
