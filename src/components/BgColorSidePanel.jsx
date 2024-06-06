@@ -15,7 +15,12 @@ const BgColorSidePanel = ({ canvasRef, setBgColor }) => {
         className={`cursor-pointer m-auto w-[2rem] h-[2rem] vsm:w-[3rem] vsm:h-[3rem]  rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600 `}
       />
       {rainbowColors?.map((val, i) => (
-        <BgColor key={i} color={val} setBgColor={setBgColor} canvas={canvasRef.current} />
+        <BgColor
+          key={i}
+          color={val}
+          setBgColor={setBgColor}
+          canvas={canvasRef.current}
+        />
       ))}
     </div>
   );
