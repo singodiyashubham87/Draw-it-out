@@ -58,8 +58,23 @@ function App() {
     }
   }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode !== null) {
+      const isDarkMode = savedDarkMode === 'true';
+      setDarkMode(isDarkMode);
+      if (isDarkMode) {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  }, []);
+
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode);
     document.body.classList.toggle("dark");
   };
 
