@@ -17,6 +17,7 @@ import { PiMinus } from "react-icons/pi";
 import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
 import Footer from "./components/Footer";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 function ToolbarRightSection({ showMenuAndBgColor }) {
   const BUY_ME_COFFEE_LINK = "https://buymeacoffee.com/mastermickey";
@@ -29,7 +30,7 @@ function ToolbarRightSection({ showMenuAndBgColor }) {
   return (
     <>
       {/* Toolbar right menu section */}
-      <div className="flex md:flex-row flex-col sm:scale-[1] scale-[0.9]  justify-center align-center items-center absolute top-0 md:right-4 right-2">
+      <div className="flex md:flex-row flex-col sm:scale-[1] scale-[0.9] justify-center align-center items-center absolute top-0 md:right-4 right-2">
         {/* Eye button */}
         <div
           className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
@@ -80,6 +81,7 @@ function App() {
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [brushStyle, setBrushStyle] = useState("solid");
   const [selectedTool, setSelectedTool] = useState("brush");
+  const [bgToggleOpen, setbgToggleOpen] = useState(false);
 
   const style = {
     guideline: `p-4 flex text-xs`,
@@ -106,8 +108,8 @@ function App() {
   }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
   return (
-    <>
-      <div className="relative ">
+    <div>
+      <div className="relative">
         <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
           <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
             Draw it Out!
@@ -145,6 +147,18 @@ function App() {
         <div className="relative flex flex-col min-w-full justify-center w-full">
           {/* Drawing Toolbar */}
           <div className="flex items-center justify-center">
+            <div
+              className={`shadow-[#777777] z-30 shadow-vsm p-1 absolute left-4 sm:hidden flex hover:cursor-pointer`}
+              onClick={() => {
+                setbgToggleOpen(!bgToggleOpen);
+              }}
+            >
+              <RxHamburgerMenu />
+            </div>
+            <div className={`sm:hidden absolute top-8 left-3 ${bgToggleOpen ? "" : "hidden"}`}>
+              <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />
+            </div>
+
             {showMenuAndBgColor && (
               <Menu
                 isDrawing={isDrawing}
@@ -167,14 +181,16 @@ function App() {
           {/* Background color changer and Canvas */}
           <div className="flex justify-between font-primary">
             {showMenuAndBgColor && (
-              <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />
+              <div className="hidden sm:block">
+                <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />
+              </div>
             )}
 
             <div className="flex w-full flex-col gap-5 items-center">
               {/* ----- Canvas ------ */}
               <canvas
                 id="draw"
-                className={`whiteboard bg-slate-950  w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+                className={`whiteboard bg-slate-950  w-screen mt-[2vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
                   isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"
                 }
             `}
@@ -208,11 +224,11 @@ function App() {
               </div>
             </div>
           </div>
+
+          {/* About application modal */}
           <div
             className={
-              modal
-                ? "z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100"
-                : "fixed right-[-100%]"
+              modal ? "z-20 fixed right-3 top-5 w-[300px] h-[500px] bg-gray-100" : "hidden"
             }
             onClick={showGuidelines}
           >
@@ -261,7 +277,7 @@ function App() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
