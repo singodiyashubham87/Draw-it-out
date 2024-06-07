@@ -1,8 +1,8 @@
 import React ,{useState,useEffect} from 'react';
-import pre from '../../../assets/images/pre.json';
+import preloaderAnimation from '../../utils/preloaderAnimation.json';
 import Lottie from 'lottie-react';
-import App from '../../../App';
-import Chatbot from '../Chatbot';
+import App from '../../App';
+import Chatbot from '../Chatbot/Chatbot';
 function Preloader() {
     const [loading,setLoading]=useState(false);
     useEffect(()=>{
@@ -16,7 +16,7 @@ return (
      
             loading ?
             <div className='flex justify-center items-center relative top-[12rem]'>
-                <Lottie className="w-[40vw] h-[40vh]" animationData={pre}/>
+                <Lottie className="w-[40vw] h-[40vh]" animationData={preloaderAnimation}/>
             </div>
              :
             //Rest Code
