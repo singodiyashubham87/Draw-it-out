@@ -179,7 +179,7 @@ function App() {
             <canvas
               id="draw"
               className={`whiteboard bg-slate-950 w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"
+                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
               }
             `}
               ref={canvasRef}
