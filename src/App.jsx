@@ -24,7 +24,9 @@ function App() {
   const [thickness, setThickness] = useState(4);
   const [color, setColor] = useState("#000");
   const [bgColor, setBgColor] = useState("#b7babf");
-  const [darkMode, setDarkMode] = useState(null);
+  const [darkMode, setDarkMode] = useState(() =>{
+    return localStorage.getItem('darkMode') === 'true' ;
+  });
   const [showMenuAndBgColor, setShowMenuAndBgColor] = useState(true);
   const [steps] = useState(tourSteps);
   const [modal, setModal] = useState(false);
@@ -58,10 +60,27 @@ function App() {
     }
   }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("dark");
-  };
+  // const toggleDarkMode = () => {
+  //   setDarkMode(!darkMode);
+  //   document.body.classList.toggle("dark");
+  // };
+
+    useEffect(() => {
+      if(darkMode){
+     document.body.classList.add('dark');
+      }
+      else{
+        document.body.classList.remove('dark');
+      }
+    },[darkMode])  ;
+
+    const toggleDarkMode = () => {
+     setDarkMode(prevMode => {
+      const newMode = !prevMode ;
+      localStorage.setItem('darkMode' , newMode) ;
+      return newMode ;
+     });
+    };
 
   return (
     <>
