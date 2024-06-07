@@ -80,11 +80,7 @@ const DrawingShapes = ({
 
     const drawing = (e) => {
       if (!isDrawing) return;
-
-      if (selectedTool === "brush") {
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
-      } else if (selectedTool === "rectangle") {
+      else if (selectedTool === "rectangle") {
         drawRect(e);
       } else if (selectedTool === "circle") {
         drawCircle(e);
@@ -191,3 +187,4 @@ const DrawingShapes = ({
 };
 
 export default DrawingShapes;
+
