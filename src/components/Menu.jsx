@@ -71,6 +71,7 @@ const Menu = ({
   const [isOpen, setIsOpen] = useState(false);
   const [fillColor, setFillColor] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [bgColor, setBgColor] = useState('bg-slate-950');
 
   const toggleDropdown = () => {
     if (!isVisible) {
@@ -230,14 +231,14 @@ const Menu = ({
         </div>
         <button>
           <PiPlus
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
-            onClick={() => increaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
+            onClick={() => increaseHeight(canvasRef.current, setBgColor, thickness, color, brushStyle)}
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
             onClick={() => decreaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
             title="DecreaseHeight"
           />
