@@ -74,6 +74,7 @@ function App() {
         </div>
 
         <button className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
+          
           <FaBookOpen
             size={35}
             color="white"
