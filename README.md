@@ -6,6 +6,7 @@
 
 Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It allows users to draw, sketch, and take snapshots of their creations. The intuitive interface and responsive design make it easy to use across various devices.
 
+
 <table align="center">
     <thead align="center">
         <tr border: 1px;>
@@ -26,6 +27,7 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
         </tr>
     </tbody>
 </table>
+
 
 # Getting Started
 
