@@ -58,8 +58,23 @@ function App() {
     }
   }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode !== null) {
+      const isDarkMode = savedDarkMode === 'true';
+      setDarkMode(isDarkMode);
+      if (isDarkMode) {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  }, []);
+
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode);
     document.body.classList.toggle("dark");
   };
 
@@ -163,7 +178,7 @@ function App() {
             <canvas
               id="draw"
               className={`whiteboard bg-slate-950 w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing ? "cursor-crosshair" : "cursor-default pointer-events-none"
+                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
               }
             `}
               ref={canvasRef}
