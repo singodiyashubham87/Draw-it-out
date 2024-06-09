@@ -21,6 +21,7 @@ function Brush(props) {
     brushStyle,
     isVisible,
     toggleVisible,
+    setSelectedTool
   } = props;
 
 return (
@@ -37,6 +38,9 @@ return (
       />
       <div
         className={`absolute top-full bg-[#CBCCCF] mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2 ${isDropdownOpen ? "block" : "hidden"}`}
+        onClick={() => {
+          setSelectedTool("brush")
+        }}
       >
         {/* Dropdown content */}
         <div className={`py-2 bg-[#CBCCCF]`}>
