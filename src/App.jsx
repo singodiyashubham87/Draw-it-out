@@ -115,8 +115,7 @@ function App() {
       </div>
       {/* Buy me a coffee element */}
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
-        <div className="flex flex-col min-w-full justify-center gsm:flex-row">
-          {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+        <div className="flex flex-col min-w-full justify-center gsm:flex-column">
 
           <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
             {/* Drawing Toolbar */}
@@ -185,6 +184,8 @@ function App() {
               ref={canvasRef}
             ></canvas>
 
+            {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+
             <div
               className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
@@ -197,7 +198,7 @@ function App() {
             >
               <RxCross1 />
             </div>
-            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
+            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 pt-2 dark:text-white">
               Made with &#128157; by{" "}
               <a
                 href="https://shubham-s-socials.vercel.app/"
