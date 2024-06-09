@@ -118,9 +118,9 @@ function App() {
         <div className="flex flex-col min-w-full justify-center gsm:flex-row">
           {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
-          <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
+          <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary md:w-[85vw]">
             {/* Drawing Toolbar */}
-            <div className="flex items-center gap-14">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-10 w-full">
               {showMenuAndBgColor && (
                 <Menu
                   isDrawing={isDrawing}
@@ -138,7 +138,7 @@ function App() {
                 />
               )}
               {/* Toolbar right menu section */}
-              <div className="flex md:flex-row flex-col justify-center align-center items-center absolute top-0 md:right-4 right-2">
+              <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
                 {/* Eye button */}
                 <div
                   className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
