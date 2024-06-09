@@ -117,7 +117,7 @@ function App() {
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
         <div className="flex flex-col min-w-full justify-center gsm:flex-column">
 
-          <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary md:w-[85vw]">
+          <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
             {/* Drawing Toolbar */}
             <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
               {showMenuAndBgColor && (
