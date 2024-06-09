@@ -120,7 +120,7 @@ function App() {
 
           <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary md:w-[85vw]">
             {/* Drawing Toolbar */}
-            <div className="flex flex-col md:flex-row justify-center items-center gap-10 w-full">
+            <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
               {showMenuAndBgColor && (
                 <Menu
                   isDrawing={isDrawing}
