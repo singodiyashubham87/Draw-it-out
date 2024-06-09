@@ -1,6 +1,6 @@
 <h1 align="center">Draw-it-out: Online Whiteboard App</h1>
 
-<div align="center"><img src="./src/assets/images/readmeLogo.png" width="200px" height="200px"/></div>
+<div align="center"><img src="./src/assets/images/logo.png" width="200px" height="200px"/></div>
 
 # Introduction
 
