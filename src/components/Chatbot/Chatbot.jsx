@@ -135,6 +135,7 @@ function Chatbot() {
                 <ChatBot
                     headerTitle="Drawbot"
                     steps={steps}
+                    className="custom-chatbot" // Add this line
                     {...config}
                 />
             </ThemeProvider>

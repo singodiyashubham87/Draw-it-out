@@ -9,6 +9,11 @@
   padding: 0;
 }
 
+.custom-chatbot .rsc-float-button {
+  bottom: 118px !important; /* Adjust the value to move the chatbot icon upwards */
+  right: 25px;
+}
+
 body{
   height: 100%;
   width: 100%;
