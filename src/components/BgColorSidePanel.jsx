@@ -9,7 +9,8 @@ const BgColorSidePanel = ({ canvasRef, setBgColor }) => {
     changeBG(canvasRef.current, color);
   }
   return (
-    <div className="color-pallet gsm:w-[10%] w-[85%] h-[50rem] p-7 grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[14rem] gsm:mb-8 mx-auto">
+    // The margin with the color pallet and cross is changes to prevent accidental clicks via  vsm:mb-40
+    <div className="color-pallet gsm:w-[60%] w-[85%] h-[20px] p-7 grid grid-cols-1 vsm:grid-cols-4 vsm:gap-4 vsm: mb-[100px] vvsm:grid-cols-4 gsm:grid-cols-7 gap-2 vsm:mb-40 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[4rem] gsm:mb-8 mx-auto">
       <input
         type="color"
         name="color"
@@ -20,7 +21,12 @@ const BgColorSidePanel = ({ canvasRef, setBgColor }) => {
         className={`cursor-pointer m-auto w-[2rem] h-[2rem] vsm:w-[3rem] vsm:h-[3rem]  rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600 `}
       />
       {rainbowColors?.map((val, i) => (
-        <BgColor key={i} color={val} setBgColor={setBgColor} canvas={canvasRef.current} />
+        <BgColor
+          key={i}
+          color={val}
+          setBgColor={setBgColor}
+          canvas={canvasRef.current}
+        />
       ))}
     </div>
   );
