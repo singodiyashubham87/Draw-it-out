@@ -31,6 +31,7 @@ function App() {
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [brushStyle, setBrushStyle] = useState("solid");
   const [selectedTool, setSelectedTool] = useState("brush");
+  const [isHovered, setIsHovered] = useState(false);
 
   const style = {
     guideline: `p-4 flex text-xs`,
@@ -88,7 +89,11 @@ function App() {
           <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
         </div>
 
-        <button className="absolute top-0 left-0 p-6">
+        <button 
+          className="absolute top-0 left-0 p-6"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}        
+        >
           <FaBookOpen
             size={28}
             color="white"
@@ -97,6 +102,9 @@ function App() {
             onClick={showGuidelines}
           />
         </button>
+        <span className={`absolute top-10 bg-black left-16 p-1  text-sm text-gray-300  ${isHovered ? 'visible' : 'invisible'}`}>
+        Guidelines
+      </span>
       </div>
       <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
