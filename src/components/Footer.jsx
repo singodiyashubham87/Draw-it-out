@@ -81,7 +81,7 @@ const Footer = () => {
       </div>
       <div className="text-center mt-4">
         <p className="text-white">
-          Copyright &copy;{(new Date().getFullYear())};
+          Copyright &copy;{(new Date().getFullYear())}
         </p>
       </div>
     </footer>
