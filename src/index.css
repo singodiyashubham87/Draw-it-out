@@ -26,3 +26,17 @@ body{
     height: 56vh;
   }
 }
+/* Background of the scrollbar track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Background of the scrollbar handle */
+::-webkit-scrollbar-thumb {
+    background:black;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: black;
+}
