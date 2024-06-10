@@ -81,8 +81,7 @@ const Footer = () => {
       </div>
       <div className="text-center mt-4">
         <p className="text-white">
-          Copyright &copy;{(new Date().getFullYear())}; Designed by{" "}
-          <span className="font-bold">Shubham Singodiya</span>
+          Copyright &copy;{(new Date().getFullYear())};
         </p>
       </div>
     </footer>
