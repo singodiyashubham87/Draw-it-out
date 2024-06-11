@@ -88,9 +88,10 @@ function App() {
           <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
         </div>
 
-        <button className="absolute top-0 left-0 p-6">
+        <button className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
+          
           <FaBookOpen
-            size={28}
+            size={35}
             color="white"
             className="bg-black p-1 rounded-xl"
             aria-label="show-guidelines"
