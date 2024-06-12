@@ -2,6 +2,33 @@ import LinkedInIcon from "../assets/images/linkedin.jpg";
 import TwitterIcon from "../assets/images/X.png";
 import GitHubIcon from "../assets/images/github.png";
 import EmailIcon from "../assets/images/GMail.webp";
+import "./Footer.css";
+
+const aboutLink = document.getElementById('about-link');
+const aboutPopup = document.getElementById('about-popup');
+const aboutClosePopupButton = document.getElementById('aboutClose-popup');
+
+aboutLink.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent the default link behavior
+  aboutPopup.classList.add('show'); // Show the popup
+});
+
+aboutClosePopupButton.addEventListener('click', () => {
+  aboutPopup.classList.remove('show'); // Hide the popup
+});
+
+const ourTeamLink = document.getElementById('our-team-link');
+const ourTeamPopup = document.getElementById('our-team-popup');
+const closePopupButton = document.getElementById('close-popup');
+
+ourTeamLink.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent the default link behavior
+  ourTeamPopup.classList.add('show'); // Show the popup
+});
+
+closePopupButton.addEventListener('click', () => {
+  ourTeamPopup.classList.remove('show'); // Hide the popup
+});
 
 const Footer = () => {
   return (
@@ -23,9 +50,15 @@ const Footer = () => {
               <a href="#" className="text-white hover:text-gray-600">
                 About
               </a>
+              <div id="about-popup" className="hidden">
+              <p>Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It allows users to draw, sketch, and take snapshots of their creations. The intuitive interface and responsive design make it easy to use across various devices.</p>
+              <button id="aboutClose-popup" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+              Close
+              </button>
+             </div>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-gray-600">
+              <a href="https://shubham-s-socials.vercel.app/" className="text-white hover:text-gray-600">
                 Contact Us
               </a>
             </li>
@@ -33,6 +66,12 @@ const Footer = () => {
               <a href="#" className="text-white hover:text-gray-600">
                 Our Team
               </a>
+              <div id="our-team-popup" className="hidden">
+              <p>Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It allows users to draw, sketch, and take snapshots of their creations. The intuitive interface and responsive design make it easy to use across various devices.</p>
+              <button id="close-popup" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+              Close
+              </button>
+             </div>
             </li>
           </ul>
         </div>

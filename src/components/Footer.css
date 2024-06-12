@@ -1,0 +1,31 @@
+#about-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: none; 
+  }
+  
+  #about-popup.show {
+    display: block; 
+  }
+
+  #our-team-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: none; /* Hide the popup by default */
+  }
+  
+  #our-team-popup.show {
+    display: block; /* Show the popup when the link is clicked */
+  }
