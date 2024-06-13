@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import { PiPencilSimpleFill, PiPlus, PiMinus } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 
 import { BiSolidPolygon, BiPolygon } from "react-icons/bi";
@@ -14,8 +13,7 @@ import DrawingShapes from "./DrawingShapes.jsx";
 function Brush(props) {
   const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle, isVisible, toggleVisible, setSelectedTool } = props;
 
-
-return (
+  return (
     <div className="relative">
       <PiPencilSimpleFill
         className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${isDropdownOpen ? "bg-gray-400" : ""} ${isVisible ? 'bg-gray-400' : ''}`}
@@ -86,16 +84,30 @@ const Menu = ({
 
   const toggleSaveAs = () => {
     setIsOpen(!isOpen);
-
   };
 
   const handleBrushStyleChange = (style) => {
     setBrushStyle(style);
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
-
-
   };
 
+  useEffect(() => {
+    const handleMouseDown = () => {
+      setIsDropdownOpen(false); // Close the dropdown when drawing starts
+    };
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.addEventListener('mousedown', handleMouseDown);
+    }
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener('mousedown', handleMouseDown);
+      }
+    };
+  }, [canvasRef]);
 
   return (
     <>
