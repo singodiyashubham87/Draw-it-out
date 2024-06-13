@@ -3,7 +3,7 @@ import { PiPencilSimpleFill, PiPlus, PiMinus } from "react-icons/pi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { BiSolidPolygon } from "react-icons/bi";
 import { BiPolygon } from "react-icons/bi";
@@ -102,7 +102,22 @@ const Menu = ({
 
 
   };
+  useEffect(() => {
+    const handleMouseDown = () => {
+      setAspectDropOpen(!isAspectDropOpen); // Close the dropdown when drawing starts
+    };
+  const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.addEventListener('mousedown', handleMouseDown);
+    }
 
+  // Cleanup the event listener on component unmount
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener('mousedown', handleMouseDown);
+      }
+    };
+  }, [canvasRef]);
   
   return (
     <>
