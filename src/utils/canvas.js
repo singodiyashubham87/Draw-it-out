@@ -11,7 +11,7 @@ export function startDrawing(
 ) {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.9; //default (onload)
-  canvas.height = window.innerHeight * 0.8;
+  canvas.height = window.innerHeight * 0.65;
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   canvas.setAttribute("willReadFrequently", "true");
