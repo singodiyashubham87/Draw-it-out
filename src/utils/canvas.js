@@ -10,8 +10,8 @@ export function startDrawing(
   brushStyle
 ) {
   const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth * 0.8;
-  canvas.height = window.innerHeight * 0.6;
+  canvas.width = window.innerWidth * 0.9; //default (onload)
+  canvas.height = window.innerHeight * 0.8;
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   canvas.setAttribute("willReadFrequently", "true");
@@ -240,6 +240,38 @@ export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
 
+export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum, wnum) {
+
+  const ctx = canvas.getContext("2d");
+  const histArray = [...drawHistory];
+  let newHeight, newWidth;
+  
+  // Set new height
+  if(hnum== 100 && wnum==100){//default case 
+    newWidth= window.innerWidth * 90/100;
+    newHeight= window.innerHeight * 80/100;
+  }
+  else{ 
+    //adjust wnum hnums of various options to adjust the size
+    newWidth = window.innerWidth * wnum/100;
+    newHeight = window.innerWidth * hnum/100;
+    }
+
+  // Save the current drawing and clear the canvas
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  clearCanvas(canvas, bgColor);
+
+  // Resize the canvas
+  canvas.height = newHeight;
+  canvas.width= newWidth;
+
+  // Redraw the portion of the drawing that fits in the new canvas size
+  ctx.putImageData(imageData, 0, 0);
+
+  // Update drawHistory to fit within new height
+  drawHistory = histArray.filter((point) => point.y <= newHeight);
+  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
+}
 
 export function handleUpdates(
   canvas,

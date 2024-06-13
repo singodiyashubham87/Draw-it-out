@@ -5,10 +5,11 @@ import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
 import { useState } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
-
-import { BiSolidPolygon, BiPolygon } from "react-icons/bi";
-import { convertToPDF, convertToSVG, convertToJPG, convertToPng } from "../utils/canvas.js";
-import { increaseHeight, decreaseHeight } from "../utils/canvas.js";
+import { BiSolidPolygon } from "react-icons/bi";
+import { BiPolygon } from "react-icons/bi";
+import { BiArea } from "react-icons/bi";
+import { convertToPDF, convertToSVG, convertToJPG, convertToPng} from "../utils/canvas.js";
+import { increaseHeight, decreaseHeight, changeAspect} from "../utils/canvas.js";
 import DrawingShapes from "./DrawingShapes.jsx";
 
 function Brush(props) {
@@ -74,12 +75,18 @@ const Menu = ({
   const [fillColor, setFillColor] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [bgColor, setBgColor] = useState('bg-slate-950');
+  const [isAspectDropOpen, setAspectDropOpen] = useState(false);
 
   const toggleDropdown = () => {
     if (!isVisible) {
       setIsDropdownOpen(!isDropdownOpen);
     }
   };
+
+  const toggleAspectDrop = () => {
+    setAspectDropOpen(!isAspectDropOpen); 
+  };
+
   const toggleVisible = () => {
     setIsVisible(!isVisible);
   };
@@ -88,7 +95,7 @@ const Menu = ({
     setIsOpen(!isOpen);
 
   };
-
+  
   const handleBrushStyleChange = (style) => {
     setBrushStyle(style);
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
@@ -96,7 +103,7 @@ const Menu = ({
 
   };
 
-
+  
   return (
     <>
       <div className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
@@ -254,9 +261,41 @@ const Menu = ({
             title="DecreaseHeight"
           />
         </button>
+        <div className="relative inline-">
+        <button onClick={toggleAspectDrop}>
+        <BiArea
+          className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
+          title="Canvas Size"
+        />
+      </button>
+      <div className={`absolute left-0 w-auto bg-[#CBCCCF] rounded-[0.5rem] mt-2 ${isAspectDropOpen ? "block" : "hidden"}`}>
+        <div className={`py-2 bg-[#CBCCCF] w-auto`}>
+          <button className={`block px-4 py-2 text-centre hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+            onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 50, 80)}}>
+            16:9
+          </button>
+
+          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+            onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 70, 50)}}>
+            9:16         
+          </button>
+          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+            onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 50, 60)}}>
+            1:1
+          </button>
+          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+            onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 100, 100)}}>
+            Default
+          </button>
+          {/* <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto`}
+            onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, x, y)}}>
+            To add more options 
+          </button> */}
+        </div>
+      </div>
+      </div>
       </div>
     </>
   );
 };
-
-export default Menu;
+export default Menu ;

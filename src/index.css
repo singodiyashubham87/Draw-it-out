@@ -15,11 +15,6 @@ body{
   overflow-x: hidden;
 }
 
-#draw{
-  width: 90%;
-  /* height: 70vh; */
-}
-
 @media (max-width:570px) {
   body #draw{
     width: 100%;
