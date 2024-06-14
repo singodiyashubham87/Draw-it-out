@@ -17,12 +17,12 @@ body{
 
 #draw{
   width: 90%;
-  height: 70vh;
+  /* height: 70vh; */
 }
 
 @media (max-width:570px) {
   body #draw{
     width: 90%;
-    height: 56vh;
+    /* height: 56vh; */
   }
 }
