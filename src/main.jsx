@@ -9,5 +9,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Preloader />
     <Chatbot />{ /*Render the Chatbot component*/ }
   </React.StrictMode>,
- document.getElementById('root')
-);
+)
