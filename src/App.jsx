@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaMoon, FaRegEye, FaRegEyeSlash, FaSun } from "react-icons/fa";
+// import download icon
+import { FaDownload } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { tourSteps } from "./utils/helpers";
 import BgColorSidePanel from "./components/BgColorSidePanel";
@@ -18,6 +20,8 @@ import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
 import Footer from "./components/Footer";
 
+import useGoogleDrive from './useGoogleDrive'; // Import the custom hook 
+
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
@@ -31,6 +35,8 @@ function App() {
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [brushStyle, setBrushStyle] = useState("solid");
   const [selectedTool, setSelectedTool] = useState("brush");
+
+  const { signIn, uploadFile } = useGoogleDrive(); // Use the custom hook 
 
   const style = {
     guideline: `p-4 flex text-xs`,
@@ -77,6 +83,20 @@ function App() {
     localStorage.setItem('darkMode', newDarkMode);
     document.body.classList.toggle("dark");
   };
+
+  // to save drawing in google drive
+  const saveDrawing = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.toBlob((blob) => {
+        const file = new File([blob], 'drawing.png', { type: 'image/png' });
+        signIn().then(() => uploadFile(file)); // Sign in and upload file to Google Drive
+      });
+    } else {
+      alert('Canvas not found!');
+    }
+  };
+
 
   return (
     <>
@@ -158,6 +178,18 @@ function App() {
                   onClick={toggleDarkMode}
                 >
                   {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+                </div>
+
+                {/* Save Drawing Button */}
+                <div className="flex justify-center items-center">
+                  <button
+                    className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
+                      !showMenuAndBgColor && "mt-10"
+                    }`}
+                    onClick={saveDrawing}
+                  >
+                    <FaDownload size={24} />
+                    </button>
                 </div>
 
                 {/* Buy me a coffee */}
