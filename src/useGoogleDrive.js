@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 
-const CLIENT_ID = 'Your_client_id';
-const API_KEY = 'Your_client_secret';
+const CLIENT_ID = '921050882584-nln0d9krrr85cng6nd8t1moosu7b026a.apps.googleusercontent.com';
+const API_KEY = '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';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
 const useGoogleDrive = () => {
