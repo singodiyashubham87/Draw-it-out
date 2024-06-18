@@ -89,7 +89,7 @@ function App() {
           <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
         </div>
 
-        <button className="absolute top-0 left-0 p-6">
+        <button className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
           <FaBookOpen
             size={28}
             color="white"
@@ -120,7 +120,7 @@ function App() {
 
           <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
             {/* Drawing Toolbar */}
-            <div className="flex items-center gap-14">
+            <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
               {showMenuAndBgColor && (
                 <Menu
                   isDrawing={isDrawing}
@@ -138,7 +138,7 @@ function App() {
                 />
               )}
               {/* Toolbar right menu section */}
-              <div className="flex md:flex-row flex-col justify-center align-center items-center absolute top-0 md:right-4 right-2">
+              <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
                 {/* Eye button */}
                 <div
                   className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${

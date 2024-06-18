@@ -121,7 +121,7 @@ const Menu = ({
   
   return (
     <>
-      <div className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
+      <div className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex flex-row justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
         <Brush
           isDropdownOpen={isDropdownOpen}
           toggleDropdown={toggleDropdown}
@@ -220,15 +220,15 @@ const Menu = ({
           <div
             className={`absolute z-10 ${
               isOpen ? "" : "hidden"
-            } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem]`}
+            } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem] `}
           >
             <ul
-              className="text-sm text-gray-700 flex space-x-5 p-5 justify-center"
+              className="text-sm text-gray-700 flex space-y-5 md:space-x-5 p-5 justify-center items-center flex flex-col md:flex-row"
               aria-labelledby="dropdownHoverButton"
             >
               <li>
                 <button
-                  className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
+                  className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] md:mt-4 cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={() => convertToPng(canvasRef.current)}
                   title="toPNG"
                 >
