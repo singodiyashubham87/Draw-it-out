@@ -13,6 +13,10 @@ body{
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+  user-select: none;           
+  -webkit-user-select: none;   
+  -moz-user-select: none;      
+  -ms-user-select: none;       
 }
 
 #draw{
@@ -43,7 +47,7 @@ body{
 
 @media (max-width:570px) {
   body #draw{
-    width: 100%;
-    height: 56vh;
+    width: 90%;
+    /* height: 56vh; */
   }
 }
