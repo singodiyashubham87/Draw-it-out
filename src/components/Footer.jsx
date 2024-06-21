@@ -86,7 +86,7 @@ const Footer = () => {
       </div>
       <div className="text-center mt-4">
         <p className="text-white">
-          Copyright &copy;{(new Date().getFullYear())}
+        Made with 💝 by <a href="https://shubham-s-socials.vercel.app/" class="decoration-none font-semibold hover:underline">Master Mickey</a> Copyright &copy;{(new Date().getFullYear())}
         </p>
       </div>
     </footer>
