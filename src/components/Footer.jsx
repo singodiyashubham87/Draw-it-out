@@ -32,7 +32,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="contactus.html" className="text-white flex items-center hover:text-gray-600">
                 <AiOutlineMessage className="h-6 w-6" />
                 <span className="ml-2">Contact Us</span>
               </a>
