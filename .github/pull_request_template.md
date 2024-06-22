@@ -1,6 +1,6 @@
 <!-- Mention the following details and these are mandatory -->
 # Issue Title: 
-*resolve issue:* #issue_number
+*closes* #issue_number
 
 ## Type of change ☑️
 

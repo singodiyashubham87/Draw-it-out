@@ -4,7 +4,10 @@ import { rainbowColors } from "../utils/helpers";
 
 const BgColorSidePanel = ({ canvasRef, setBgColor }) => {
   return (
-    <div className="color-pallet gsm:w-[5%] h-[40rem] grid grid-cols-6 vsm:grid-cols-4 gsm:grid-cols-1 gap-2 vsm:gap-4 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[2rem] gsm:mb-8">
+    
+    // The margin with the color pallet and cross is changes to prevent accidental clicks via  vsm:mb-40
+    <div className="color-pallet gsm:w-[60%] h-[20px] p-7 grid grid-cols-1 vsm:grid-cols-4 vsm:gap-4 vsm: mb-[100px] vvsm:grid-cols-4 gsm:grid-cols-7 gap-2 vsm:mb-40 gsm:gap-2 gsm:pb-[5rem] gsm:pt-[4rem] gsm:mb-8 mx-auto">
+
       <input
         type="color"
         name="color"

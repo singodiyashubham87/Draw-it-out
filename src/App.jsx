@@ -88,7 +88,7 @@ function App() {
           <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
         </div>
 
-        <button className="absolute top-0 left-0 p-6">
+        <button className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
           <FaBookOpen
             size={28}
             color="white"
@@ -115,12 +115,11 @@ function App() {
       </div>
       {/* Buy me a coffee element */}
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
-        <div className="flex flex-col min-w-full justify-evenly gsm:flex-row">
-          {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+        <div className="flex flex-col min-w-full justify-center gsm:flex-column">
 
           <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
             {/* Drawing Toolbar */}
-            <div className="flex items-center gap-14">
+            <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
               {showMenuAndBgColor && (
                 <Menu
                   isDrawing={isDrawing}
@@ -138,7 +137,7 @@ function App() {
                 />
               )}
               {/* Toolbar right menu section */}
-              <div className="flex md:flex-row flex-col justify-center align-center items-center absolute top-0 md:right-4 right-2">
+              <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
                 {/* Eye button */}
                 <div
                   className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
@@ -178,6 +177,8 @@ function App() {
               className="whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-crosshair"
               ref={canvasRef}></canvas>
 
+            {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+
             <div
               className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
@@ -190,7 +191,7 @@ function App() {
             >
               <RxCross1 />
             </div>
-            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
+            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 pt-2 dark:text-white">
               Made with &#128157; by{" "}
               <a
                 href="https://shubham-s-socials.vercel.app/"
