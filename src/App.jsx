@@ -51,12 +51,10 @@ function App() {
     if (canvas && !canvasInitialized) {
       setCanvasInitialized(true);
       startDrawing(canvas, color, thickness, bgColor, brushStyle);
-      console.log("starting");
-      console.log(brushStyle);
     } else if (canvasInitialized) {
-      handleUpdates(canvas, color, thickness, bgColor, brushStyle);
+      handleUpdates(canvas, color, thickness, bgColor, brushStyle, selectedTool);
     }
-  }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
+  }, [bgColor, color, thickness, canvasInitialized, brushStyle, selectedTool]);
 
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode');
