@@ -120,22 +120,24 @@ const theme = {
     userBubbleColor: '#B0C4DE', 
     userFontColor: 'black', 
 };
-  
+
 // Define the configuration for the chatbot
 const config = {
     botAvatar: "/src/assets/images/chatbot.jpg",
     floating: true,
+    floatingStyle: { bottom: '120px', right: '20px' }, // Adjust position here
 };
 
 // Chatbot component
 function Chatbot() {
     return (
-        <div className="App">
+        <div className="App relative">
             <ThemeProvider theme={theme}>
                 <ChatBot
                     headerTitle="Drawbot"
                     steps={steps}
                     {...config}
+                    className="absolute bottom-0 right-0 mb-16" // Position the chatbot icon at bottom-right corner
                 />
             </ThemeProvider>
         </div>

@@ -75,6 +75,7 @@ export function handleDrawing(canvas, color, lineThickness, bgColor, brushStyle)
     event.preventDefault();
     startDrawing(event);
   });
+    
   canvas.addEventListener('touchend', (event) => {
     event.preventDefault();
     stopDrawing();
