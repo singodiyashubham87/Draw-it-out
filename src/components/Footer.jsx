@@ -12,7 +12,7 @@ const Footer = () => {
     <footer className="bg-black">
       <div className="flex justify-between items-center py-4 px-8">
         <div className="footerNav">
-          <ul className="flex gap-4">
+          <ul className="flex gap-4 flex-wrap">
             <li>
               <a href="#" className="text-white flex items-center hover:text-gray-600">
                 <AiFillHome className="h-6 w-6" />
@@ -45,7 +45,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="socialicons flex gap-4">
+        <div className="socialicons flex gap-4 flex-wrap">
           <a
             href="https://www.linkedin.com/in/singodiyashubham87/"
             className="hover:bg-blue-300 p-1 rounded-full"
