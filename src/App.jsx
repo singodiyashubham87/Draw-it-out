@@ -184,6 +184,8 @@ function App() {
                       !showMenuAndBgColor && "mt-10"
                     }`}
                     onClick={saveDrawing}
+                    aria-label='Upload Drawing to Google Drive'
+                    title='Upload'
                   >
                   <FaDownload size={24} />
                   </button>
