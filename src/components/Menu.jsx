@@ -5,17 +5,16 @@ import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
 import { useState } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
-
 import { BiSolidPolygon, BiPolygon } from "react-icons/bi";
 import { convertToPDF, convertToSVG, convertToJPG, convertToPng } from "../utils/canvas.js";
 import { increaseHeight, decreaseHeight } from "../utils/canvas.js";
+import { FaEraser } from "react-icons/fa";
 import DrawingShapes from "./DrawingShapes.jsx";
 
 function Brush(props) {
   const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle, isVisible, toggleVisible, setSelectedTool } = props;
 
-
-return (
+  return (
     <div className="relative">
       <PiPencilSimpleFill
         className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${isDropdownOpen ? "bg-gray-400" : ""} ${isVisible ? 'bg-gray-400' : ''}`}
@@ -80,22 +79,24 @@ const Menu = ({
       setIsDropdownOpen(!isDropdownOpen);
     }
   };
+
   const toggleVisible = () => {
     setIsVisible(!isVisible);
   };
 
   const toggleSaveAs = () => {
     setIsOpen(!isOpen);
-
   };
 
   const handleBrushStyleChange = (style) => {
     setBrushStyle(style);
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
-
-
   };
 
+  const handleEraser = () => {
+    setSelectedTool("eraser");
+    setColor(bgColor); // Set the brush color to the background color to act as an eraser
+  };
 
   return (
     <>
@@ -176,8 +177,8 @@ const Menu = ({
             type="button"
             onClick={toggleSaveAs}
           >
-             {/* Save As */}
-             <IoCloudDownloadOutline />
+            {/* Save As */}
+            <IoCloudDownloadOutline />
             <svg
               className={`w-2.5 h-2.5 ms-3 ${isOpen ? "rotate-180" : ""}`}
               aria-hidden="true"
@@ -196,9 +197,7 @@ const Menu = ({
           </button>
 
           <div
-            className={`absolute z-10 ${
-              isOpen ? "" : "hidden"
-            } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem] `}
+            className={`absolute z-10 ${isOpen ? "" : "hidden"} divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem] `}
           >
             <ul
               className="text-sm text-gray-700 flex space-y-5 md:space-x-5 p-5 justify-center items-center flex flex-col md:flex-row"
@@ -232,7 +231,7 @@ const Menu = ({
               </li>
               <li>
                 <TbFileTypeSvg
-                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]  `}
+                  className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={() => convertToSVG(canvasRef.current)}
                   title="SVG"
                 />
@@ -240,16 +239,23 @@ const Menu = ({
             </ul>
           </div>
         </div>
+        <button onClick={handleEraser}>
+          <FaEraser
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
+            title="Eraser"
+          />
+        </button>
+
         <button>
           <PiPlus
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out `}
             onClick={() => increaseHeight(canvasRef.current, setBgColor, thickness, color, brushStyle)}
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
-            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
+            className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out `}
             onClick={() => decreaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
             title="DecreaseHeight"
           />
