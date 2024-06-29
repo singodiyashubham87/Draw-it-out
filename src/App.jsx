@@ -174,7 +174,7 @@ function App() {
 
             {/* ----- Canvas ------ */}
             <canvas
-              className="whiteboard bg-slate-950 rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-crosshair"
+              className="whiteboard bg-slate-950 rounded-[0.6rem] mt-6 shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-pointer"
               ref={canvasRef}></canvas>
 
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
@@ -216,7 +216,7 @@ function App() {
               onClick={closeModal}
               className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
             />
-            <ul className="pt-18 p-4">
+            <ul className="pt-18 p-4 dark:bg-zinc-800">
               <li className="p-2 font-bold text-lg uppercase">Guidelines</li>
               <li className={style.guideline}>
                 <PiPencilSimpleFill />
