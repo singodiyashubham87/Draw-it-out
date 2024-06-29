@@ -12,6 +12,10 @@ export function startDrawing(
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.9; //default (onload)
   canvas.height = window.innerHeight * 0.65;
+
+  canvas.width = window.innerWidth * 0.9;
+  canvas.height = window.innerHeight * 0.6;
+
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   canvas.setAttribute("willReadFrequently", "true");
@@ -69,8 +73,9 @@ export function startDrawing(
   //Event listeners for touch devices
   canvas.addEventListener("touchstart", (e) => {
     const touch = e.touches[0]; // Get the first touch
-    lastX = touch.clientX - canvas.offsetLeft;
-    lastY = touch.clientY - canvas.offsetTop;
+    const rect = canvas.getBoundingClientRect();
+    lastX = (touch.clientX - rect.left) * (canvas.width/rect.width)
+    lastY = (touch.clientY - rect.top) * (canvas.height/rect.height)
     isDrawing = true;
   });
 
@@ -88,8 +93,9 @@ export function startDrawing(
     e.preventDefault();
     if (!isDrawing) return;
     const touch = e.touches[0]; // Get the first touch
-    const offsetX = touch.clientX - canvas.offsetLeft;
-    const offsetY = touch.clientY - canvas.offsetTop;
+    const rect = canvas.getBoundingClientRect();
+    const offsetX = (touch.clientX - rect.left) * (canvas.width/rect.width)
+    const offsetY = (touch.clientY - rect.top) * (canvas.height/rect.height)
     draw({ offsetX, offsetY });
   });
   setBrushStyle(ctx, brushStyle);
