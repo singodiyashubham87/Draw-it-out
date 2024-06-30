@@ -135,7 +135,7 @@ const Menu = ({
 
   return (
     <>
-      <div className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex flex-row justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
+      <div className="scale-[0.8] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex flex-row justify-center items-center gap-[1rem] xs:gap-[0.5rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
         <Brush
           isDropdownOpen={isDropdownOpen}
           toggleDropdown={toggleDropdown}
@@ -200,7 +200,7 @@ const Menu = ({
             />
           )}
         </div>
-        <div className="py-[1rem] px-[1.5rem] rounded-[0.5rem] w-12 h-12 relative shadow-vsm hover:bg-[#72b2d7] text-black cursor-pointer">
+        <div className="py-[1rem] px-[1.5rem] rounded-[0.5rem] md:w-12 xs:w-[33px] sm:w-[40px] h-12 relative shadow-vsm hover:bg-[#72b2d7] text-black cursor-pointer">
           <input
             type="color"
             name="color"
@@ -215,7 +215,7 @@ const Menu = ({
         </div>
         <div className="relative">
           <button
-            className="text-gray-700 bg-[#B7BABF] hover:bg-[#72b2d7] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center transform transition duration-300 ease-in-out"
+            className="text-gray-700  bg-[#B7BABF] hover:bg-[#72b2d7] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center transform transition duration-300 ease-in-out "
             type="button"
             onClick={toggleSaveAs}
           >

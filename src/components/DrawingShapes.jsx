@@ -153,8 +153,8 @@ const DrawingShapes = ({
       onClick={toggleDropDown}
     >
       <div className="relative controls ">
-        <ul className="options flex relative w-[50px]">
-          <div className="absolute w-[100%] h-[48px] md:top-[-24px] top-[-16px] flex flex-col items-center  text-[2rem] md:text-[3rem]  shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out ">
+        <ul className="options flex relative md:w-[50px] xs:w-[33px] sm:w-[33px]">
+          <div className="absolute w-[100%] md:h-[48px] xs:h-[32px] sm:h-[32px] md:top-[-24px] top-[-16px] flex flex-col items-center  text-[2rem] md:text-[3rem]  shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out ">
             {isDropdownOpen ? (
               <>
                 <li

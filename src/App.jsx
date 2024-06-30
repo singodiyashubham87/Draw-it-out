@@ -59,14 +59,14 @@ function App() {
   }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
   useEffect(() => {
-    const savedDarkMode = localStorage.getItem('darkMode');
+    const savedDarkMode = localStorage.getItem("darkMode");
     if (savedDarkMode !== null) {
-      const isDarkMode = savedDarkMode === 'true';
+      const isDarkMode = savedDarkMode === "true";
       setDarkMode(isDarkMode);
       if (isDarkMode) {
-        document.body.classList.add('dark');
+        document.body.classList.add("dark");
       } else {
-        document.body.classList.remove('dark');
+        document.body.classList.remove("dark");
       }
     }
   }, []);
@@ -74,7 +74,7 @@ function App() {
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode);
+    localStorage.setItem("darkMode", newDarkMode);
     document.body.classList.toggle("dark");
   };
 
@@ -85,7 +85,9 @@ function App() {
           <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
             Draw it Out!
           </h1>
-          <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
+          <p className="text-gray-500 text-xs">
+            All you need is a canvas to craft your ideas.
+          </p>
         </div>
 
         <button className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
@@ -116,10 +118,9 @@ function App() {
       {/* Buy me a coffee element */}
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
         <div className="flex flex-col min-w-full justify-center gsm:flex-column">
-
           <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
             {/* Drawing Toolbar */}
-            <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
+            <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 xs:gap-5 w-full">
               {showMenuAndBgColor && (
                 <Menu
                   isDrawing={isDrawing}
@@ -157,7 +158,11 @@ function App() {
                   }`}
                   onClick={toggleDarkMode}
                 >
-                  {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+                  {darkMode ? (
+                    <FaSun className="text-black" />
+                  ) : (
+                    <FaMoon className="text-white" />
+                  )}
                 </div>
 
                 {/* Buy me a coffee */}
@@ -178,16 +183,20 @@ function App() {
             <canvas
               id="draw"
               className={`whiteboard bg-slate-950 w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
+                isDrawing
+                  ? "cursor-pointer"
+                  : "cursor-default pointer-events-none"
               }
             `}
               ref={canvasRef}
             ></canvas>
 
-            {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+            {showMenuAndBgColor && (
+              <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />
+            )}
 
             <div
-              className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
+              className=" bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
                 setBgColor("#B7BABF");
                 setBrushStyle("solid");
@@ -231,19 +240,30 @@ function App() {
               </li>
               <li className={style.guideline}>
                 <FaFeatherPointed />
-                <span className="ml-2"> Use a light touch for delicate lines.</span>
+                <span className="ml-2">
+                  {" "}
+                  Use a light touch for delicate lines.
+                </span>
               </li>
               <li className={style.guideline}>
                 <RiScreenshot2Fill />
-                <span className="ml-2"> Capture your screen for reference.</span>
+                <span className="ml-2">
+                  {" "}
+                  Capture your screen for reference.
+                </span>
               </li>
               <li className={style.guideline}>
                 <FaFilePdf />{" "}
-                <span className="ml-2">Export your work as a PDF for easy sharing.</span>
+                <span className="ml-2">
+                  Export your work as a PDF for easy sharing.
+                </span>
               </li>
               <li className={style.guideline}>
                 <TbFileTypeSvg />
-                <span className="ml-2"> Save your artwork as an SVG for scalability.</span>
+                <span className="ml-2">
+                  {" "}
+                  Save your artwork as an SVG for scalability.
+                </span>
               </li>
               <li className={style.guideline}>
                 <PiPlus />
@@ -251,7 +271,10 @@ function App() {
               </li>
               <li className={style.guideline}>
                 <PiMinus />
-                <span className="ml-2"> Zoom out for an overview of your drawing.</span>
+                <span className="ml-2">
+                  {" "}
+                  Zoom out for an overview of your drawing.
+                </span>
               </li>
               <li className={style.guideline}>
                 <FaRegEye />
