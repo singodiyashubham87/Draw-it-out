@@ -11,13 +11,27 @@ import { BiArea } from "react-icons/bi";
 import { convertToPDF, convertToSVG, convertToJPG, convertToPng} from "../utils/canvas.js";
 import { increaseHeight, decreaseHeight, changeAspect} from "../utils/canvas.js";
 import DrawingShapes from "./DrawingShapes.jsx";
+import { useEffect, useRef } from "react";
 
 function Brush(props) {
   const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle, isVisible, toggleVisible, setSelectedTool } = props;
+  const dropdownRef = useRef(null);
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
 
-return (
-    <div className="relative">
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
       <PiPencilSimpleFill
         className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${isDropdownOpen ? "bg-gray-400" : ""} ${isVisible ? 'bg-gray-400' : ''}`}
         onClick={() => { toggleDropdown(); toggleVisible(); setSelectedTool("brush"); }}
@@ -313,4 +327,4 @@ const Menu = ({
     </>
   );
 };
-export default Menu ;
+export default Menu;
