@@ -152,34 +152,34 @@ const DrawingShapes = ({
       className="drawing-container flex  flex-shrink-0"
       onClick={toggleDropDown}
     >
-      <div className="relative controls">
+      <div className="relative controls ">
         <ul className="options flex relative w-[50px]">
-          <div className="absolute md:top-[-20px] top-[-16px] flex flex-col  text-[2rem] md:text-[3rem]  shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out ">
+          <div className="absolute w-[100%] h-[48px] md:top-[-24px] top-[-16px] flex flex-col items-center  text-[2rem] md:text-[3rem]  shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out ">
             {isDropdownOpen ? (
               <>
                 <li
-                  className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                  className="hover:bg-[#72b2d7] bg-[#CBCCCF] p-[0.5rem] md:p-[1rem] w-[100%] h-[100%] flex flex-col items-center justify-center rounded-t-[0.5rem]"
                   id="rectangle"
                   onClick={() => setSelectedTool("rectangle")}
                 >
                   <img src={rectImg} alt="Rectangle" />
                 </li>
                 <li
-                  className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                  className="hover:bg-[#B7BABF] bg-[#CBCCCF] p-[0.5rem] md:p-[1rem] w-[100%] h-[100%] flex flex-col items-center justify-center "
                   id="circle"
                   onClick={() => setSelectedTool("circle")}
                 >
                   <img src={circleImg} alt="Circle" />
                 </li>
                 <li
-                  className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                  className="hover:bg-[#B7BABF] bg-[#CBCCCF] p-[0.5rem] md:p-[1rem] w-[100%] h-[100%] flex flex-col items-center justify-center"
                   id="triangle"
                   onClick={() => setSelectedTool("triangle")}
                 >
                   <img src={triangleImg} alt="Triangle" />
                 </li>
                 <li
-                  className="hover:bg-[#B7BABF] px-[0.5rem] py-[0.5rem] md:py-[1rem] md:px-[0.8rem]"
+                  className="hover:bg-[#B7BABF] bg-[#CBCCCF] p-[0.5rem] md:p-[1rem] w-[100%] h-[100%] flex flex-col items-center justify-center"
                   id="line"
                   onClick={() => setSelectedTool("line")}
                 >
@@ -188,7 +188,7 @@ const DrawingShapes = ({
               </>
             ) : (
               <li
-                className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem] "
+                className="hover:bg-[#72b2d7] bg-[#CBCCCF] p-[0.5rem] md:p-[1rem] w-[100%] h-[100%] flex flex-col items-center justify-center rounded-[0.5rem]"
                 id="current-tool"
                 onClick={() => setSelectedTool("current-tool")}
               >
