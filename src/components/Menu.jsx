@@ -5,16 +5,36 @@ import { FaFilePdf } from "react-icons/fa";
 import { TbFileTypeSvg } from "react-icons/tb";
 import { useState, useEffect, useRef } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
+
 import { BiSolidPolygon } from "react-icons/bi";
 import { BiPolygon } from "react-icons/bi";
 import { BiArea } from "react-icons/bi";
 import { convertToPDF, convertToSVG, convertToJPG, convertToPng} from "../utils/canvas.js";
 import { increaseHeight, decreaseHeight, changeAspect} from "../utils/canvas.js";
+
+import { BiSolidPolygon, BiPolygon } from "react-icons/bi";
+import {
+  convertToPDF,
+  convertToSVG,
+  convertToJPG,
+  convertToPng,
+} from "../utils/canvas.js";
+import { increaseHeight, decreaseHeight } from "../utils/canvas.js";
+
 import DrawingShapes from "./DrawingShapes.jsx";
 import { useEffect, useRef } from "react";
 
 function Brush(props) {
-  const { isDropdownOpen, toggleDropdown, setBrushStyle, setIsDropdownOpen, brushStyle, isVisible, toggleVisible, setSelectedTool } = props;
+  const {
+    isDropdownOpen,
+    toggleDropdown,
+    setBrushStyle,
+    setIsDropdownOpen,
+    brushStyle,
+    isVisible,
+    toggleVisible,
+    setSelectedTool,
+  } = props;
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -33,36 +53,64 @@ function Brush(props) {
   return (
     <div className="relative" ref={dropdownRef}>
       <PiPencilSimpleFill
-        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${isDropdownOpen ? "bg-gray-400" : ""} ${isVisible ? 'bg-gray-400' : ''}`}
-        onClick={() => { toggleDropdown(); toggleVisible(); setSelectedTool("brush"); }}
+        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
+          isDropdownOpen ? "bg-gray-400" : ""
+        } ${isVisible ? "bg-gray-400" : ""}`}
+        onClick={() => {
+          toggleDropdown();
+          toggleVisible();
+          setSelectedTool("brush");
+        }}
         title="Draw"
       />
       <div
-        className={`absolute top-full bg-[#CBCCCF] mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2 ${isDropdownOpen ? "block" : "hidden"}`}
+        className={`absolute top-full bg-[#CBCCCF] mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2 ${
+          isDropdownOpen ? "block" : "hidden"
+        }`}
       >
         {/* Dropdown content */}
-        <div className={`py-2 bg-[#CBCCCF]`}>
+        <div className={`py-2 bg-[#CBCCCF] text-black`}>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "solid" ? "font-bold" : ""}`}
-            onClick={() => { setBrushStyle("solid"); setIsDropdownOpen(!isDropdownOpen); }}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "solid" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              setBrushStyle("solid");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
           >
             Solid
           </button>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "dotted" ? "font-bold" : ""}`}
-            onClick={() => { setBrushStyle("dotted"); setIsDropdownOpen(!isDropdownOpen); }}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dotted" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              setBrushStyle("dotted");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
           >
             Dotted
           </button>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "dashed" ? "font-bold" : ""}`}
-            onClick={() => { setBrushStyle("dashed"); setIsDropdownOpen(!isDropdownOpen); }}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "dashed" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              setBrushStyle("dashed");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
           >
             Dashed
           </button>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "faded" ? "font-bold" : ""}`}
-            onClick={() => { setBrushStyle("faded"); setIsDropdownOpen(!isDropdownOpen); }}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
+              brushStyle === "faded" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              setBrushStyle("faded");
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
           >
             Faded
           </button>
@@ -88,8 +136,11 @@ const Menu = ({
   const [isOpen, setIsOpen] = useState(false);
   const [fillColor, setFillColor] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+
   const [bgColor, setBgColor] = useState('bg-slate-950');
   const [isAspectDropOpen, setAspectDropOpen] = useState(false);
+
+  const [bgColor, setBgColor] = useState("bg-slate-950");
 
   const toggleDropdown = () => {
     if (!isVisible) {
@@ -107,14 +158,11 @@ const Menu = ({
 
   const toggleSaveAs = () => {
     setIsOpen(!isOpen);
-
   };
   
   const handleBrushStyleChange = (style) => {
     setBrushStyle(style);
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
-
-
   };
   useEffect(() => {
     const handleMouseDown = () => {
@@ -174,8 +222,13 @@ const Menu = ({
         <div className="flex flex-col relative">
           <button className="relative">
             <FaFeatherPointed
-              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF] transform transition duration-300 ease-in-out ${isVisible ? 'block' : 'hidden'} ${pencilWidth ? "bg-gray-200" : ""}`}
-              onClick={() => { setPencilWidth(!pencilWidth); setSelectedTool("brush"); }}
+              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF] transform transition duration-300 ease-in-out ${
+                isVisible ? "block" : "hidden"
+              } ${pencilWidth ? "bg-gray-200" : ""}`}
+              onClick={() => {
+                setPencilWidth(!pencilWidth);
+                setSelectedTool("brush");
+              }}
             />
           </button>
           {pencilWidth && (
@@ -189,7 +242,9 @@ const Menu = ({
               onChange={(e) => {
                 setThickness(e.target.value);
               }}
-              className={`cursor-pointer absolute bottom-[-40px] ${isVisible ? 'block' : 'hidden'}`}
+              className={`cursor-pointer absolute bottom-[-40px] ${
+                isVisible ? "block" : "hidden"
+              }`}
             />
           )}
         </div>
@@ -212,8 +267,8 @@ const Menu = ({
             type="button"
             onClick={toggleSaveAs}
           >
-             {/* Save As */}
-             <IoCloudDownloadOutline />
+            {/* Save As */}
+            <IoCloudDownloadOutline />
             <svg
               className={`w-2.5 h-2.5 ms-3 ${isOpen ? "rotate-180" : ""}`}
               aria-hidden="true"
@@ -279,14 +334,30 @@ const Menu = ({
         <button>
           <PiPlus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
-            onClick={() => increaseHeight(canvasRef.current, setBgColor, thickness, color, brushStyle)}
+            onClick={() =>
+              increaseHeight(
+                canvasRef.current,
+                setBgColor,
+                thickness,
+                color,
+                brushStyle
+              )
+            }
             title="IncreaseHeight"
           />
         </button>
         <button>
           <PiMinus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
-            onClick={() => decreaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
+            onClick={() =>
+              decreaseHeight(
+                canvasRef.current,
+                bgColor,
+                thickness,
+                color,
+                brushStyle
+              )
+            }
             title="DecreaseHeight"
           />
         </button>
