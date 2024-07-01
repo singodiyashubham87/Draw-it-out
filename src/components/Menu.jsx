@@ -159,23 +159,22 @@ const Menu = ({
     setBrushStyle(style);
     setIsDropdownOpen(false); // Close the dropdown after selecting a style
   };
-  useEffect(() => {
-    const handleMouseDown = () => {
-      setAspectDropOpen(!isAspectDropOpen); // Close the dropdown when drawing starts
-    };
-  const canvas = canvasRef.current;
-    if (canvas) {
-      canvas.addEventListener('mousedown', handleMouseDown);
-    }
 
-  // Cleanup the event listener on component unmount
+  const aspectDropRef = useRef(null);
+
+  const handleOutClick = (event) => {
+    if (aspectDropRef.current && !aspectDropRef.current.contains(event.target)) {
+      setAspectDropOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutClick);
     return () => {
-      if (canvas) {
-        canvas.removeEventListener('mousedown', handleMouseDown);
-      }
+      document.removeEventListener("mousedown", handleOutClick);
     };
-  }, [canvasRef]);
-  
+  }, [isAspectDropOpen]);
+
   return (
     <>
       <div className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex flex-row justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
@@ -357,7 +356,7 @@ const Menu = ({
           />
         </button>
         <div className="relative inline-">
-        <button onClick={toggleAspectDrop}>
+        <button onClick={toggleAspectDrop} ref={aspectDropRef}>
         <BiArea
           className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
           title="Canvas Size"
