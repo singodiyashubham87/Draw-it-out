@@ -3,6 +3,11 @@ import { changeBG } from "../utils/canvas";
 import { rainbowColors } from "../utils/helpers";
 
 const BgColorSidePanel = ({ canvasRef, setBgColor }) => {
+  const handleColorChange = (e) => {
+    const color = e.target.value;
+    setBgColor(color);
+    changeBG(canvasRef.current, color);
+  }
   return (
     
     // The margin with the color pallet and cross is changes to prevent accidental clicks via  vsm:mb-40
@@ -14,7 +19,7 @@ const BgColorSidePanel = ({ canvasRef, setBgColor }) => {
         id="color"
         title="Color Picker"
         // defaultValue={bgColor}
-        onChange={(e) => setBgColor(e.target.value)}
+        onChange={handleColorChange}
         className={`cursor-pointer m-auto w-[2rem] h-[2rem] vsm:w-[3rem] vsm:h-[3rem]  rounded-[0.4rem] border-[0.2px] border-black bg-gradient-to-r from-red-700 via-yellow-600 to-green-600 `}
       />
       {rainbowColors?.map((val, i) => (
