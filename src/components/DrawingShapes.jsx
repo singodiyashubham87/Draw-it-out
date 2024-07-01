@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import rectImg from "../assets/images/rectangle.svg";
 import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
@@ -18,6 +18,21 @@ const DrawingShapes = ({
 
   const [snapshot, setSnapshot] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const shapeDropRef = useRef(null);
+
+  const handleoutsideClick = (event) => {
+    if (shapeDropRef.current && !shapeDropRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleoutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleoutsideClick);
+    };
+  }, [isDropdownOpen]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -151,6 +166,7 @@ const DrawingShapes = ({
     <div
       className="drawing-container flex  flex-shrink-0"
       onClick={toggleDropDown}
+      ref={shapeDropRef}
     >
       <div className="relative controls">
         <ul className="options flex relative w-[50px]">
