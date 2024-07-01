@@ -13,7 +13,7 @@ export function startDrawing(
   canvas.height = window.innerHeight * 0.65;
 
   canvas.width = window.innerWidth * 0.9;
-
+}
 
 export function handleDrawing(canvas, color, lineThickness, bgColor, brushStyle) {
   const ctx = canvas.getContext('2d');
@@ -284,14 +284,6 @@ export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum
   drawHistory = histArray.filter((point) => point.y <= newHeight);
   handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
-
-export function handleUpdates(
-  canvas,
-  color,
-  lineThickness,
-  bgColor,
-  brushStyle
-) {
 
 export function handleUpdates(canvas, color, lineThickness, bgColor, brushStyle) {
 

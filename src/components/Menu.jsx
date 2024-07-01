@@ -9,20 +9,17 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 import { BiSolidPolygon } from "react-icons/bi";
 import { BiPolygon } from "react-icons/bi";
 import { BiArea } from "react-icons/bi";
-import { convertToPDF, convertToSVG, convertToJPG, convertToPng} from "../utils/canvas.js";
 import { increaseHeight, decreaseHeight, changeAspect} from "../utils/canvas.js";
 
-import { BiSolidPolygon, BiPolygon } from "react-icons/bi";
 import {
   convertToPDF,
   convertToSVG,
   convertToJPG,
   convertToPng,
 } from "../utils/canvas.js";
-import { increaseHeight, decreaseHeight } from "../utils/canvas.js";
 
 import DrawingShapes from "./DrawingShapes.jsx";
-import { useEffect, useRef } from "react";
+
 
 function Brush(props) {
   const {
@@ -139,8 +136,6 @@ const Menu = ({
 
   const [bgColor, setBgColor] = useState('bg-slate-950');
   const [isAspectDropOpen, setAspectDropOpen] = useState(false);
-
-  const [bgColor, setBgColor] = useState("bg-slate-950");
 
   const toggleDropdown = () => {
     if (!isVisible) {

@@ -182,9 +182,7 @@ function App() {
             `}
               ref={canvasRef}
             ></canvas>
-            
-              className="whiteboard bg-slate-950 rounded-[0.6rem] mt-6 shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-pointer"
-              ref={canvasRef}></canvas>
+          
 
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
