@@ -38,6 +38,40 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
 
 ### Installation Instructions
 
+#### With Docker
+
+1. **Clone the Repository**
+   - Open Command Prompt.
+   - Navigate to the directory where you want to clone the repository:
+     ```sh
+     cd path\to\your\directory
+     ```
+   - Clone the repository:
+     ```sh
+     git clone https://github.com/singodiyashubham87/Draw-it-out.git
+     ```
+
+2. **Navigate to the project directory**
+   - Navigate into the project directory:
+     ```sh
+     cd Draw-it-out
+     ```
+
+3. **Build docker Image (only needed during first installation)**
+   - Build the Docker image:
+     ```sh
+     docker build -t draw-it-out:latest .        
+     ```
+
+4. **Run docker image**
+   - Run the Docker image:
+     ```sh
+     docker run -d -p 3000:3000 draw-it-out:latest
+     ```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+
 #### For Windows
 
 1. **Install Node.js**
