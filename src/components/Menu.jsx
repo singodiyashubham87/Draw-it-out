@@ -364,26 +364,26 @@ const Menu = ({
       </button>
       <div className={`absolute left-0 w-auto bg-[#CBCCCF] rounded-[0.5rem] mt-2 ${isAspectDropOpen ? "block" : "hidden"}`}>
         <div className={`py-2 bg-[#CBCCCF] w-auto`}>
-          <button className={`block px-4 py-2 text-centre hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-full dark:text-black dark:hover:bg-##3a3838`}
             onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 50, 80)}}>
             16:9
           </button>
 
-          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-full dark:text-black dark:hover:bg-##3a3838`}
             onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 70, 50)}}>
             9:16         
           </button>
-          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-full dark:text-black dark:hover:bg-##3a3838`}
             onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 50, 60)}}>
             1:1
           </button>
-          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto dark:text-black dark:hover:bg-##3a3838`}
+          <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-full dark:text-black dark:hover:bg-##3a3838`}
             onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, 100, 100)}}>
             Default
           </button>
-          {/* <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-auto`}
+          {/* <button className={`block px-4 py-2 text-left hover:bg-gray-200 w-full dark:text-black dark:hover:bg-##3a3838`}
             onClick={() => { toggleAspectDrop(); changeAspect(canvasRef.current, bgColor, thickness, color, brushStyle, x, y)}}>
-            To add more options 
+            Add more options for aspect ratio 
           </button> */}
         </div>
       </div>
