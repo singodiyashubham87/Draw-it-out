@@ -1,3 +1,4 @@
+import React from 'react';
 import { AiFillHome, AiOutlineInfoCircle, AiOutlineMessage, AiOutlineTeam } from 'react-icons/ai';
 import { FaNewspaper } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
@@ -14,31 +15,31 @@ const Footer = () => {
         <div className="footerNav">
           <ul className="flex gap-4 flex-wrap">
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="/" className="text-white flex items-center hover:text-gray-600">
                 <AiFillHome className="h-6 w-6" />
                 <span className="ml-2">Home</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="/news" target="_blank" className="text-white flex items-center hover:text-gray-600">
                 <FaNewspaper className="h-6 w-6" />
                 <span className="ml-2">News</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="/aboutus" target="_blank" className="text-white flex items-center hover:text-gray-600">
                 <AiOutlineInfoCircle className="h-6 w-6" />
                 <span className="ml-2">About Us</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="/contactus" target="_blank" className="text-white flex items-center hover:text-gray-600">
                 <AiOutlineMessage className="h-6 w-6" />
                 <span className="ml-2">Contact Us</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="/ourteam" target="_blank" className="text-white flex items-center hover:text-gray-600">
                 <AiOutlineTeam className="h-6 w-6" />
                 <span className="ml-2">Our Team</span>
               </a>
@@ -86,7 +87,7 @@ const Footer = () => {
       </div>
       <div className="text-center mt-4">
         <p className="text-white">
-        Made with 💝 by <a href="https://shubham-s-socials.vercel.app/" class="decoration-none font-semibold hover:underline">Master Mickey</a> Copyright &copy;{(new Date().getFullYear())}
+          Made with 💝 by <a href="https://shubham-s-socials.vercel.app/" className="decoration-none font-semibold hover:underline">Master Mickey</a> Copyright &copy;{(new Date().getFullYear())}
         </p>
       </div>
     </footer>
