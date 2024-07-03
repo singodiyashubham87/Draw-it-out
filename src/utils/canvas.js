@@ -260,8 +260,8 @@ export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum
   
   // Set new height
   if(hnum== 100 && wnum==100){//default case 
-    newWidth= window.innerWidth * 90/100;
-    newHeight= window.innerHeight * 80/100;
+    newWidth = window.innerWidth * 0.8; 
+    newHeight = window.innerHeight * 0.6;
   }
   else{ 
     //adjust wnum hnums of various options to adjust the size

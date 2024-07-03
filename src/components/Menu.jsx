@@ -168,12 +168,12 @@ const Menu = ({
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleOutClick);
-    return () => {
-      document.removeEventListener("mousedown", handleOutClick);
-    };
-  }, [isAspectDropOpen]);
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleOutClick);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleOutClick);
+  //   };
+  // }, [isAspectDropOpen]);
 
   return (
     <>
