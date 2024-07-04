@@ -50,7 +50,7 @@ function App() {
 
     const updateCanvasSize = () => {
       const parent = canvas.parentElement;
-      canvas.width = parent.clientWidth;
+      canvas.width = parent.clientWidth * 0.9;
       canvas.height = parent.clientHeight;
     };
 
@@ -182,9 +182,9 @@ function App() {
             </div>
 
             {/* ----- Canvas ------ */}
-            <div className="w-full h-full flex-grow">
+            <div className="flex justify-center items-center w-full h-full flex-grow">
               <canvas
-                className="whiteboard bg-slate-950 rounded-[0.6rem] mt-6 shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-pointer w-full h-full"
+                className="whiteboard bg-slate-950 rounded-[0.6rem] mt-6 shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-pointer w-full h-full max-w-[90%]"
                 ref={canvasRef}
               ></canvas>
             </div>
