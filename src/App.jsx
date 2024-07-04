@@ -163,9 +163,10 @@ function App() {
                   href={BUY_ME_COFFEE_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-end sm:ml-0"
-                >
-                  <button className="flex mt-2 mb-2 items-center ml-1 mr-1 bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
+                  className=  {`flex justify-end sm:ml-0 ${!showMenuAndBgColor && "mt-10" }`} 
+                
+                    >
+                  <button className="flex mt-2 mb-2 items-center ml-1 mr-1  bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
                     <SiBuymeacoffee className="text-xl" />
                   </button>
                 </a>
@@ -180,7 +181,7 @@ function App() {
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
             <div
-              className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
+              className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out mt-10 dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
                 setBgColor("#B7BABF");
                 setBrushStyle("solid");
