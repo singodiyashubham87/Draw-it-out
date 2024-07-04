@@ -88,7 +88,7 @@ function App() {
           <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
         </div>
 
-        <button className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
+        <button id="guideLines" className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
           <FaBookOpen
             size={28}
             color="white"
@@ -101,7 +101,7 @@ function App() {
       <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-evenly gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
         <Joyride
-          steps={steps}
+          steps={tourSteps}
           continuous
           showSkipButton={true}
           locale={{
@@ -140,6 +140,7 @@ function App() {
               <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
                 {/* Eye button */}
                 <div
+                  id="eye"
                   className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
                     }`}
                   onClick={() => {
@@ -151,6 +152,7 @@ function App() {
 
                 {/* Theme Changer */}
                 <div
+                  id="mode"
                   className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"
                     }`}
                   onClick={toggleDarkMode}
@@ -180,6 +182,7 @@ function App() {
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
             <div
+              id="reset"
               className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
               onClick={() => {
                 setBgColor("#B7BABF");

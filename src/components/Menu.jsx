@@ -46,9 +46,8 @@ function Brush(props) {
   return (
     <div className="relative" ref={dropdownRef}>
       <PiPencilSimpleFill
-        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${
-          isDropdownOpen ? "bg-gray-400" : ""
-        } ${isVisible ? "bg-gray-400" : ""}`}
+        className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] cursor-pointer text-black bg-[#CBCCCF] hover:bg-[#B7BABF] ${isDropdownOpen ? "bg-gray-400" : ""
+          } ${isVisible ? "bg-gray-400" : ""}`}
         onClick={() => {
           toggleDropdown();
           toggleVisible();
@@ -57,16 +56,14 @@ function Brush(props) {
         title="Draw"
       />
       <div
-        className={`absolute top-full bg-[#CBCCCF] mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2 ${
-          isDropdownOpen ? "block" : "hidden"
-        }`}
+        className={`absolute top-full bg-[#CBCCCF] mx-auto rounded-[0.5rem] left-1/2 transform -translate-x-1/2 ${isDropdownOpen ? "block" : "hidden"
+          }`}
       >
         {/* Dropdown content */}
         <div className={`py-2 bg-[#CBCCCF] text-black`}>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "solid" ? "font-bold" : ""
-            }`}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "solid" ? "font-bold" : ""
+              }`}
             onClick={() => {
               setBrushStyle("solid");
               setIsDropdownOpen(!isDropdownOpen);
@@ -75,9 +72,8 @@ function Brush(props) {
             Solid
           </button>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "dotted" ? "font-bold" : ""
-            }`}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "dotted" ? "font-bold" : ""
+              }`}
             onClick={() => {
               setBrushStyle("dotted");
               setIsDropdownOpen(!isDropdownOpen);
@@ -86,9 +82,8 @@ function Brush(props) {
             Dotted
           </button>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "dashed" ? "font-bold" : ""
-            }`}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "dashed" ? "font-bold" : ""
+              }`}
             onClick={() => {
               setBrushStyle("dashed");
               setIsDropdownOpen(!isDropdownOpen);
@@ -97,9 +92,8 @@ function Brush(props) {
             Dashed
           </button>
           <button
-            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${
-              brushStyle === "faded" ? "font-bold" : ""
-            }`}
+            className={`block px-4 py-2 text-left hover:bg-gray-200 w-full ${brushStyle === "faded" ? "font-bold" : ""
+              }`}
             onClick={() => {
               setBrushStyle("faded");
               setIsDropdownOpen(!isDropdownOpen);
@@ -151,7 +145,7 @@ const Menu = ({
 
   return (
     <>
-      <div className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex flex-row justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
+      <div id="toolbar" className="scale-[0.8] max-w-[100%] bg-[#CBCCCF] shadow-mdm dark:bg-[#111111] flex flex-row justify-center items-center gap-[1rem] px-[1rem] pt-2 pb-2 rounded-[0.6rem]">
         <Brush
           isDropdownOpen={isDropdownOpen}
           toggleDropdown={toggleDropdown}
@@ -190,9 +184,8 @@ const Menu = ({
         <div className="flex flex-col relative">
           <button className="relative">
             <FaFeatherPointed
-              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF] transform transition duration-300 ease-in-out ${
-                isVisible ? "block" : "hidden"
-              } ${pencilWidth ? "bg-gray-200" : ""}`}
+              className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF] transform transition duration-300 ease-in-out ${isVisible ? "block" : "hidden"
+                } ${pencilWidth ? "bg-gray-200" : ""}`}
               onClick={() => {
                 setPencilWidth(!pencilWidth);
                 setSelectedTool("brush");
@@ -210,9 +203,8 @@ const Menu = ({
               onChange={(e) => {
                 setThickness(e.target.value);
               }}
-              className={`cursor-pointer absolute bottom-[-40px] ${
-                isVisible ? "block" : "hidden"
-              }`}
+              className={`cursor-pointer absolute bottom-[-40px] ${isVisible ? "block" : "hidden"
+                }`}
             />
           )}
         </div>
@@ -255,9 +247,8 @@ const Menu = ({
           </button>
 
           <div
-            className={`absolute z-10 ${
-              isOpen ? "" : "hidden"
-            } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem] `}
+            className={`absolute z-10 ${isOpen ? "" : "hidden"
+              } divide-y bg-[#CBCCCF] rounded-lg shadow w-59 top-[3.1rem] `}
           >
             <ul
               className="text-sm text-gray-700 flex space-y-5 md:space-x-5 p-5 justify-center items-center flex flex-col md:flex-row"
