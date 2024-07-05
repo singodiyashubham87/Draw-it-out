@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import rectImg from "../assets/images/rectangle.svg";
 import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
@@ -18,6 +18,21 @@ const DrawingShapes = ({
 
   const [snapshot, setSnapshot] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const shapeDropRef = useRef(null);
+
+  const handleoutsideClick = (event) => {
+    if (shapeDropRef.current && !shapeDropRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleoutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleoutsideClick);
+    };
+  }, [isDropdownOpen]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,7 +57,7 @@ const DrawingShapes = ({
       ctx.beginPath();
       const radius = Math.sqrt(
         Math.pow(prevMouseX - e.offsetX, 2) +
-        Math.pow(prevMouseY - e.offsetY, 2)
+          Math.pow(prevMouseY - e.offsetY, 2)
       );
       ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
       fillColor ? ctx.fill() : ctx.stroke();
@@ -119,7 +134,6 @@ const DrawingShapes = ({
     canvasRef,
     isDrawing,
     prevMouseX,
-
   ]);
 
   function toggleDropDown() {
@@ -150,29 +164,47 @@ const DrawingShapes = ({
 
   return (
     <div
-      className="drawing-container flex hover:bg-[#B7BABF] flex-shrink-0"
+      className="drawing-container flex  flex-shrink-0"
       onClick={toggleDropDown}
+      ref={shapeDropRef}
     >
       <div className="relative controls">
         <ul className="options flex relative w-[50px]">
-          <div className="absolute md:top-[-20px] top-[-16px] flex flex-col gap-5 text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out hover:bg-[#B7BABF]">
+          <div className="absolute md:top-[-20px] top-[-16px] flex flex-col  text-[2rem] md:text-[3rem]  shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out ">
             {isDropdownOpen ? (
               <>
-                <li id="rectangle" onClick={() => setSelectedTool("rectangle")}>
+                <li
+                  className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                  id="rectangle"
+                  onClick={() => setSelectedTool("rectangle")}
+                >
                   <img src={rectImg} alt="Rectangle" />
                 </li>
-                <li id="circle" onClick={() => setSelectedTool("circle")}>
+                <li
+                  className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                  id="circle"
+                  onClick={() => setSelectedTool("circle")}
+                >
                   <img src={circleImg} alt="Circle" />
                 </li>
-                <li id="triangle" onClick={() => setSelectedTool("triangle")}>
+                <li
+                  className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                  id="triangle"
+                  onClick={() => setSelectedTool("triangle")}
+                >
                   <img src={triangleImg} alt="Triangle" />
                 </li>
-                <li id="line" onClick={() => setSelectedTool("line")}>
+                <li
+                  className="hover:bg-[#B7BABF] px-[0.5rem] py-[0.5rem] md:py-[1rem] md:px-[0.8rem]"
+                  id="line"
+                  onClick={() => setSelectedTool("line")}
+                >
                   <img src={lineImg} alt="Line" />
                 </li>
               </>
             ) : (
               <li
+                className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem] "
                 id="current-tool"
                 onClick={() => setSelectedTool("current-tool")}
               >
@@ -187,4 +219,3 @@ const DrawingShapes = ({
 };
 
 export default DrawingShapes;
-
