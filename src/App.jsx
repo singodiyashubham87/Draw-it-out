@@ -17,7 +17,6 @@ import { PiMinus } from "react-icons/pi";
 import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
 import Footer from "./components/Footer";
-
 function App() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(true);
