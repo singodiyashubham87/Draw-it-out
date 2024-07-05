@@ -5,8 +5,7 @@ import { FiMail } from 'react-icons/fi';
 import LinkedInIcon from "../assets/images/linkedin.jpg";
 import TwitterIcon from "../assets/images/X.png";
 import GitHubIcon from "../assets/images/github.png";
-import EmailIcon from "../assets/images/GMail.webp";
-import RateUs from './Rateus'; // Import the RateUs component
+import RateUs from './RateUs'; // Adjust the import path as needed
 
 const Footer = () => {
   const [showRateUs, setShowRateUs] = useState(false);
@@ -106,9 +105,9 @@ const Footer = () => {
       </footer>
 
       {showRateUs && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={toggleRateUs}>&times;</span>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg relative max-w-md w-full">
+            <span className="absolute top-2 right-2 cursor-pointer text-2xl font-bold" onClick={toggleRateUs}>&times;</span>
             <RateUs />
           </div>
         </div>
