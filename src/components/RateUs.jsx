@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 const RateUs = () => {
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+  const [messageText, setMessageText] = useState('');
+  const [messageType, setMessageType] = useState(''); // success or error
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -10,8 +13,32 @@ const RateUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Rating:', rating);
-    console.log('Feedback:', feedback);
+    
+    if (rating > 0 && feedback.trim()) {
+      console.log('Rating:', rating);
+      console.log('Feedback:', feedback);
+
+      // Show success message
+      showMessageWithTimeout('Thanks For Your Feedback :)', 'success');
+      
+      // Optionally clear the form inputs after submission
+      setRating(0);
+      setFeedback('');
+    } else {
+      // Show error message
+      showMessageWithTimeout('Please Fill All Details :(', 'error');
+    }
+  };
+
+  const showMessageWithTimeout = (text, type) => {
+    setMessageText(text);
+    setMessageType(type);
+    setShowMessage(true);
+
+    // Hide the message after 4 seconds
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 4000);
   };
 
   return (
@@ -22,7 +49,7 @@ const RateUs = () => {
           {[1, 2, 3, 4, 5].map((star) => (
             <span
               key={star}
-              className={`text-4xl cursor-pointer transition duration-300 transform hover:text-yellow-500 hover:scale-125 ${star <= rating ? 'text-yellow-500' : 'text-gray-500'}`}
+              className={`text-4xl cursor-pointer transition duration-300 transform hover:text-yellow-500 hover:scale-125 ${star <= rating ? 'text-yellow-500' : 'text-gray-400'}`}
               onClick={() => handleRating(star)}
             >
               ★
@@ -33,7 +60,7 @@ const RateUs = () => {
           <textarea
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-            placeholder="Leave your feedback here"
+            placeholder="Leave your feedback here :)"
             className="w-full h-28 p-4 mb-6 border border-gray-600 rounded-lg resize-none text-black"
           ></textarea>
           <button
@@ -43,6 +70,11 @@ const RateUs = () => {
             Submit
           </button>
         </form>
+        {showMessage && (
+          <div className={`mt-4 text-center ${messageType === 'success' ? 'text-green-500' : 'text-red-500'}`}>
+            {messageText}
+          </div>
+        )}
       </div>
     </div>
   );
