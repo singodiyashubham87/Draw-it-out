@@ -166,7 +166,7 @@ function App() {
                   rel="noopener noreferrer"
                   className="flex justify-end sm:ml-0"
                 >
-                  <button className="flex mt-2 mb-2 items-center ml-1 mr-1 bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
+                  <button className="flex mt-2 mb-2 items-center ml-1 mr-1 bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2 dark:text-white">
                     <SiBuymeacoffee className="text-xl" />
                   </button>
                 </a>
