@@ -14,31 +14,31 @@ const Footer = () => {
         <div className="footerNav">
           <ul className="flex gap-4 flex-wrap">
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="#" className="text-white flex items-center hover:text-gray-200  hover:rounded-sm  hover:scale-110">
                 <AiFillHome className="h-6 w-6" />
                 <span className="ml-2">Home</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="#" className="text-white flex items-center hover:text-gray-200  hover:rounded-sm  hover:scale-110">
                 <FaNewspaper className="h-6 w-6" />
                 <span className="ml-2">News</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="#" className="text-white flex items-center hover:text-gray-200 hover:rounded-sm  hover:scale-110">
                 <AiOutlineInfoCircle className="h-6 w-6" />
                 <span className="ml-2">About Us</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="#" className="text-white flex items-center hover:text-gray-200  hover:rounded-sm  hover:scale-110">
                 <AiOutlineMessage className="h-6 w-6" />
                 <span className="ml-2">Contact Us</span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600">
+              <a href="#" className="text-white flex items-center hover:text-gray-200  hover:rounded-sm  hover:scale-110">
                 <AiOutlineTeam className="h-6 w-6" />
                 <span className="ml-2">Our Team</span>
               </a>
