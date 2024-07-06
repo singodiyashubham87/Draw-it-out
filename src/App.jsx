@@ -4,10 +4,11 @@ import { RxCross1 } from "react-icons/rx";
 import { tourSteps } from "./utils/helpers";
 import BgColorSidePanel from "./components/BgColorSidePanel";
 import Menu from "./components/Menu";
-import { handleUpdates, startDrawing } from "./utils/canvas";
+import { handleUpdates, handleDrawing } from "./utils/canvas";
 import { FaBookOpen } from "react-icons/fa";
 import { VscClose } from "react-icons/vsc";
 import { PiPencilSimpleFill } from "react-icons/pi";
+import { BiArea } from "react-icons/bi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { FaFilePdf } from "react-icons/fa";
@@ -50,7 +51,7 @@ function App() {
 
     if (canvas && !canvasInitialized) {
       setCanvasInitialized(true);
-      startDrawing(canvas, color, thickness, bgColor, brushStyle);
+      handleDrawing(canvas, color, thickness, bgColor, brushStyle);
       console.log("starting");
       console.log(brushStyle);
     } else if (canvasInitialized) {
@@ -88,7 +89,7 @@ function App() {
           <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
         </div>
 
-        <button className="absolute top-0 left-0 p-6">
+        <button className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
           <FaBookOpen
             size={28}
             color="white"
@@ -99,7 +100,7 @@ function App() {
         </button>
       </div>
       <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
-      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
+      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-evenly gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
         <Joyride
           steps={steps}
           continuous
@@ -115,12 +116,11 @@ function App() {
       </div>
       {/* Buy me a coffee element */}
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
-        <div className="flex flex-col min-w-full justify-center gsm:flex-row">
-          {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+        <div className="flex flex-col min-w-full justify-center gsm:flex-column">
 
           <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
             {/* Drawing Toolbar */}
-            <div className="flex items-center gap-14">
+            <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
               {showMenuAndBgColor && (
                 <Menu
                   isDrawing={isDrawing}
@@ -138,12 +138,11 @@ function App() {
                 />
               )}
               {/* Toolbar right menu section */}
-              <div className="flex md:flex-row flex-col justify-center align-center items-center absolute top-0 md:right-4 right-2">
+              <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
                 {/* Eye button */}
                 <div
-                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
-                    !showMenuAndBgColor && "mt-10"
-                  }`}
+                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
+                    }`}
                   onClick={() => {
                     setShowMenuAndBgColor((state) => !state);
                   }}
@@ -153,9 +152,8 @@ function App() {
 
                 {/* Theme Changer */}
                 <div
-                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
-                    !showMenuAndBgColor && "mt-10"
-                  }`}
+                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"
+                    }`}
                   onClick={toggleDarkMode}
                 >
                   {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
@@ -177,13 +175,16 @@ function App() {
 
             {/* ----- Canvas ------ */}
             <canvas
+
               id="draw"
-              className={`whiteboard bg-slate-950 w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
-              }
+              className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none" }
             `}
               ref={canvasRef}
             ></canvas>
+          
+
+            {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
             <div
               className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out dark:text-[#111111]  hover:md:scale-110"
@@ -197,7 +198,7 @@ function App() {
             >
               <RxCross1 />
             </div>
-            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 dark:text-white">
+            <h1 className="text-[0.7rem] vvsm:text-[1rem] pb-4 pt-2 dark:text-white">
               Made with &#128157; by{" "}
               <a
                 href="https://shubham-s-socials.vercel.app/"
@@ -222,7 +223,7 @@ function App() {
               onClick={closeModal}
               className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
             />
-            <ul className="pt-18 p-4 bg-white dark:bg-dark-bg text-black dark:text-dark-text">
+            <ul className="pt-18 p-4 dark:bg-zinc-800">
               <li className="p-2 font-bold text-lg uppercase">Guidelines</li>
               <li className={style.guideline}>
                 <PiPencilSimpleFill />
@@ -251,6 +252,10 @@ function App() {
               <li className={style.guideline}>
                 <PiMinus />
                 <span className="ml-2"> Zoom out for an overview of your drawing.</span>
+              </li>
+              <li className={style.guideline}>
+                <BiArea />
+                <span className="ml-2">Change your canvas size to preset values.</span>
               </li>
               <li className={style.guideline}>
                 <FaRegEye />

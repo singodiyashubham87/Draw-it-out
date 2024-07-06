@@ -1,4 +1,3 @@
-// Array to store the drawing history
 import jsPdf from "jspdf";
 import { Context } from "svgcanvas";
 let drawHistory = [];
@@ -10,8 +9,18 @@ export function startDrawing(
   brushStyle
 ) {
   const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth * 0.9; //default (onload)
+  canvas.height = window.innerHeight * 0.65;
+
+  canvas.width = window.innerWidth * 0.9;
+}
+
+export function handleDrawing(canvas, color, lineThickness, bgColor, brushStyle) {
+  const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth * 0.8;
+
   canvas.height = window.innerHeight * 0.6;
+
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   canvas.setAttribute("willReadFrequently", "true");
@@ -20,78 +29,81 @@ export function startDrawing(
   ctx.lineCap = "round";
   ctx.lineWidth = lineThickness;
 
+  // Variables to store the mouse position and state
   let isDrawing = false;
-  // Main draw function
-  const draw = (e) => {
-    if (!isDrawing) return;
+  let mouseX = 0;
+  let mouseY = 0;
 
-    // Initialize lastX and lastY if not already initialized
-    if (lastX === 0 && lastY === 0) {
-      lastX = e.offsetX;
-      lastY = e.offsetY;
+  // Function to update the mouse position
+  function updateMousePosition(event) {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = event.clientX - rect.left;
+    mouseY = event.clientY - rect.top;
+    drawHistory.push({ x: mouseX, y: mouseY }); // Add the current position to the drawing history
+  }
+
+  function updateTouchPosition(touch) {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = touch.clientX - rect.left;
+    mouseY = touch.clientY - rect.top;
+    drawHistory.push({ x: mouseX, y: mouseY }); // Add the current position to the drawing history
+  }
+
+  // Function to start drawing
+  function startDrawing(event) {
+    isDrawing = true;
+    if (event.touches) {
+      updateTouchPosition(event.touches[0]);
+    } else {
+      updateMousePosition(event);
     }
+  }
 
-    // Begin a new path for the current stroke
-    ctx.beginPath();
-
-    // Move to the last drawn point
-    ctx.moveTo(lastX, lastY);
-
-    // Draw a line to the current mouse position
-    ctx.lineTo(e.offsetX, e.offsetY);
-
-    // Stroke the path to display it on the canvas
-    ctx.stroke();
-
-    // Update lastX and lastY for the next drawing action
-    lastX = e.offsetX;
-    lastY = e.offsetY;
-
-    // Add the current position to the drawing history
-    drawHistory.push({ x: e.offsetX, y: e.offsetY });
-  };
-
-  let lastX = 0;
-  let lastY = 0;
-  canvas.addEventListener("mousedown", (e) => {
-    lastX = e.offsetX;
-    lastY = e.offsetY;
-    isDrawing = true;
-    drawHistory.push({ x: lastX, y: lastY });
-  });
-  canvas.addEventListener("mouseup", () => (isDrawing = false));
-  canvas.addEventListener("mouseout", () => {
-    lastX = 0;
-    lastY = 0;
-  });
-  canvas.addEventListener("mousemove", draw);
-
-  //Event listeners for touch devices
-  canvas.addEventListener("touchstart", (e) => {
-    const touch = e.touches[0]; // Get the first touch
-    lastX = touch.clientX - canvas.offsetLeft;
-    lastY = touch.clientY - canvas.offsetTop;
-    isDrawing = true;
-  });
-
-  canvas.addEventListener("touchend", () => {
+  // Function to stop drawing
+  function stopDrawing() {
     isDrawing = false;
-  });
+    ctx.beginPath(); // Reset the path so a new line doesn't connect to the previous one
+  }
 
-  canvas.addEventListener("touchcancel", () => {
-    isDrawing = false;
-  });
-
-  canvas.addEventListener("mouseleave", () => (isDrawing = false));
-  canvas.addEventListener("touchmove", (e) => {
-    // added e.preventDefault();
-    e.preventDefault();
+  // Function to draw on the canvas
+  function draw(event) {
     if (!isDrawing) return;
-    const touch = e.touches[0]; // Get the first touch
-    const offsetX = touch.clientX - canvas.offsetLeft;
-    const offsetY = touch.clientY - canvas.offsetTop;
-    draw({ offsetX, offsetY });
+    ctx.beginPath(); // Begin a new path
+    ctx.moveTo(mouseX, mouseY); // Move the path to the current mouse position
+    if (event.touches) {
+      updateTouchPosition(event.touches[0]);
+    } else {
+      updateMousePosition(event);
+    }
+    ctx.lineTo(mouseX, mouseY);
+    ctx.stroke();
+  }
+
+  // Add event listeners for mouse interactions
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseleave', stopDrawing); // Stop drawing if the mouse leaves the canvas
+
+  // Add touch event listeners for mobile devices
+  canvas.addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    startDrawing(event);
   });
+    
+  canvas.addEventListener('touchend', (event) => {
+    event.preventDefault();
+    stopDrawing();
+  });
+  canvas.addEventListener('touchcancel', (event) => {
+    event.preventDefault();
+    stopDrawing();
+  });
+  canvas.addEventListener('touchmove', (event) => {
+    event.preventDefault();
+    draw(event);
+  });
+
   setBrushStyle(ctx, brushStyle);
 }
 
@@ -240,14 +252,41 @@ export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
 
+export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum, wnum) {
 
-export function handleUpdates(
-  canvas,
-  color,
-  lineThickness,
-  bgColor,
-  brushStyle
-) {
+  const ctx = canvas.getContext("2d");
+  const histArray = [...drawHistory];
+  let newHeight, newWidth;
+  
+  // Set new height
+  if(hnum== 100 && wnum==100){//default case 
+    newWidth = window.innerWidth * 0.8; 
+    newHeight = window.innerHeight * 0.6;
+  }
+  else{ 
+    //adjust wnum hnums of various options to adjust the size
+    newWidth = window.innerWidth * wnum/100;
+    newHeight = window.innerWidth * hnum/100;
+    }
+
+  // Save the current drawing and clear the canvas
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  clearCanvas(canvas, bgColor);
+
+  // Resize the canvas
+  canvas.height = newHeight;
+  canvas.width= newWidth;
+
+  // Redraw the portion of the drawing that fits in the new canvas size
+  ctx.putImageData(imageData, 0, 0);
+
+  // Update drawHistory to fit within new height
+  drawHistory = histArray.filter((point) => point.y <= newHeight);
+  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
+}
+
+export function handleUpdates(canvas, color, lineThickness, bgColor, brushStyle) {
+
   const ctx = canvas.getContext("2d");
   ctx.lineWidth = lineThickness;
   ctx.strokeStyle = `${color}`;
