@@ -8,6 +8,7 @@ import { handleUpdates, handleDrawing } from "./utils/canvas";
 import { FaBookOpen } from "react-icons/fa";
 import { VscClose } from "react-icons/vsc";
 import { PiPencilSimpleFill } from "react-icons/pi";
+import { BiArea } from "react-icons/bi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { FaFilePdf } from "react-icons/fa";
@@ -182,12 +183,16 @@ function App() {
             </div>
 
             {/* ----- Canvas ------ */}
-            <div className="flex justify-center items-center w-full h-full flex-grow">
-              <canvas
-                className="whiteboard bg-slate-950 rounded-[0.6rem] mt-6 shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-pointer w-full h-full max-w-[90%]"
-                ref={canvasRef}
-              ></canvas>
-            </div>
+<div className="flex justify-center items-center w-full h-full flex-grow">
+  <canvas
+    id="draw"
+    className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+      isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
+    }`}
+    ref={canvasRef}
+  ></canvas>
+</div>
+
 
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
@@ -257,6 +262,10 @@ function App() {
               <li className={style.guideline}>
                 <PiMinus />
                 <span className="ml-2"> Zoom out for an overview of your drawing.</span>
+              </li>
+              <li className={style.guideline}>
+                <BiArea />
+                <span className="ml-2">Change your canvas size to preset values.</span>
               </li>
               <li className={style.guideline}>
                 <FaRegEye />
