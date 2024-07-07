@@ -31,7 +31,8 @@ function App() {
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [brushStyle, setBrushStyle] = useState("solid");
   const [selectedTool, setSelectedTool] = useState("brush");
-
+  const canvasWidth = 1100;  // Set your desired width
+  const canvasHeight = 450; 
   const style = {
     guideline: `p-4 flex text-xs`,
   };
@@ -137,10 +138,10 @@ function App() {
                 />
               )}
               {/* Toolbar right menu section */}
-              <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
+              <div className="flex flex-row justify-center align-end items-center md:absolute top-0 md:right-0 right-1">
                 {/* Eye button */}
                 <div
-                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
+                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-0" 
                     }`}
                   onClick={() => {
                     setShowMenuAndBgColor((state) => !state);
@@ -151,7 +152,7 @@ function App() {
 
                 {/* Theme Changer */}
                 <div
-                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"
+                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-0"
                     }`}
                   onClick={toggleDarkMode}
                 >
@@ -163,7 +164,7 @@ function App() {
                   href={BUY_ME_COFFEE_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=  {`flex justify-end sm:ml-0 ${!showMenuAndBgColor && "mt-10" }`} 
+                  className=  {`flex justify-end sm:ml-0 ${!showMenuAndBgColor && "mt-0" }`} 
                 
                     >
                   <button className="flex mt-2 mb-2 items-center ml-1 mr-1  bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2">
@@ -176,7 +177,10 @@ function App() {
             {/* ----- Canvas ------ */}
             <canvas
               className="whiteboard bg-slate-950 rounded-[0.6rem] mt-6 shadow-md shadow-black dark:shadow-black dark:shadow-lg cursor-pointer"
-              ref={canvasRef}></canvas>
+              ref={canvasRef}
+              width={canvasWidth}
+              height={canvasHeight}
+              style={{ width: canvasWidth, height: canvasHeight }}></canvas>
 
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
