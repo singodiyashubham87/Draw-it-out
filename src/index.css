@@ -54,20 +54,13 @@ body{
 }
 /* Background of the scrollbar track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  @apply bg-gray-200;
 }
 
-/* Background of the scrollbar handle */
 ::-webkit-scrollbar-thumb {
-    background:black;
+  @apply bg-black hover:bg-black;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: black;
-}
-*{
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+* {
+  @apply select-none;
 }
