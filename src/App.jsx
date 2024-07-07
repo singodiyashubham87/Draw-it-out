@@ -49,14 +49,24 @@ function App() {
   useEffect(() => {
     const canvas = canvasRef.current;
 
+    const updateCanvasSize = () => {
+      const parent = canvas.parentElement;
+      canvas.width = parent.clientWidth * 0.9;
+      canvas.height = parent.clientHeight;
+    };
+
     if (canvas && !canvasInitialized) {
       setCanvasInitialized(true);
+      updateCanvasSize();
+      window.addEventListener("resize", updateCanvasSize);
       handleDrawing(canvas, color, thickness, bgColor, brushStyle);
-      console.log("starting");
-      console.log(brushStyle);
     } else if (canvasInitialized) {
       handleUpdates(canvas, color, thickness, bgColor, brushStyle);
     }
+
+    return () => {
+      window.removeEventListener("resize", updateCanvasSize);
+    };
   }, [bgColor, color, thickness, canvasInitialized, brushStyle]);
 
   useEffect(() => {
@@ -81,7 +91,7 @@ function App() {
 
   return (
     <>
-      <div className="relative ">
+      <div className="relative">
         <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
           <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
             Draw it Out!
@@ -117,7 +127,6 @@ function App() {
       {/* Buy me a coffee element */}
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
         <div className="flex flex-col min-w-full justify-center gsm:flex-column">
-
           <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
             {/* Drawing Toolbar */}
             <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
@@ -176,15 +185,16 @@ function App() {
             </div>
 
             {/* ----- Canvas ------ */}
-            <canvas
+<div className="flex justify-center items-center w-full h-full flex-grow">
+  <canvas
+    id="draw"
+    className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+      isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
+    }`}
+    ref={canvasRef}
+  ></canvas>
+</div>
 
-              id="draw"
-              className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none" }
-            `}
-              ref={canvasRef}
-            ></canvas>
-          
 
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
