@@ -1,5 +1,8 @@
-<img  src="https://readme-typing-svg.herokuapp.com?size=40&width=900&height=80&lines=Welcome-to-Draw-it-out"/>
-<div align="center"><img src="./src/assets/images/logo.png" width="200px" height="200px"/></div>
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?size=40&width=900&height=80&lines=Welcome-to-Draw-it-out"/>
+  <img src="./src/assets/images/logo.png" width="200px" height="200px"/>
+</div>
+
 <h4 align="center">
 </center>Draw-it-out: Online Whiteboard App</h4>
 
