@@ -228,13 +228,13 @@ export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
 export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
-  
+  const MIN_HEIGHT=250;
   // Calculate new height, reducing by 10% of the current height
   let newHeight = canvas.height - canvas.height * 0.1;
   
   // Ensure new height does not go below 1 pixel
-  if (newHeight < 1) {
-    newHeight = 1;
+  if (newHeight < MIN_HEIGHT) {
+    newHeight = MIN_HEIGHT;
   }
 
   // Save the current drawing and clear the canvas
