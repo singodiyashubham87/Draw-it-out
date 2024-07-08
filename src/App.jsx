@@ -5,6 +5,7 @@ import { tourSteps } from "./utils/helpers";
 import BgColorSidePanel from "./components/BgColorSidePanel";
 import Menu from "./components/Menu";
 import { handleUpdates, handleDrawing } from "./utils/canvas";
+import { getCookie, setCookie, eraseCookie } from "./utils/manageCookies.js";
 import { FaBookOpen } from "react-icons/fa";
 import { VscClose } from "react-icons/vsc";
 import { PiPencilSimpleFill } from "react-icons/pi";
@@ -17,32 +18,6 @@ import { PiMinus } from "react-icons/pi";
 import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
 import Footer from "./components/Footer";
-
-// Cookie management functions
-const setCookie = (name, value, days) => {
-  let expires = "";
-  if (days) {
-    const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
-};
-
-const getCookie = (name) => {
-  const nameEQ = name + "=";
-  const ca = document.cookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-  }
-  return null;
-};
-
-const eraseCookie = (name) => {
-  document.cookie = name + '=; Max-Age=-99999999;';
-};
 
 function App() {
   const canvasRef = useRef(null);
