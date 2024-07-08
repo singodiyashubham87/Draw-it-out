@@ -19,8 +19,9 @@ body{
   -ms-user-select: none;       
 }
 
+
 #draw{
-  width: 90%;
+  /* width: 90%; */
   /* height: 70vh; */
 }
 
@@ -50,5 +51,18 @@ body{
     width: 90%;
     /* height: 56vh; */
   }
+}
+
+/* Background of the scrollbar track */
+::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-black hover:bg-black;
+}
+
+* {
+  @apply select-none;
 }
 
