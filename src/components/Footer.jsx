@@ -8,8 +8,7 @@ import LinkedInIcon from "../assets/images/linkedin.jpg";
 import TwitterIcon from "../assets/images/X.png";
 import GitHubIcon from "../assets/images/github.png";
 
-Modal.setAppElement('#root'); // Ensure this line is correct for accessibility
-
+Modal.setAppElement('#root'); 
 const Footer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
@@ -29,12 +28,6 @@ const Footer = () => {
       <div className="flex justify-between items-center py-4 px-8">
         <div className="footerNav">
           <ul className="flex gap-4 flex-wrap">
-            <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600" onClick={() => openModal('Home Content')}>
-                <AiFillHome className="h-6 w-6" />
-                <span className="ml-2">Home</span>
-              </a>
-            </li>
             <li>
               <a href="#" className="text-white flex items-center hover:text-gray-600" onClick={() => openModal('News Content')}>
                 <FaNewspaper className="h-6 w-6" />
@@ -115,6 +108,50 @@ const Footer = () => {
       >
         <div className="modal-content">
           <h2 className="text-2xl font-bold mb-4">{modalContent}</h2>
+          {modalContent === 'News Content' && (
+            <p className="mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
+              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
+              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
+              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
+              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
+              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
+              ac a est. Fusce ac fringilla justo.
+            </p>
+          )}
+          {modalContent === 'About Us Content' && (
+            <p className="mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
+              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
+              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
+              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
+              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
+              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
+              ac a est. Fusce ac fringilla justo.
+            </p>
+          )}
+          {modalContent === 'Contact Us Content' && (
+            <p className="mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
+              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
+              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
+              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
+              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
+              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
+              ac a est. Fusce ac fringilla justo.
+            </p>
+          )}
+          {modalContent === 'Our Team Content' && (
+            <p className="mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
+              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
+              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
+              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
+              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
+              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
+              ac a est. Fusce ac fringilla justo.
+            </p>
+          )}
           <button onClick={closeModal} className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">
             Close
           </button>
