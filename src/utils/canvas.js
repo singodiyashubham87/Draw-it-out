@@ -1,11 +1,26 @@
 import jsPdf from "jspdf";
 import { Context } from "svgcanvas";
 let drawHistory = [];
+export function startDrawing(
+  canvas,
+  color,
+  lineThickness,
+  bgColor,
+  brushStyle
+) {
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth * 0.9; //default (onload)
+  canvas.height = window.innerHeight * 0.65;
+
+  canvas.width = window.innerWidth * 0.9;
+}
 
 export function handleDrawing(canvas, color, lineThickness, bgColor, brushStyle) {
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth * 0.8;
+
   canvas.height = window.innerHeight * 0.6;
+
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   canvas.setAttribute("willReadFrequently", "true");
@@ -213,13 +228,13 @@ export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
 export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
-  
+  const MIN_HEIGHT=250;
   // Calculate new height, reducing by 10% of the current height
   let newHeight = canvas.height - canvas.height * 0.1;
   
   // Ensure new height does not go below 1 pixel
-  if (newHeight < 1) {
-    newHeight = 1;
+  if (newHeight < MIN_HEIGHT) {
+    newHeight = MIN_HEIGHT;
   }
 
   // Save the current drawing and clear the canvas
@@ -237,7 +252,41 @@ export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
 
+export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum, wnum) {
+
+  const ctx = canvas.getContext("2d");
+  const histArray = [...drawHistory];
+  let newHeight, newWidth;
+  
+  // Set new height
+  if(hnum== 100 && wnum==100){//default case 
+    newWidth = window.innerWidth * 0.8; 
+    newHeight = window.innerHeight * 0.6;
+  }
+  else{ 
+    //adjust wnum hnums of various options to adjust the size
+    newWidth = window.innerWidth * wnum/100;
+    newHeight = window.innerWidth * hnum/100;
+    }
+
+  // Save the current drawing and clear the canvas
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  clearCanvas(canvas, bgColor);
+
+  // Resize the canvas
+  canvas.height = newHeight;
+  canvas.width= newWidth;
+
+  // Redraw the portion of the drawing that fits in the new canvas size
+  ctx.putImageData(imageData, 0, 0);
+
+  // Update drawHistory to fit within new height
+  drawHistory = histArray.filter((point) => point.y <= newHeight);
+  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
+}
+
 export function handleUpdates(canvas, color, lineThickness, bgColor, brushStyle) {
+
   const ctx = canvas.getContext("2d");
   ctx.lineWidth = lineThickness;
   ctx.strokeStyle = `${color}`;
