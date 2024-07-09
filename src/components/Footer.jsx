@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { AiFillHome, AiOutlineInfoCircle, AiOutlineMessage, AiOutlineTeam } from 'react-icons/ai';
+import { AiOutlineInfoCircle, AiOutlineMessage, AiOutlineTeam } from 'react-icons/ai';
 import { FaNewspaper } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
 
-import LinkedInIcon from "../assets/images/linkedin.jpg";
-import TwitterIcon from "../assets/images/X.png";
-import GitHubIcon from "../assets/images/github.png";
+import LinkedInIcon from '../assets/images/linkedin.jpg';
+import TwitterIcon from '../assets/images/X.png';
+import GitHubIcon from '../assets/images/github.png';
 
 Modal.setAppElement('#root'); 
+
 const Footer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
@@ -28,30 +29,23 @@ const Footer = () => {
       <div className="flex justify-between items-center py-4 px-8">
         <div className="footerNav">
           <ul className="flex gap-4 flex-wrap">
-            <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600" onClick={() => openModal('News Content')}>
-                <FaNewspaper className="h-6 w-6" />
-                <span className="ml-2">News</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600" onClick={() => openModal('About Us Content')}>
-                <AiOutlineInfoCircle className="h-6 w-6" />
-                <span className="ml-2">About Us</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600" onClick={() => openModal('Contact Us Content')}>
-                <AiOutlineMessage className="h-6 w-6" />
-                <span className="ml-2">Contact Us</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white flex items-center hover:text-gray-600" onClick={() => openModal('Our Team Content')}>
-                <AiOutlineTeam className="h-6 w-6" />
-                <span className="ml-2">Our Team</span>
-              </a>
-            </li>
+            {[
+              { label: 'News', icon: FaNewspaper, content: 'News Content' },
+              { label: 'About Us', icon: AiOutlineInfoCircle, content: 'About Us Content' },
+              { label: 'Contact Us', icon: AiOutlineMessage, content: 'Contact Us Content' },
+              { label: 'Our Team', icon: AiOutlineTeam, content: 'Our Team Content' }
+            ].map((item, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  className="text-white flex items-center hover:text-gray-600"
+                  onClick={() => openModal(item.content)}
+                >
+                  <item.icon className="h-6 w-6" />
+                  <span className="ml-2">{item.label}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="socialicons flex gap-4 flex-wrap">
@@ -108,50 +102,19 @@ const Footer = () => {
       >
         <div className="modal-content">
           <h2 className="text-2xl font-bold mb-4">{modalContent}</h2>
-          {modalContent === 'News Content' && (
-            <p className="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
-              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
-              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
-              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
-              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
-              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
-              ac a est. Fusce ac fringilla justo.
-            </p>
-          )}
-          {modalContent === 'About Us Content' && (
-            <p className="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
-              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
-              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
-              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
-              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
-              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
-              ac a est. Fusce ac fringilla justo.
-            </p>
-          )}
-          {modalContent === 'Contact Us Content' && (
-            <p className="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
-              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
-              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
-              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
-              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
-              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
-              ac a est. Fusce ac fringilla justo.
-            </p>
-          )}
-          {modalContent === 'Our Team Content' && (
-            <p className="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
-              mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
-              pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
-              elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
-              potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
-              ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
-              ac a est. Fusce ac fringilla justo.
-            </p>
-          )}
+          {['News Content', 'About Us Content', 'Contact Us Content', 'Our Team Content'].map((content, index) => (
+            modalContent === content && (
+              <p key={index} className="mb-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
+                mauris quam. Nullam commodo, nunc ut aliquam sagittis, nisi elit
+                pellentesque odio, ut accumsan enim dolor eu odio. Vivamus vehicula
+                elit non sapien dapibus, nec volutpat libero pulvinar. Suspendisse
+                potenti. Proin non ornare nisi, at fermentum mauris. Aenean id orci
+                ac elit pharetra lobortis. Sed id metus a tortor facilisis pharetra
+                ac a est. Fusce ac fringilla justo.
+              </p>
+            )
+          ))}
           <button onClick={closeModal} className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">
             Close
           </button>
