@@ -100,7 +100,7 @@ const Footer = () => {
         className="modal absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-4 shadow-lg"
         overlayClassName="overlay fixed inset-0 bg-black opacity-50"
       >
-        <div className="modal-content">
+        <div className="modal-content text-center">
           <h2 className="text-2xl font-bold mb-4">{modalContent}</h2>
           {['News Content', 'About Us Content', 'Contact Us Content', 'Our Team Content'].map((content, index) => (
             modalContent === content && (
