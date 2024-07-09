@@ -4,10 +4,11 @@ import { RxCross1 } from "react-icons/rx";
 import { tourSteps } from "./utils/helpers";
 import BgColorSidePanel from "./components/BgColorSidePanel";
 import Menu from "./components/Menu";
-import { handleUpdates, startDrawing } from "./utils/canvas";
+import { handleUpdates, handleDrawing } from "./utils/canvas";
 import { FaBookOpen } from "react-icons/fa";
 import { VscClose } from "react-icons/vsc";
 import { PiPencilSimpleFill } from "react-icons/pi";
+import { BiArea } from "react-icons/bi";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { RiScreenshot2Fill } from "react-icons/ri";
 import { FaFilePdf } from "react-icons/fa";
@@ -49,7 +50,7 @@ function App() {
 
     if (canvas && !canvasInitialized) {
       setCanvasInitialized(true);
-      startDrawing(canvas, color, thickness, bgColor, brushStyle);
+      handleDrawing(canvas, color, thickness, bgColor, brushStyle);
       console.log("starting");
       console.log(brushStyle);
     } else if (canvasInitialized) {
@@ -98,7 +99,7 @@ function App() {
         </button>
       </div>
       <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
-      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
+      <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-evenly gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
         <Joyride
           steps={steps}
           continuous
@@ -139,9 +140,8 @@ function App() {
               <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
                 {/* Eye button */}
                 <div
-                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
-                    !showMenuAndBgColor && "mt-10"
-                  }`}
+                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
+                    }`}
                   onClick={() => {
                     setShowMenuAndBgColor((state) => !state);
                   }}
@@ -151,9 +151,8 @@ function App() {
 
                 {/* Theme Changer */}
                 <div
-                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
-                    !showMenuAndBgColor && "mt-10"
-                  }`}
+                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"
+                    }`}
                   onClick={toggleDarkMode}
                 >
                   {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
@@ -175,13 +174,14 @@ function App() {
 
             {/* ----- Canvas ------ */}
             <canvas
+
               id="draw"
-              className={`whiteboard bg-slate-950 w-screen mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
-              }
+              className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+                isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none" }
             `}
               ref={canvasRef}
             ></canvas>
+          
 
             {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
 
@@ -222,7 +222,7 @@ function App() {
               onClick={closeModal}
               className="bg-black rounded-xl p-1 absolute top-4 right-4 cursor-pointer"
             />
-            <ul className="pt-18 p-4 bg-white dark:bg-dark-bg text-black dark:text-dark-text">
+            <ul className="pt-18 p-4 dark:bg-zinc-800">
               <li className="p-2 font-bold text-lg uppercase">Guidelines</li>
               <li className={style.guideline}>
                 <PiPencilSimpleFill />
@@ -251,6 +251,10 @@ function App() {
               <li className={style.guideline}>
                 <PiMinus />
                 <span className="ml-2"> Zoom out for an overview of your drawing.</span>
+              </li>
+              <li className={style.guideline}>
+                <BiArea />
+                <span className="ml-2">Change your canvas size to preset values.</span>
               </li>
               <li className={style.guideline}>
                 <FaRegEye />

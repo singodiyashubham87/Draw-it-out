@@ -3,7 +3,7 @@ import rectImg from "../assets/images/rectangle.svg";
 import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
 import lineImg from "../assets/images/line.svg";
-
+import { GiPencilBrush } from "react-icons/gi";
 const DrawingShapes = ({
   brushWidth,
   selectedColor,
@@ -18,20 +18,19 @@ const DrawingShapes = ({
 
   const [snapshot, setSnapshot] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedBrush, setSelectedBrush] = useState("rounded");
 
   const shapeDropRef = useRef(null);
 
-  const handleOutsideClick = (event) => {
+  const handleoutsideClick = (event) => {
     if (shapeDropRef.current && !shapeDropRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("mousedown", handleoutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("mousedown", handleoutsideClick);
     };
   }, [isDropdownOpen]);
 
@@ -143,13 +142,13 @@ const DrawingShapes = ({
         drawTriangle(e);
       } else if (selectedTool === "line") {
         drawLine(e);
-      } else if (selectedBrush === "rounded") {
+      } else if (selectedTool === "rounded") {
         drawRoundedBrush(e);
-      } else if (selectedBrush === "flat") {
+      } else if (selectedTool === "flat") {
         drawFlatBrush(e);
-      } else if (selectedBrush === "watercolor") {
+      } else if (selectedTool === "watercolor") {
         drawWatercolorBrush(e);
-      } else if (selectedBrush === "blur") {
+      } else if (selectedTool === "blur") {
         drawBlurBrush(e);
       }
     };
@@ -173,17 +172,7 @@ const DrawingShapes = ({
       canvas.removeEventListener("mouseup", stopDrawing);
       canvas.removeEventListener("mouseout", stopDrawing);
     };
-  }, [
-    brushWidth,
-    fillColor,
-    selectedTool,
-    selectedColor,
-    snapshot,
-    canvasRef,
-    isDrawing,
-    prevMouseX,
-    selectedBrush,
-  ]);
+  }, [brushWidth, fillColor, selectedTool, selectedColor, snapshot, canvasRef, isDrawing, prevMouseX, prevMouseY]);
 
   function toggleDropDown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -214,7 +203,7 @@ const DrawingShapes = ({
   const [lower, setLower] = useState(false);
 
   const handleBrushSelect = (brush) => {
-    setSelectedBrush(brush);
+    setSelectedTool(brush);
     setIsDropdownOpen(false); // Close dropdown after selection
   };
 
@@ -222,10 +211,10 @@ const DrawingShapes = ({
     <>
       <div>
         <button
-          className="bg-gray-500 h-10 p-2 rounded-md text-white text-xl"
+          className=" h-10 p-2 rounded-md text-xl shadow-md"
           onClick={() => setLower(!lower)}
         >
-          Other Strokes
+          <GiPencilBrush />
         </button>
         {lower && (
           <div className="absolute bg-slate-300 p-1 h-40 overflow-auto">

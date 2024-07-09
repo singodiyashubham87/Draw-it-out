@@ -19,8 +19,9 @@ body{
   -ms-user-select: none;       
 }
 
+
 #draw{
-  width: 90%;
+  /* width: 90%; */
   /* height: 70vh; */
 }
 
