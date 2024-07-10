@@ -6,6 +6,7 @@ import LinkedInIcon from "../assets/images/linkedin.jpg";
 import TwitterIcon from "../assets/images/X.png";
 import GitHubIcon from "../assets/images/github.png";
 import RateUs from './RateUs'; // Adjust the import path as needed
+import FooterLink from './FooterLink';
 
 const Footer = () => {
   const [showRateUs, setShowRateUs] = useState(false);
@@ -21,40 +22,40 @@ const Footer = () => {
           <div className="footerNav">
             <ul className="flex gap-4">
               <li>
-                <a href="#" className="text-white flex items-center hover:text-gray-600">
-                  <AiFillHome className="h-6 w-6" />
+              <FooterLink label={"Home"}>
+                <AiFillHome className="h-6 w-6" />
+              </FooterLink>
                   <span className="ml-2">Home</span>
-                </a>
               </li>
               <li>
-                <a href="#" className="text-white flex items-center hover:text-gray-600">
-                  <FaNewspaper className="h-6 w-6" />
+              <FooterLink label={"News"}>
+                <FaNewspaper className="h-6 w-6" />
+              </FooterLink>
                   <span className="ml-2">News</span>
-                </a>
               </li>
               <li>
-                <a href="#" className="text-white flex items-center hover:text-gray-600">
-                  <AiOutlineInfoCircle className="h-6 w-6" />
+              <FooterLink label={"About Us"}>
+                <AiOutlineInfoCircle className="h-6 w-6" />
+              </FooterLink>
                   <span className="ml-2">About Us</span>
-                </a>
               </li>
               <li>
-                <a href="#" className="text-white flex items-center hover:text-gray-600">
-                  <AiOutlineMessage className="h-6 w-6" />
+              <FooterLink label={"Contact Us"}>
+               <AiOutlineMessage className="h-6 w-6" />
+              </FooterLink>
                   <span className="ml-2">Contact Us</span>
-                </a>
               </li>
               <li>
-                <a onClick={toggleRateUs} className="text-white flex items-center hover:text-gray-600 cursor-pointer">
-                  <FaStar className="h-6 w-6" />
+              <FooterLink label={"Rate Us"}>
+                 <FaStar className="h-6 w-6" />
+              </FooterLink>
                   <span className="ml-2">Rate Us</span>
-                </a>
               </li>
               <li>
-                <a href="#" className="text-white flex items-center hover:text-gray-600">
-                  <AiOutlineTeam className="h-6 w-6" />
+              <FooterLink label={"Our Team"}>
+                <AiOutlineTeam className="h-6 w-6" />
+              </FooterLink>
                   <span className="ml-2">Our Team</span>
-                </a>
               </li>
             </ul>
           </div>
