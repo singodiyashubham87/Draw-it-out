@@ -10,27 +10,27 @@ const Footer = () => {
         <div className="footerNav">
           <ul className="flex gap-4">
             <li>
-              <a href="#" className="text-white hover:text-gray-600">
+              <a href="#" className="text-white hover:text-cyan-600">
                 Home
               </a>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-gray-600">
+              <a href="#" className="text-white hover:text-cyan-600">
                 News
               </a>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-gray-600">
+              <a href="#" className="text-white hover:text-cyan-600">
                 About
               </a>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-gray-600">
+              <a href="#" className="text-white hover:text-cyan-600">
                 Contact Us
               </a>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-gray-600">
+              <a href="#" className="text-white hover:text-cyan-600">
                 Our Team
               </a>
             </li>
