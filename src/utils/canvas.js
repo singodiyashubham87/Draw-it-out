@@ -90,7 +90,7 @@ export function handleDrawing(canvas, color, lineThickness, bgColor, brushStyle)
     event.preventDefault();
     startDrawing(event);
   });
-    
+
   canvas.addEventListener('touchend', (event) => {
     event.preventDefault();
     stopDrawing();
@@ -220,18 +220,19 @@ export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
 
+
   // Update drawHistory to fit within new height
   drawHistory = histArray.filter((point) => point.y <= newHeight);
-  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
+
 }
 
 export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
-  const MIN_HEIGHT=250;
+  const MIN_HEIGHT = 250;
   // Calculate new height, reducing by 10% of the current height
   let newHeight = canvas.height - canvas.height * 0.1;
-  
+
   // Ensure new height does not go below 1 pixel
   if (newHeight < MIN_HEIGHT) {
     newHeight = MIN_HEIGHT;
@@ -243,13 +244,13 @@ export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
 
   // Resize the canvas
   canvas.height = newHeight;
-
+  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
   // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
 
   // Update drawHistory to fit within new height
   drawHistory = histArray.filter((point) => point.y <= newHeight);
-  handleUpdates(canvas, color, thickness, bgColor, brushStyle);
+
 }
 
 export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum, wnum) {
@@ -257,17 +258,17 @@ export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
   let newHeight, newWidth;
-  
+
   // Set new height
-  if(hnum== 100 && wnum==100){//default case 
-    newWidth = window.innerWidth * 0.8; 
+  if (hnum == 100 && wnum == 100) {//default case 
+    newWidth = window.innerWidth * 0.8;
     newHeight = window.innerHeight * 0.6;
   }
-  else{ 
+  else {
     //adjust wnum hnums of various options to adjust the size
-    newWidth = window.innerWidth * wnum/100;
-    newHeight = window.innerWidth * hnum/100;
-    }
+    newWidth = window.innerWidth * wnum / 100;
+    newHeight = window.innerWidth * hnum / 100;
+  }
 
   // Save the current drawing and clear the canvas
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -275,7 +276,7 @@ export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum
 
   // Resize the canvas
   canvas.height = newHeight;
-  canvas.width= newWidth;
+  canvas.width = newWidth;
 
   // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
@@ -292,6 +293,7 @@ export function handleUpdates(canvas, color, lineThickness, bgColor, brushStyle)
   ctx.strokeStyle = `${color}`;
   canvas.style.backgroundColor = bgColor;
   ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   setBrushStyle(ctx, brushStyle);
   console.log("update called");
 }
