@@ -1,8 +1,7 @@
-import LinkedInIcon from "../assets/images/linkedin.jpg";
-import TwitterIcon from "../assets/images/X.png";
-import GitHubIcon from "../assets/images/github.png";
-import EmailIcon from "../assets/images/GMail.webp";
-
+import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { CiMail } from "react-icons/ci";
 const Footer = () => {
   return (
     <footer className="bg-black">
@@ -39,43 +38,27 @@ const Footer = () => {
         <div className="socialicons flex gap-4">
           <a
             href="https://www.linkedin.com/in/singodiyashubham87/"
-            className="hover:bg-blue-300 p-1 rounded-full"
+            className="rounded-full"
           >
-            <img
-              src={LinkedInIcon}
-              alt="LinkedIn"
-              className="rounded-full w-8 h-8 hover:bg-blue-500"
-            />
+            <FaLinkedinIn className="text-white hover:bg-blue-600 m-1" size={26}/>
           </a>
           <a
             href="https://twitter.com/_master_mickey"
-            className="hover:bg-blue-300 p-1 rounded-full"
+            className="rounded-full"
           >
-            <img
-              src={TwitterIcon}
-              alt="Twitter"
-              className="rounded-full w-8 h-8 hover:bg-blue-500"
-            />
+            <FaXTwitter className="text-white hover:bg-white hover:text-black m-1 " size={26}/>
           </a>
           <a
             href="https://github.com/singodiyashubham87"
-            className="hover:bg-blue-300 p-1 rounded-full"
+            className="rounded-full"
           >
-            <img
-              src={GitHubIcon}
-              alt="GitHub"
-              className="rounded-full w-8 h-8 hover:bg-blue-500"
-            />
+            <FaGithub className="text-white m-1" size={28}/>
           </a>
           <a
             href="mailto:singodiyashubham87@gmail.com"
-            className="hover:bg-blue-300 p-1 rounded-full"
+            className="rounded-full"
           >
-            <img
-              src={EmailIcon}
-              alt="Email"
-              className="rounded-full w-8 h-8 hover:bg-blue-500"
-            />
+            <CiMail className="text-white m-1 hover:bg-white hover:text-red-900" size={26}/>
           </a>
         </div>
       </div>
