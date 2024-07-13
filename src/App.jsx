@@ -5,6 +5,7 @@ import { tourSteps } from "./utils/helpers";
 import BgColorSidePanel from "./components/BgColorSidePanel";
 import Menu from "./components/Menu";
 import { handleUpdates, handleDrawing } from "./utils/canvas";
+import { getCookie, setCookie, eraseCookie } from "./utils/manageCookies.js";
 import { FaBookOpen } from "react-icons/fa";
 import { VscClose } from "react-icons/vsc";
 import { PiPencilSimpleFill } from "react-icons/pi";
@@ -31,6 +32,7 @@ function App() {
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [brushStyle, setBrushStyle] = useState("solid");
   const [selectedTool, setSelectedTool] = useState("brush");
+  const [showTour, setShowTour] = useState(false);
 
   const style = {
     guideline: `p-4 flex text-xs`,
@@ -39,6 +41,7 @@ function App() {
   const showGuidelines = () => {
     setModal(!modal);
   };
+
   const closeModal = () => {
     setModal(false);
   };
@@ -79,6 +82,12 @@ function App() {
         document.body.classList.remove('dark');
       }
     }
+
+    const tourSeen = getCookie('tourSeen');
+    if (!tourSeen) {
+      setShowTour(true);
+      setCookie('tourSeen', 'true', 365);
+    }
   }, []);
 
   const toggleDarkMode = () => {
@@ -110,18 +119,20 @@ function App() {
       </div>
       <div className="bg-[#d3d4d9] dark:bg-black pb-3"></div>
       <div className="bg-[#CBCCCF] flex flex-col min-w-full justify-evenly gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white transform transition duration-500 ease-in-out">
-        <Joyride
-          steps={tourSteps}
-          continuous
-          showSkipButton={true}
-          locale={{
-            back: "Back",
-            close: "Close",
-            last: "Start",
-            next: "Next",
-            skip: "Skip",
-          }}
-        />
+        {showTour && (
+          <Joyride
+            steps={steps}
+            continuous
+            showSkipButton={true}
+            locale={{
+              back: "Back",
+              close: "Close",
+              last: "Start",
+              next: "Next",
+              skip: "Skip",
+            }}
+          />
+        )}
       </div>
       {/* Buy me a coffee element */}
       <div className="bg-[#d3d5d8] flex flex-col min-w-full justify-center gsm:flex-row dark:bg-zinc-800 dark:bg-blend-luminosity dark:text-white">
