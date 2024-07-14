@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { AiOutlineInfoCircle, AiOutlineMessage, AiOutlineTeam } from 'react-icons/ai';
-import { FaNewspaper } from 'react-icons/fa';
+import { FaNewspaper, FaStar } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
-
 
 import LinkedInIcon from '../assets/images/linkedin.jpg';
 import TwitterIcon from '../assets/images/X.png';
 import GitHubIcon from '../assets/images/github.png';
-
-Modal.setAppElement('#root'); 
-
-import LinkedInIcon from "../assets/images/linkedin.jpg";
-import TwitterIcon from "../assets/images/X.png";
-import GitHubIcon from "../assets/images/github.png";
-import RateUs from './RateUs'; // Adjust the import path as needed
 import FooterLink from './FooterLink';
+
+Modal.setAppElement('#root');
 
 const Footer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -32,7 +26,6 @@ const Footer = () => {
   };
 
   return (
-
     <footer className="bg-black relative">
       <div className="flex justify-between items-center py-4 px-8">
         <div className="footerNav">
@@ -52,48 +45,6 @@ const Footer = () => {
                   <item.icon className="h-6 w-6" />
                   <span className="ml-2">{item.label}</span>
                 </a>
-
-    <>
-      <footer className="bg-black">
-        <div className="flex justify-between items-center py-4 px-8">
-          <div className="footerNav">
-            <ul className="flex gap-4">
-              <li>
-              <FooterLink label={"Home"}>
-                <AiFillHome className="h-6 w-6" />
-              </FooterLink>
-                  <span className="ml-2">Home</span>
-              </li>
-              <li>
-              <FooterLink label={"News"}>
-                <FaNewspaper className="h-6 w-6" />
-              </FooterLink>
-                  <span className="ml-2">News</span>
-              </li>
-              <li>
-              <FooterLink label={"About Us"}>
-                <AiOutlineInfoCircle className="h-6 w-6" />
-              </FooterLink>
-                  <span className="ml-2">About Us</span>
-              </li>
-              <li>
-              <FooterLink label={"Contact Us"}>
-               <AiOutlineMessage className="h-6 w-6" />
-              </FooterLink>
-                  <span className="ml-2">Contact Us</span>
-              </li>
-              <li>
-              <FooterLink label={"Rate Us"}>
-                 <FaStar className="h-6 w-6" />
-              </FooterLink>
-                  <span className="ml-2">Rate Us</span>
-              </li>
-              <li>
-              <FooterLink label={"Our Team"}>
-                <AiOutlineTeam className="h-6 w-6" />
-              </FooterLink>
-                  <span className="ml-2">Our Team</span>
-
               </li>
             ))}
           </ul>
