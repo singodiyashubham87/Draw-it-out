@@ -28,7 +28,7 @@ https://draw-it-out.vercel.app/
       <td>GirlScript Summer of Code is a three-month-long Open Source Program conducted every summer by GirlScript Foundation. It is an initiative to bring more beginners to Open-Source Software Development.</td>
     </tr>
       <tr>
-        <td><img src="src/assets/images/Social Summer of COde.jpeg" width="200" height="auto" loading="lazy" alt="GSSoC 24"/></td>
+        <td><img src="src/assets/images/Social Summer of Code.jpeg" width="100" height="70" loading="lazy" alt="SSOC 24"/></td>
       <td>Social Summer of Code 2024</td>
       <td>The program is run by the Social(Formally Script Foundation) aims to connect students with open-source organization and projects to encourage their contribution to the open-source community. </td>
     </tr>
