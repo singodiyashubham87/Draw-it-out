@@ -1,6 +1,56 @@
-<h1 align="center">Draw-it-out: Online Whiteboard App</h1>
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?size=40&width=900&height=80&lines=Welcome-to-Draw-it-out"/>
+  <img src="./src/assets/images/logo.png" width="200px" height="200px"/>
+</div>
 
-<div align="center"><img src="./src/assets/images/logo.png" width="200px" height="200px"/></div>
+<h4 align="center">
+</center>Draw-it-out: Online Whiteboard App</h4>
+
+
+## Deployed App
+
+https://draw-it-out.vercel.app/
+
+## 🏆 Featured in:
+
+<table>
+  <thead>
+    <tr>
+      <th>Event Logo</th>
+      <th>Event Name</th>
+      <th>Event Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td><img src="src/assets/images/Gssoc Label.png" width="200" height="auto" loading="lazy" alt="GSSoC 24"/></td>
+      <td>GirlScript Summer of Code 2024</td>
+      <td>GirlScript Summer of Code is a three-month-long Open Source Program conducted every summer by GirlScript Foundation. It is an initiative to bring more beginners to Open-Source Software Development.</td>
+    </tr>
+  </tbody>
+</table>
+
+# Table of Contents
+
+- [Introduction](#introduction)
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Using Drawing Tools](#using-drawing-tools)
+- [Code of Conduct](#code-of-conduct)
+- [Contributing Guidelines](#contributing-guidelines)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation Instructions](#installation-instructions)
+    - [For Windows](#for-windows)
+    - [For macOS](#for-macos)
+    - [For Linux](#for-linux)
+- [Releases](#releases)
+- [Learn More](#learn-more)
+- [Contributions](#contributions)
+- [Author](#author)
+- [License](#license)
+- [Thanks to all the Contributors](#thanks-to-all-the-contributors)
+- [Message from PA](#message-from-pa)
 
 # Introduction
 
@@ -29,6 +79,39 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
 </table>
 
 
+# Tech Stack
+
+- **ReactJS**
+- **TailwindCSS**
+
+
+# Features
+
+- **Drawing Tools:** Users can select between different drawing tools like pencil and brush thickness.
+- **Color Picker:** Choose from a wide range of colors using the color picker tool.
+- **Shapes:** Users can select from different shapes, like circles, triangles, and rectangles, to use in their drawings.
+- **Brush Thickness:** Adjust the thickness of the brush stroke using a range slider.
+- **Snapshot:** Capture and download snapshots of the whiteboard canvas.
+- **Clear Canvas:** Clear the canvas with a single click.
+- **Responsive Design:** The application is responsive and works seamlessly across different screen sizes.
+- **Resizable Board:** Adjust the height of the board using Increase and Decrease buttons.
+
+# Using Drawing Tools
+
+- **Pencil:** The pencil is selected by default in the app. Simply, move onto the canvas and start drawing.
+- **Brush Thickness:** This feature will allow you to select the thickness of the brush tool.
+- **Color Picker:** This feature will help to select a color of your choice. The user gets the option to select the color depending on three color models, namely, 'RGB', 'HSL' and 'HEX'. Optionally, the user can select any color on the screen as well, with the help of a color picker.
+- **Snapshot:** The snapshot option allows you to store your creativity in an image form(PNG).
+- **Canvas Height**: This feature will allow you to select the height of the canvas.
+
+# Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+# Contributing Guidelines
+
+We believe in the power of collaboration. If you have ideas to improve College.ai, feel free to contribute! Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started.
+
 # Getting Started
 
 ### Comprehensive Guide for Installing and Setting Up Draw-it-out
@@ -37,6 +120,40 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
 - **Node.js**: Ensure that Node.js is installed on your machine. You can download it from the [official Node.js website](https://nodejs.org/).
 
 ### Installation Instructions
+
+#### With Docker
+
+1. **Clone the Repository**
+   - Open Command Prompt.
+   - Navigate to the directory where you want to clone the repository:
+     ```sh
+     cd path\to\your\directory
+     ```
+   - Clone the repository:
+     ```sh
+     git clone https://github.com/singodiyashubham87/Draw-it-out.git
+     ```
+
+2. **Navigate to the project directory**
+   - Navigate into the project directory:
+     ```sh
+     cd Draw-it-out
+     ```
+
+3. **Build docker Image (only needed during first installation)**
+   - Build the Docker image:
+     ```sh
+     docker build -t draw-it-out:latest .        
+     ```
+
+4. **Run docker image**
+   - Run the Docker image:
+     ```sh
+     docker run -d -p 3000:3000 draw-it-out:latest
+     ```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
 
 #### For Windows
 
@@ -155,35 +272,6 @@ Draw-it-out is an online whiteboard tool built using ReactJS and TailwindCSS. It
      npm run dev
      ```
 
-
-# Features
-
-- **Drawing Tools:** Users can select between different drawing tools like pencil and brush thickness.
-- **Color Picker:** Choose from a wide range of colors using the color picker tool.
-- **Shapes:** Users can select from different shapes, like circles, triangles, and rectangles, to use in their drawings.
-- **Brush Thickness:** Adjust the thickness of the brush stroke using a range slider.
-- **Snapshot:** Capture and download snapshots of the whiteboard canvas.
-- **Clear Canvas:** Clear the canvas with a single click.
-- **Responsive Design:** The application is responsive and works seamlessly across different screen sizes.
-- **Resizable Board:** Adjust the height of the board using Increase and Decrease buttons.
-
-# Using Drawing Tools
-
-- **Pencil:** The pencil is selected by default in the app. Simply, move onto the canvas and start drawing.
-- **Brush Thickness:** This feature will allow you to select the thickness of the brush tool.
-- **Color Picker:** This feature will help to select a color of your choice. The user gets the option to select the color depending on three color models, namely, 'RGB', 'HSL' and 'HEX'. Optionally, the user can select any color on the screen as well, with the help of a color picker.
-- **Snapshot:** The snapshot option allows you to store your creativity in an image form(PNG).
-- **Canvas Height**: This feature will allow you to select the height of the canvas.
-
-# Tech Stack
-
-- **ReactJS**
-- **TailwindCSS**
-
-# Deployed App
-
-https://draw-it-out.vercel.app/
-
 # Releases
 
 - **Release 1.0** : March 15, 2024 @16:32 [First phase of application completed.]
@@ -192,6 +280,9 @@ https://draw-it-out.vercel.app/
 
 - **Release 0.0** : March 14, 2024 @22:31 [Zeroth phase of application completed.]
   - Features: Drawing functionality with custom thickness of the brush and custom color.
+
+# Learn More
+To learn more about the project you must refer to [Learn](learn.md)
 
 <!--- Acknowledgements: We would like to thank all the contributors who have helped in the development of ScanVerse. I would greatly appreciate your support and contributions -->
 
