@@ -64,5 +64,6 @@ body{
 
 * {
   @apply select-none;
+  transition: all 0.2s linear;
 }
 
