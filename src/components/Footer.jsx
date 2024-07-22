@@ -15,10 +15,10 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-black relative">
-      <div className="flex justify-between items-center py-4 px-8">
-        <div className="footerNav">
-          <ul className="flex gap-4 flex-wrap">
+    <footer className="relative bg-black gap-52 md:gap-0">
+      <div className="flex flex-col items-center gap-20 px-8 py-4 justify-evenly md:justify-between md:flex-row ">
+        <div className="footerNav ">
+          <ul className="flex flex-wrap gap-4 justify-evenly md:justify-between">
             {[
               { label: "News", icon: FaNewspaper, content: "News Content" },
               {
@@ -40,67 +40,67 @@ const Footer = () => {
               <li key={index}>
                 <a
                   href="#"
-                  className="text-white flex items-center hover:text-gray-600"
+                  className="flex items-center text-white hover:text-gray-600"
                 >
-                  <item.icon className="h-6 w-6" />
+                  <item.icon className="w-6 h-6" />
                   <span className="ml-2">{item.label}</span>
                 </a>
               </li>
             ))}
           </ul>
         </div>
-        <div className="socialicons flex gap-4 flex-wrap icons">
+        <div className="flex flex-wrap gap-4 socialicons icons">
           <a
             href="https://www.linkedin.com/in/singodiyashubham87/"
             className="group"
           >
-            <div className="icon transform group-hover:scale-125">
+            <div className="transform icon group-hover:scale-125">
               <FaLinkedin
-                className="text-white h-8 w-8 group-hover:text-linkedin"
+                className="w-8 h-8 text-white group-hover:text-linkedin"
                 style={{ transition: "color 0.3s" }}
               />
             </div>
           </a>
           <a href="https://twitter.com/_master_mickey" className="group">
-            <div className="icon transform group-hover:scale-125">
+            <div className="transform icon group-hover:scale-125">
               <FaTwitter
-                className="text-white h-8 w-8 group-hover:text-twitter"
+                className="w-8 h-8 text-white group-hover:text-twitter"
                 style={{ transition: "color 0.3s" }}
               />
             </div>
           </a>
           <a href="https://www.instagram.com" className="group">
-            <div className="icon transform group-hover:scale-125 relative">
+            <div className="relative transform icon group-hover:scale-125">
               <FaInstagram
-                className="text-white h-8 w-8 relative z-10 group-hover:text-instagram"
+                className="relative z-10 w-8 h-8 text-white group-hover:text-instagram"
                 style={{ transition: "color 0.3s" }}
               />
             </div>
           </a>
           <a href="https://www.youtube.com" className="group">
-            <div className="icon transform group-hover:scale-125">
+            <div className="transform icon group-hover:scale-125">
               <FaYoutube
-                className="text-white h-8 w-8 group-hover:text-youtube"
+                className="w-8 h-8 text-white group-hover:text-youtube"
                 style={{ transition: "color 0.3s" }}
               />
             </div>
           </a>
           <a href="https://github.com/singodiyashubham87" className="group">
-            <div className="icon transform group-hover:scale-125">
+            <div className="transform icon group-hover:scale-125">
               <FaGithub
-                className="text-white h-8 w-8 group-hover:text-github"
+                className="w-8 h-8 text-white group-hover:text-github"
                 style={{ transition: "color 0.3s" }}
               />
             </div>
           </a>
         </div>
       </div>
-      <div className="text-center mt-4">
+      <div className="mt-4 text-center">
         <p className="text-white">
           Made with 💝 by{" "}
           <a
             href="https://shubham-s-socials.vercel.app/"
-            className="decoration-none font-semibold hover:underline"
+            className="font-semibold decoration-none hover:underline"
           >
             Master Mickey
           </a>{" "}
