@@ -22,7 +22,7 @@ import Joyride from "react-joyride";
 import { SiBuymeacoffee } from "react-icons/si";
 import Footer from "./components/Footer";
 import useGoogleDrive from './useGoogleDrive'; // Import the custom hook 
-
+import logoText from "./assets/images/logoText.png";
 
 function App() {
   const canvasRef = useRef(null);
@@ -119,14 +119,25 @@ function App() {
   return (
     <>
       <div className="relative">
+        <img
+          src={logoText}
+          alt=""
+          className="absolute top-4 left-6 p-3 bg-gray-800"
+          style={{ width: "100px", height: "100px" }}
+        />
         <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
           <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
             Draw it Out!
           </h1>
-          <p className="text-gray-500 text-xs">All you need is a canvas to craft your ideas.</p>
+          <p className="text-gray-500 text-xs">
+            All you need is a canvas to craft your ideas.
+          </p>
         </div>
 
-        <button id="guideLines" className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300">
+        <button
+          id="guideLines"
+          className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300"
+        >
           <FaBookOpen
             size={28}
             color="white"
@@ -179,9 +190,9 @@ function App() {
               <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
                 {/* Eye button */}
                 <div
-
-                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
-                    }`}
+                  className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${
+                    !showMenuAndBgColor && "mt-10"
+                  }`}
                   onClick={() => {
                     setShowMenuAndBgColor((state) => !state);
                   }}
@@ -190,10 +201,17 @@ function App() {
                 </div>
 
                 {/* Theme Changer */}
-                <div className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"
-                  }`}  onClick={toggleDarkMode}
+                <div
+                  className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${
+                    !showMenuAndBgColor && "mt-10"
+                  }`}
+                  onClick={toggleDarkMode}
                 >
-                  {darkMode ? <FaSun className="text-black" /> : <FaMoon className="text-white" />}
+                  {darkMode ? (
+                    <FaSun className="text-black" />
+                  ) : (
+                    <FaMoon className="text-white" />
+                  )}
                 </div>
 
                 {/* Save Drawing Button */}
@@ -203,10 +221,10 @@ function App() {
                       !showMenuAndBgColor && "mt-10"
                     }`}
                     onClick={saveDrawing}
-                    aria-label='Upload Drawing to Google Drive'
-                    title='Upload'
+                    aria-label="Upload Drawing to Google Drive"
+                    title="Upload"
                   >
-                  <FaDownload size={24} />
+                    <FaDownload size={24} />
                   </button>
                 </div>
 
@@ -215,7 +233,10 @@ function App() {
                   href={BUY_ME_COFFEE_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=  {`flex justify-end sm:ml-0 ${!showMenuAndBgColor && "mt-10" }`} >
+                  className={`flex justify-end sm:ml-0 ${
+                    !showMenuAndBgColor && "mt-10"
+                  }`}
+                >
                   <button className="flex mt-2 mb-2 items-center ml-1 mr-1 bg-transparent border border-black text-black focus:outline-none bg-[#d4d5d7] hover:bg-[#c6c9ce] rounded-xl p-2 dark:text-white">
                     <SiBuymeacoffee className="text-xl" />
                   </button>
@@ -225,20 +246,22 @@ function App() {
 
             {/* ----- Canvas ------ */}
 
-            
-              <div className="flex justify-center items-center w-full h-full flex-grow">
-                <canvas
-                  id="draw"
-                  className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
-                    isDrawing ? "cursor-pointer" : "cursor-default pointer-events-none"
-                  }`}
-                  ref={canvasRef}
-                ></canvas>
-              </div>
-            {showMenuAndBgColor && <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />}
+            <div className="flex justify-center items-center w-full h-full flex-grow">
+              <canvas
+                id="draw"
+                className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${
+                  isDrawing
+                    ? "cursor-pointer"
+                    : "cursor-default pointer-events-none"
+                }`}
+                ref={canvasRef}
+              ></canvas>
+            </div>
+            {showMenuAndBgColor && (
+              <BgColorSidePanel canvasRef={canvasRef} setBgColor={setBgColor} />
+            )}
 
             <div
-
               className="bg-[#CBCCCF] p-[1rem] text-[2rem] rounded-[50%] shadow-black shadow-vsm dark:shadow-black dark:shadow-lg hover:bg-gray-400 cursor-pointer transform transition duration-300 ease-in-out mt-10 dark:text-[#111111]  hover:md:scale-110"
               id="reset"
               onClick={() => {
@@ -284,19 +307,30 @@ function App() {
               </li>
               <li className={style.guideline}>
                 <FaFeatherPointed />
-                <span className="ml-2"> Use a light touch for delicate lines.</span>
+                <span className="ml-2">
+                  {" "}
+                  Use a light touch for delicate lines.
+                </span>
               </li>
               <li className={style.guideline}>
                 <RiScreenshot2Fill />
-                <span className="ml-2"> Capture your screen for reference.</span>
+                <span className="ml-2">
+                  {" "}
+                  Capture your screen for reference.
+                </span>
               </li>
               <li className={style.guideline}>
                 <FaFilePdf />{" "}
-                <span className="ml-2">Export your work as a PDF for easy sharing.</span>
+                <span className="ml-2">
+                  Export your work as a PDF for easy sharing.
+                </span>
               </li>
               <li className={style.guideline}>
                 <TbFileTypeSvg />
-                <span className="ml-2"> Save your artwork as an SVG for scalability.</span>
+                <span className="ml-2">
+                  {" "}
+                  Save your artwork as an SVG for scalability.
+                </span>
               </li>
               <li className={style.guideline}>
                 <PiPlus />
@@ -304,11 +338,16 @@ function App() {
               </li>
               <li className={style.guideline}>
                 <PiMinus />
-                <span className="ml-2"> Zoom out for an overview of your drawing.</span>
+                <span className="ml-2">
+                  {" "}
+                  Zoom out for an overview of your drawing.
+                </span>
               </li>
               <li className={style.guideline}>
                 <BiArea />
-                <span className="ml-2">Change your canvas size to preset values.</span>
+                <span className="ml-2">
+                  Change your canvas size to preset values.
+                </span>
               </li>
               <li className={style.guideline}>
                 <FaRegEye />
