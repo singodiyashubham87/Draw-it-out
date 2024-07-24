@@ -127,10 +127,12 @@ const Menu = ({
           {fillColor ? (
             <BiSolidPolygon
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
+              title="Solid Polygon"
             />
           ) : (
             <BiPolygon
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
+              title="Polygon"
             />
           )}
         </button>
@@ -140,6 +142,7 @@ const Menu = ({
             <FaFeatherPointed
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF] transform transition duration-300 ease-in-out ${isVisible ? 'block' : 'hidden'} ${pencilWidth ? "bg-gray-200" : ""}`}
               onClick={() => { setPencilWidth(!pencilWidth); setSelectedTool("brush"); }}
+              title="Feather Point"
             />
           </button>
           {pencilWidth && (
@@ -147,6 +150,7 @@ const Menu = ({
               type="range"
               name="thickness"
               id="thickness"
+              title="Thickness"
               value={thickness || 10}
               min={1}
               max={100}
@@ -174,6 +178,7 @@ const Menu = ({
           <button
             className="text-gray-700 bg-[#B7BABF] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center transform transition duration-300 ease-in-out"
             type="button"
+            title="Upload"
             onClick={toggleSaveAs}
           >
              {/* Save As */}
@@ -244,14 +249,14 @@ const Menu = ({
           <PiPlus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
             onClick={() => increaseHeight(canvasRef.current, setBgColor, thickness, color, brushStyle)}
-            title="IncreaseHeight"
+            title="Increase Height"
           />
         </button>
         <button>
           <PiMinus
             className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#c5c5c9] hover:bg-[#B7BABF]  transform transition duration-300 ease-in-out `}
             onClick={() => decreaseHeight(canvasRef.current, bgColor, thickness, color, brushStyle)}
-            title="DecreaseHeight"
+            title="Decrease Height"
           />
         </button>
       </div>
