@@ -1,12 +1,28 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const CursorTrail = () => {
   const trailRef = useRef([]);
   const trailLength = 20;
   const animationFrameRef = useRef();
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768); // Adjust the width as per your requirement
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
+      if (isMobileView) return;
+
       const { clientX, clientY } = event;
 
       for (let i = trailLength - 1; i > 0; i--) {
@@ -23,10 +39,12 @@ const CursorTrail = () => {
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isMobileView]);
 
   useEffect(() => {
     const updateTrail = () => {
+      if (isMobileView) return;
+
       for (let i = 1; i < trailLength; i++) {
         const currentDot = trailRef.current[i];
         const previousDot = trailRef.current[i - 1];
@@ -52,7 +70,11 @@ const CursorTrail = () => {
     animationFrameRef.current = requestAnimationFrame(updateTrail);
 
     return () => cancelAnimationFrame(animationFrameRef.current);
-  }, []);
+  }, [isMobileView]);
+
+  if (isMobileView) {
+    return null; // Do not render anything on mobile view
+  }
 
   return (
     <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-50">

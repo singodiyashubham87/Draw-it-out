@@ -1,71 +1,93 @@
-import { FaXTwitter } from "react-icons/fa6";
-import { FaLinkedinIn } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { CiMail } from "react-icons/ci";
+import React from "react";
+import { FaLinkedin, FaTwitter, FaGithub, FaNewspaper } from "react-icons/fa";
+import {
+  AiOutlineInfoCircle,
+  AiOutlineMessage,
+  AiOutlineTeam,
+} from "react-icons/ai";
+import { FaInstagram, FaYoutube } from "react-icons/fa";
+
 const Footer = () => {
   return (
-    <footer className="bg-black">
-      <div className="flex justify-between items-center py-4 px-8">
+    <footer className="relative bg-black">
+      <div className="flex flex-col items-center gap-20 px-8 py-4 justify-evenly md:justify-between md:flex-row">
         <div className="footerNav">
-          <ul className="flex gap-4">
-            <li>
-              <a href="#" className="text-white hover:text-cyan-600">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white hover:text-cyan-600">
-                News
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white hover:text-cyan-600">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white hover:text-cyan-600">
-                Contact Us
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white hover:text-cyan-600">
-                Our Team
-              </a>
-            </li>
+          <ul className="flex flex-wrap gap-4 justify-evenly md:justify-between">
+            {[
+              { label: "Home", href: "#" },
+              { label: "News", href: "#", icon: FaNewspaper },
+              { label: "About Us", href: "#", icon: AiOutlineInfoCircle },
+              { label: "Contact Us", href: "#", icon: AiOutlineMessage },
+              { label: "Our Team", href: "#", icon: AiOutlineTeam },
+            ].map((item, index) => (
+              <li key={index}>
+                <a
+                  href={item.href}
+                  className="flex items-center text-white hover:text-gray-600"
+                >
+                  {item.icon && <item.icon className="w-6 h-6" />}
+                  <span className="ml-2">{item.label}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
-        <div className="socialicons flex gap-4">
+        <div className="flex flex-wrap gap-4 socialicons icons">
           <a
             href="https://www.linkedin.com/in/singodiyashubham87/"
-            className="rounded-full"
+            className="group"
           >
-            <FaLinkedinIn className="text-white hover:bg-blue-600 m-1" size={26}/>
+            <div className="transform icon group-hover:scale-125">
+              <FaLinkedin
+                className="w-8 h-8 text-white group-hover:text-linkedin"
+                style={{ transition: "color 0.3s" }}
+              />
+            </div>
           </a>
-          <a
-            href="https://twitter.com/_master_mickey"
-            className="rounded-full"
-          >
-            <FaXTwitter className="text-white hover:bg-white hover:text-black m-1 " size={26}/>
+          <a href="https://twitter.com/_master_mickey" className="group">
+            <div className="transform icon group-hover:scale-125">
+              <FaTwitter
+                className="w-8 h-8 text-white group-hover:text-twitter"
+                style={{ transition: "color 0.3s" }}
+              />
+            </div>
           </a>
-          <a
-            href="https://github.com/singodiyashubham87"
-            className="rounded-full"
-          >
-            <FaGithub className="text-white m-1" size={28}/>
+          <a href="https://www.instagram.com" className="group">
+            <div className="relative transform icon group-hover:scale-125">
+              <FaInstagram
+                className="relative z-10 w-8 h-8 text-white group-hover:text-instagram"
+                style={{ transition: "color 0.3s" }}
+              />
+            </div>
           </a>
-          <a
-            href="mailto:singodiyashubham87@gmail.com"
-            className="rounded-full"
-          >
-            <CiMail className="text-white m-1 hover:bg-white hover:text-red-900" size={26}/>
+          <a href="https://www.youtube.com" className="group">
+            <div className="transform icon group-hover:scale-125">
+              <FaYoutube
+                className="w-8 h-8 text-white group-hover:text-youtube"
+                style={{ transition: "color 0.3s" }}
+              />
+            </div>
+          </a>
+          <a href="https://github.com/singodiyashubham87" className="group">
+            <div className="transform icon group-hover:scale-125">
+              <FaGithub
+                className="w-8 h-8 text-white group-hover:text-github"
+                style={{ transition: "color 0.3s" }}
+              />
+            </div>
           </a>
         </div>
       </div>
-      <div className="text-center mt-4">
+      <div className="mt-4 text-center">
         <p className="text-white">
-          Copyright &copy;2024; Designed by{" "}
-          <span className="font-bold">Shubham Singodiya</span>
+          Made with 💝 by{" "}
+          <a
+            href="https://shubham-s-socials.vercel.app/"
+            className="font-semibold decoration-none hover:underline"
+          >
+            Master Mickey
+          </a>{" "}
+          &copy;{new Date().getFullYear()}
         </p>
       </div>
     </footer>
