@@ -3,64 +3,66 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
+:root {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body{
+body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  user-select: none;           
-  -webkit-user-select: none;   
-  -moz-user-select: none;      
-  -ms-user-select: none;       
 }
 
-
-#draw{
-  /* width: 90%; */
+#draw {
+  width: 90%;
   /* height: 70vh; */
 }
 
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #1b1b1b;
+/* Add styles for tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
 }
 
-::-webkit-scrollbar
-{
-	width: 9px;
-	background-color: #1b1b1b;
+/* Hide tooltip text by default */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  /* Adjust the width as needed */
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  /* Position above the element */
+  left: 50%;
+  margin-left: -60px;
+  /* Center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #b7babf;
+/* Show the tooltip text when hovering */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 
+/* Additional styling for tooltip boxes */
+.tooltiptext {
+  font-size: 0.8rem;
+  padding: 5px;
+  white-space: nowrap;
+}
 
 @media (max-width:570px) {
-  body #draw{
-    width: 90%;
-    /* height: 56vh; */
+  body #draw {
+    width: 100%;
+    height: 56vh;
   }
-}
-/* Background of the scrollbar track */
-::-webkit-scrollbar-track {
-  @apply bg-gray-200;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-black hover:bg-black;
-}
-
-* {
-  @apply select-none;
 }
