@@ -4,6 +4,7 @@ import circleImg from "../assets/images/circle.svg";
 import triangleImg from "../assets/images/triangle.svg";
 import lineImg from "../assets/images/line.svg";
 import { GiPencilBrush } from "react-icons/gi";
+
 const DrawingShapes = ({
   brushWidth,
   selectedColor,
@@ -15,22 +16,22 @@ const DrawingShapes = ({
   const [isDrawing, setIsDrawing] = useState(false);
   const [prevMouseX, setPrevMouseX] = useState(0);
   const [prevMouseY, setPrevMouseY] = useState(0);
-
   const [snapshot, setSnapshot] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [currentToolName, setCurrentToolName] = useState();
 
   const shapeDropRef = useRef(null);
 
-  const handleoutsideClick = (event) => {
+  const handleOutsideClick = (event) => {
     if (shapeDropRef.current && !shapeDropRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleoutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleoutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [isDropdownOpen]);
 
@@ -56,7 +57,8 @@ const DrawingShapes = ({
       ctx.putImageData(snapshot, 0, 0);
       ctx.beginPath();
       const radius = Math.sqrt(
-        Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2)
+        Math.pow(prevMouseX - e.offsetX, 2) +
+          Math.pow(prevMouseY - e.offsetY, 2)
       );
       ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
       fillColor ? ctx.fill() : ctx.stroke();
@@ -95,7 +97,15 @@ const DrawingShapes = ({
       ctx.translate(prevMouseX, prevMouseY);
       ctx.rotate(angle);
       ctx.beginPath();
-      ctx.rect(0, -brushWidth / 2, Math.sqrt(Math.pow(e.offsetX - prevMouseX, 2) + Math.pow(e.offsetY - prevMouseY, 2)), brushWidth);
+      ctx.rect(
+        0,
+        -brushWidth / 2,
+        Math.sqrt(
+          Math.pow(e.offsetX - prevMouseX, 2) +
+            Math.pow(e.offsetY - prevMouseY, 2)
+        ),
+        brushWidth
+      );
       ctx.fillStyle = selectedColor;
       ctx.fill();
       ctx.restore();
@@ -171,7 +181,17 @@ const DrawingShapes = ({
       canvas.removeEventListener("mouseup", stopDrawing);
       canvas.removeEventListener("mouseout", stopDrawing);
     };
-  }, [brushWidth, fillColor, selectedTool, selectedColor, snapshot, canvasRef, isDrawing, prevMouseX, prevMouseY]);
+  }, [
+    brushWidth,
+    fillColor,
+    selectedTool,
+    selectedColor,
+    snapshot,
+    canvasRef,
+    isDrawing,
+    prevMouseX,
+    prevMouseY,
+  ]);
 
   function toggleDropDown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -201,49 +221,55 @@ const DrawingShapes = ({
 
   const [lower, setLower] = useState(false);
 
-  const handleBrushSelect = (brush) => {
+  const handleBrushSelect = (brush, brushName) => {
     setSelectedTool(brush);
+    setCurrentToolName(brushName);
     setIsDropdownOpen(false); // Close dropdown after selection
   };
 
   return (
     <>
-      <div>
+      <div className="tooltip">
         <button
-          className=" h-10 p-2 rounded-md text-xl shadow-md"
+          className="h-10 p-2 rounded-md text-xl shadow-md"
           onClick={() => setLower(!lower)}
         >
           <GiPencilBrush />
         </button>
-        {lower && (
-          <div className="absolute bg-slate-300 p-1 h-40 overflow-auto">
-            <div
-              onClick={() => handleBrushSelect("rounded")}
-              className="hover:bg-gray-400 p-2 cursor-pointer"
-            >
-              <h1 className="mb-2">Rounded Brush</h1>
-            </div>
-            <div
-              onClick={() => handleBrushSelect("flat")}
-              className="hover:bg-gray-400 p-2 cursor-pointer"
-            >
-              <h1 className="mb-2">Flat Brush</h1>
-            </div>
-            <div
-              onClick={() => handleBrushSelect("watercolor")}
-              className="hover:bg-gray-400 p-2 cursor-pointer"
-            >
-              <h1 className="mb-2">Watercolor Brush</h1>
-            </div>
-            <div
-              onClick={() => handleBrushSelect("blur")}
-              className="hover:bg-gray-400 p-2 cursor-pointer"
-            >
-              <h1 className="mb-2">Blur Brush</h1>
-            </div>
-          </div>
-        )}
+        <span className="tooltiptext">Brush</span>
       </div>
+      {lower && (
+        <div className="absolute bg-slate-300 p-1 h-40 overflow-auto">
+          <div
+            onClick={() => handleBrushSelect("rounded", "Rounded Brush")}
+            className="hover:bg-gray-400 p-2 cursor-pointer relative group tooltip"
+          >
+            <h1 className="mb-2">Rounded Brush</h1>
+            <span className="tooltiptext">Rounded Brush</span>
+          </div>
+          <div
+            onClick={() => handleBrushSelect("flat", "Flat Brush")}
+            className="hover:bg-gray-400 p-2 cursor-pointer relative group tooltip"
+          >
+            <h1 className="mb-2">Flat Brush</h1>
+            <span className="tooltiptext">Flat Brush</span>
+          </div>
+          <div
+            onClick={() => handleBrushSelect("watercolor", "Watercolor Brush")}
+            className="hover:bg-gray-400 p-2 cursor-pointer relative group tooltip"
+          >
+            <h1 className="mb-2">Watercolor Brush</h1>
+            <span className="tooltiptext">Watercolor Brush</span>
+          </div>
+          <div
+            onClick={() => handleBrushSelect("blur", "Blur Brush")}
+            className="hover:bg-gray-400 p-2 cursor-pointer relative group tooltip"
+          >
+            <h1 className="mb-2">Blur Brush</h1>
+            <span className="tooltiptext">Blur Brush</span>
+          </div>
+        </div>
+      )}
 
       <div
         className="drawing-container flex-shrink-0"
@@ -251,49 +277,52 @@ const DrawingShapes = ({
         ref={shapeDropRef}
       >
         <div className="relative controls">
+          <div className="text-center mb-2 p-2 bg-blue-200 rounded text-blue-800">
+            {currentToolName}
+          </div>
           <ul className="options flex relative w-[50px]">
             <div className="absolute md:top-[-20px] top-[-16px] flex flex-col text-[2rem] md:text-[3rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] transform transition duration-300 ease-in-out">
               {isDropdownOpen ? (
                 <>
                   <li
-                    className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                    className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem] relative tooltip"
                     id="rectangle"
                     onClick={() => {
-                      setSelectedTool("rectangle");
-                      setIsDropdownOpen(false);
+                      handleBrushSelect("rectangle", "Rectangle");
                     }}
                   >
                     <img src={rectImg} alt="Rectangle" />
+                    <span className="tooltiptext">Rectangle</span>
                   </li>
                   <li
-                    className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                    className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem] relative tooltip"
                     id="circle"
                     onClick={() => {
-                      setSelectedTool("circle");
-                      setIsDropdownOpen(false);
+                      handleBrushSelect("circle", "Circle");
                     }}
                   >
                     <img src={circleImg} alt="Circle" />
+                    <span className="tooltiptext">Circle</span>
                   </li>
                   <li
-                    className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem]"
+                    className="hover:bg-[#B7BABF] p-[0.5rem] md:p-[0.8rem] relative tooltip"
                     id="triangle"
                     onClick={() => {
-                      setSelectedTool("triangle");
-                      setIsDropdownOpen(false);
+                      handleBrushSelect("triangle", "Triangle");
                     }}
                   >
                     <img src={triangleImg} alt="Triangle" />
+                    <span className="tooltiptext">Triangle</span>
                   </li>
                   <li
-                    className="hover:bg-[#B7BABF] px-[0.5rem] py-[0.5rem] md:py-[1rem] md:px-[0.8rem]"
+                    className="hover:bg-[#B7BABF] px-[0.5rem] py-[0.5rem] md:py-[1rem] md:px-[0.8rem] relative tooltip"
                     id="line"
                     onClick={() => {
-                      setSelectedTool("line");
-                      setIsDropdownOpen(false);
+                      handleBrushSelect("line", "Line");
                     }}
                   >
                     <img src={lineImg} alt="Line" />
+                    <span className="tooltiptext">Line</span>
                   </li>
                 </>
               ) : (
