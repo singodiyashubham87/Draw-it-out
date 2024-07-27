@@ -30,16 +30,18 @@ const Footer = () => {
                 label: "Contact Us",
                 icon: AiOutlineMessage,
                 content: "Contact Us Content",
+                link:'/contact'
               },
               {
                 label: "Our Team",
                 icon: AiOutlineTeam,
                 content: "Our Team Content",
+                link:'/team'
               },
             ].map((item, index) => (
               <li key={index}>
                 <a
-                  href="#"
+                  href={item.link}
                   className="flex items-center text-white hover:text-gray-600"
                 >
                   <item.icon className="w-6 h-6" />
