@@ -1,0 +1,3 @@
+[submodule "main-repo"]
+	path = main-repo
+	url = https://github.com/singodiyashubham87/Draw-it-out.git
