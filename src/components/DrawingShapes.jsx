@@ -210,7 +210,8 @@ const DrawingShapes = ({
     <>
       <div>
         <button
-          className=" h-10 p-2 rounded-md text-xl shadow-md"
+          className=" h-10 p-2 rounded-md text-xl shadow-md hover:bg-gray-400"
+          style={{ backgroundColor: '#D1D5DB', color: '#000' }}
           onClick={() => setLower(!lower)}
         >
           <GiPencilBrush />
