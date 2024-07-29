@@ -1,11 +1,17 @@
 import React from "react";
-import { FaLinkedin, FaTwitter, FaGithub, FaNewspaper } from "react-icons/fa";
+import {
+  FaLinkedin,
+  FaTwitter,
+  FaGithub,
+  FaNewspaper,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa";
 import {
   AiOutlineInfoCircle,
   AiOutlineMessage,
   AiOutlineTeam,
 } from "react-icons/ai";
-import { FaInstagram, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -17,8 +23,8 @@ const Footer = () => {
               { label: "Home", href: "#" },
               { label: "News", href: "#", icon: FaNewspaper },
               { label: "About Us", href: "#", icon: AiOutlineInfoCircle },
-              { label: "Contact Us", href: "#", icon: AiOutlineMessage },
-              { label: "Our Team", href: "#", icon: AiOutlineTeam },
+              { label: "Contact Us", href: "/contact", icon: AiOutlineMessage },
+              { label: "Our Team", href: "/team", icon: AiOutlineTeam },
             ].map((item, index) => (
               <li key={index}>
                 <a
