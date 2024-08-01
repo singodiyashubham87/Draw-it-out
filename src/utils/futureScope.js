@@ -85,7 +85,7 @@
 //             type="color"
 //             name="color"
 //             id="color"
-//             title="Color Picker"
+//             title="Color "
 //             onChange={(e) => setColor(e.target.value)}
 //             className={`bg-[#CBCCCF] p-[0.5rem] shadow-vsm rounded-[0.5rem] cursor-pointer outline-none hover:bg-[#B7BABF] flex-[0.5] w-full h-full z-[5] absolute top-0 left-0`}
 //           />

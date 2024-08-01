@@ -198,10 +198,12 @@ const Menu = ({
         >
           {fillColor ? (
             <BiSolidPolygon
+            title="vacate-color"
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
             />
           ) : (
             <BiPolygon
+             title="fill-color"
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
             />
           )}
@@ -210,8 +212,9 @@ const Menu = ({
         <div className="flex flex-col relative">
           <button className="relative">
             <FaFeatherPointed
+            title="thickness"
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm mx-auto rounded-[0.5rem] text-black bg-[#CBCCCF] cursor-pointer hover:bg-[#B7BABF] transform transition duration-300 ease-in-out ${isVisible ? "block" : "hidden"
-                } ${pencilWidth ? "bg-gray-200" : ""}`}
+                } ${pencilWidth ? "bg-gray-300" : ""}`}
               onClick={() => {
                 setPencilWidth(!pencilWidth);
                 setSelectedTool("brush");
@@ -251,16 +254,19 @@ const Menu = ({
           <button
             className="text-gray-700 bg-[#B7BABF] focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center transform transition duration-300 ease-in-out"
             type="button"
+            title="Save as "
             onClick={toggleSaveAs}
           >
             {/* Save As */}
             <IoCloudDownloadOutline />
             <svg
+            
               className={`w-2.5 h-2.5 ms-3 ${isOpen ? "rotate-180" : ""}`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 10 6"
+              title="Save-file"
             >
               <path
                 stroke="currentColor"
@@ -279,14 +285,15 @@ const Menu = ({
             <ul
               className="text-sm text-gray-700 flex space-y-5 md:space-x-5 p-5 justify-center items-center flex flex-col md:flex-row"
               aria-labelledby="dropdownHoverButton"
+              
             >
               <li>
                 <button
                   className={`text-[1rem] md:text-[1rem] p-[0.5rem] md:p-[0.8rem] shadow-mdm rounded-[0.5rem] md:mt-4 cursor-pointer hover:bg-[#B7BABF]`}
                   onClick={() => convertToPng(canvasRef.current)}
-                  title="toPNG"
+                  title="ToPNG"
                 >
-                  <p>PNG</p>
+                  <p className="font-bold">PNG</p>
                 </button>
               </li>
 
@@ -296,7 +303,7 @@ const Menu = ({
                   onClick={() => convertToJPG(canvasRef.current)}
                   title="ToJPG"
                 >
-                  <p>JPG</p>
+                  <p className="font-bold">JPG</p>
                 </button>
               </li>
               <li>

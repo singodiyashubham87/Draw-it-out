@@ -172,17 +172,19 @@ function Home() {
                                     className={`p-[1rem] text-[1.5rem] scale-[0.7] rounded-[50%] shadow-md hover:bg-gray-1000 transform transition duration-300 ease-in-out hover:md:scale-[0.8] cursor-pointer bg-black dark:bg-amber-400 shadow-black dark:shadow-black dark:shadow-md ${!showMenuAndBgColor && "mt-10"
                                         }`}
                                     onClick={toggleDarkMode}
+                                    
                                 >
                                     {darkMode ? (
-                                        <FaSun className="text-black" />
+                                        <FaSun className="text-black " title="LightMode" />
                                     ) : (
-                                        <FaMoon className="text-white" />
+                                        <FaMoon className="text-white" title="DarkMode"/>
                                     )}
                                 </div>
 
                                 {/* Save Drawing Button */}
                                 <div className="flex justify-center items-center">
                                     <button
+                                    
                                         className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
                                             }`}
                                         onClick={saveDrawing}
@@ -197,6 +199,7 @@ function Home() {
                                 <a
                                     href={BUY_ME_COFFEE_LINK}
                                     target="_blank"
+                                    title="Buy a Coffee"
                                     rel="noopener noreferrer"
                                     className={`flex justify-end sm:ml-0 ${!showMenuAndBgColor && "mt-10"
                                         }`}
