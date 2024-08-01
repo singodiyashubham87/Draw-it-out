@@ -11,6 +11,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "axios": "^1.7.2",
     "fabric": "^5.3.0",
     "gapi-script": "^1.2.0",
     "jspdf": "^2.5.1",
