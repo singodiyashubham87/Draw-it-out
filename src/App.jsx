@@ -7,6 +7,7 @@ import Contact from "../src/components/Contact/Contact.jsx";
 import Contributor from '../src/components/Team/Contributor.jsx'
 import Home from '../src/components/Home.jsx'
 function App() {
+
   return (<>
     <Header />
     <BrowserRouter>

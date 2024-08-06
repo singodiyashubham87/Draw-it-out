@@ -13,9 +13,9 @@ const Header = () => {
         setModal(!modal);
     };
 
-  return (
-    <div>
-        <div className="relative">
+    return (
+        <div>
+            <div className="relative">
                 <img
                     src={logoText}
                     alt=""
@@ -24,28 +24,34 @@ const Header = () => {
                 />
                 <div className="flex flex-col justify-center text-center items-center bg-gray-800 dark:bg-black pb-8 pt-8">
                     <h1 className="font-['Love_Ya_Like_A_Sister',cursive] text-4xl text-slate-200 p-2">
-                        Draw it Out!
+                        {/* className="absolute top-4 md:left-6 left-2 p-3 bg-gray-800 w-24 h-24 " */}
                     </h1>
-                    <p className="text-gray-500 text-xs">
-                        All you need is a canvas to craft your ideas.
-                    </p>
-                </div>
+                    <div className="flex flex-col justify-center items-start   md:items-center bg-gray-800 dark:bg-black pl-28 md:pl-0 pb-8 pt-8">
+                        <h1 className="font-['Love_Ya_Like_A_Sister',cursive] md:text-4xl text-3xl text-slate-200 md:px-2 py-2">
+                            Draw it Out!
+                        </h1>
+                        <p className="text-gray-500 text-xs">
+                            All you need is a canvas to craft your ideas.
+                        </p>
+                    </div>
 
-                <button
-                    id="guideLines"
-                    className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300"
-                >
-                    <FaBookOpen
-                        size={28}
-                        color="white"
-                        className="bg-black p-1 rounded-xl"
-                        aria-label="show-guidelines"
-                        onClick={showGuidelines}
-                    />
-                </button>
+                    <button
+                        id="guideLines"
+                        className="absolute top-7 right-6 p-3 bg-gray-800 rounded-full text-white hover:bg-gray-600 transition duration-300"
+
+                    >
+                        <FaBookOpen
+                            size={28}
+                            color="white"
+                            className="bg-black p-1 rounded-xl"
+                            aria-label="show-guidelines"
+                            onClick={showGuidelines}
+                        />
+                    </button>
+                </div>
             </div>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Header

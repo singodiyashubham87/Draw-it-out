@@ -137,7 +137,8 @@ function Home() {
                 <div className="flex flex-col min-w-full justify-center gsm:flex-column">
                     <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
                         {/* Drawing Toolbar */}
-                        <div className="flex flex-col md:flex-row justify-between lg:justify-center items-center gap-10 w-full">
+
+                        <div className="flex flex-col md:flex-row justify-between md:justify-start lg:justify-center items-center lg:gap-10 md:gap-4 gap-10 w-full">
                             {showMenuAndBgColor && (
                                 <Menu
                                     isDrawing={isDrawing}
@@ -155,7 +156,8 @@ function Home() {
                                 />
                             )}
                             {/* Toolbar right menu section */}
-                            <div className="flex flex-row justify-center align-center items-center md:absolute top-0 md:right-4 right-2">
+
+                            <div className="flex flex-row justify-center align-center items-center md:absolute top-2 md:right-2 right-2">
                                 {/* Eye button */}
                                 <div
                                     className={`bg-[#CBCCCF] scale-[0.7] p-[1rem] text-[1.5rem] w-80% rounded-[50%] shadow-black shadow-md transform transition duration-300 ease-in-out text-black hover:bg-gray-400 cursor-pointer dark:bg-slate-800 dark:text-[#ffffff] hover:md:scale-[0.8] ${!showMenuAndBgColor && "mt-10"
@@ -213,7 +215,8 @@ function Home() {
                         <div className="flex justify-center items-center w-full h-full flex-grow">
                             <canvas
                                 id="draw"
-                                className={`whiteboard bg-slate-950 mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${isDrawing
+
+                                className={`whiteboard bg-slate-950 max-w-full mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${isDrawing
                                     ? "cursor-pointer"
                                     : "cursor-default pointer-events-none"
                                     }`}
