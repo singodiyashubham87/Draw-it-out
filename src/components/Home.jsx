@@ -137,6 +137,7 @@ function Home() {
                 <div className="flex flex-col min-w-full justify-center gsm:flex-column">
                     <div className="relative flex flex-col justify-between mt-[0.5vh] items-center font-primary">
                         {/* Drawing Toolbar */}
+
                         <div className="flex flex-col md:flex-row justify-between md:justify-start lg:justify-center items-center lg:gap-10 md:gap-4 gap-10 w-full">
                             {showMenuAndBgColor && (
                                 <Menu
@@ -155,6 +156,7 @@ function Home() {
                                 />
                             )}
                             {/* Toolbar right menu section */}
+
                             <div className="flex flex-row justify-center align-center items-center md:absolute top-2 md:right-2 right-2">
                                 {/* Eye button */}
                                 <div
@@ -213,6 +215,7 @@ function Home() {
                         <div className="flex justify-center items-center w-full h-full flex-grow">
                             <canvas
                                 id="draw"
+
                                 className={`whiteboard bg-slate-950 max-w-full mt-[4vh] rounded-[0.6rem] shadow-md shadow-black dark:shadow-black dark:shadow-lg ${isDrawing
                                     ? "cursor-pointer"
                                     : "cursor-default pointer-events-none"

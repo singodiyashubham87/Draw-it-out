@@ -1,19 +1,12 @@
 
 // import route 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Contact from '../src/components/Contact/Contact.jsx'
-// import download icon
-
 import Footer from "./components/Footer";
-import Home from "./components/Home.jsx";
 import Header from "./components/Header.jsx";
-import Contributor from "./components/Team/Contributor.jsx";
-
+import Contact from "../src/components/Contact/Contact.jsx";
+import Contributor from '../src/components/Team/Contributor.jsx'
+import Home from '../src/components/Home.jsx'
 function App() {
-
- 
-
-
 
   return (<>
     <Header />
