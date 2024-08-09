@@ -1,50 +1,37 @@
 import React from "react";
 import {
+  FaLinkedin,
+  FaTwitter,
+  FaGithub,
+  FaNewspaper,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa";
+import {
   AiOutlineInfoCircle,
   AiOutlineMessage,
   AiOutlineTeam,
 } from "react-icons/ai";
-import {
-  FaNewspaper,
-  FaLinkedin,
-  FaTwitter,
-  FaInstagram,
-  FaYoutube,
-  FaGithub,
-} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-black gap-52 md:gap-0">
-      <div className="flex flex-col items-center gap-20 px-8 py-4 justify-evenly md:justify-between md:flex-row ">
-        <div className="footerNav ">
+    <footer className="relative bg-black">
+      <div className="flex flex-col items-center gap-20 px-8 py-4 justify-evenly md:justify-between md:flex-row">
+        <div className="footerNav">
           <ul className="flex flex-wrap gap-4 justify-evenly md:justify-between">
             {[
-              { label: "News", icon: FaNewspaper, content: "News Content" },
-              {
-                label: "About Us",
-                icon: AiOutlineInfoCircle,
-                content: "About Us Content",
-              },
-              {
-                label: "Contact Us",
-                icon: AiOutlineMessage,
-                content: "Contact Us Content",
-                link:'/contact'
-              },
-              {
-                label: "Our Team",
-                icon: AiOutlineTeam,
-                content: "Our Team Content",
-                link:'/team'
-              },
+              { label: "Home", href: "#" },
+              { label: "News", href: "#", icon: FaNewspaper },
+              { label: "About Us", href: "#", icon: AiOutlineInfoCircle },
+              { label: "Contact Us", href: "/contact", icon: AiOutlineMessage },
+              { label: "Our Team", href: "/team", icon: AiOutlineTeam },
             ].map((item, index) => (
               <li key={index}>
                 <a
-                  href={item.link}
+                  href={item.href}
                   className="flex items-center text-white hover:text-gray-600"
                 >
-                  <item.icon className="w-6 h-6" />
+                  {item.icon && <item.icon className="w-6 h-6" />}
                   <span className="ml-2">{item.label}</span>
                 </a>
               </li>
@@ -106,7 +93,7 @@ const Footer = () => {
           >
             Master Mickey
           </a>{" "}
-          Copyright &copy;{new Date().getFullYear()}
+          &copy;{new Date().getFullYear()}
         </p>
       </div>
     </footer>
