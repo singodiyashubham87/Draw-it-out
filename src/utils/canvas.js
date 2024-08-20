@@ -15,8 +15,14 @@ export function startDrawing(
   canvas.width = window.innerWidth * 0.9;
 }
 
-export function handleDrawing(canvas, color, lineThickness, bgColor, brushStyle) {
-  const ctx = canvas.getContext('2d');
+export function handleDrawing(
+  canvas,
+  color,
+  lineThickness,
+  bgColor,
+  brushStyle
+) {
+  const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth * 0.8;
 
   canvas.height = window.innerHeight * 0.6;
@@ -80,26 +86,26 @@ export function handleDrawing(canvas, color, lineThickness, bgColor, brushStyle)
   }
 
   // Add event listeners for mouse interactions
-  canvas.addEventListener('mousedown', startDrawing);
-  canvas.addEventListener('mouseup', stopDrawing);
-  canvas.addEventListener('mousemove', draw);
-  canvas.addEventListener('mouseleave', stopDrawing); // Stop drawing if the mouse leaves the canvas
+  canvas.addEventListener("mousedown", startDrawing);
+  canvas.addEventListener("mouseup", stopDrawing);
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mouseleave", stopDrawing); // Stop drawing if the mouse leaves the canvas
 
   // Add touch event listeners for mobile devices
-  canvas.addEventListener('touchstart', (event) => {
+  canvas.addEventListener("touchstart", (event) => {
     event.preventDefault();
     startDrawing(event);
   });
 
-  canvas.addEventListener('touchend', (event) => {
+  canvas.addEventListener("touchend", (event) => {
     event.preventDefault();
     stopDrawing();
   });
-  canvas.addEventListener('touchcancel', (event) => {
+  canvas.addEventListener("touchcancel", (event) => {
     event.preventDefault();
     stopDrawing();
   });
-  canvas.addEventListener('touchmove', (event) => {
+  canvas.addEventListener("touchmove", (event) => {
     event.preventDefault();
     draw(event);
   });
@@ -147,20 +153,58 @@ export const convertToPDF = (canvas) => {
 
 // Function to handle converting it into SVG format
 export const convertToSVG = (canvas) => {
-  const context2D = canvas.getContext("2d");
-  const options = {
-    width: canvas.width,
-    height: canvas.height,
-    ctx: context2D,
-  };
-  const ctx = new Context(options);
-  const svgContent = ctx.getSerializedSvg();
-  const blob = new Blob([svgContent], { type: "image/svg+xml" });
+  // Ensure canvas is not null
+  if (!canvas) {
+    console.error("Canvas is not defined.");
+    return;
+  }
 
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+
+  // Create SVG namespace
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  // Create SVG element
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("width", canvasWidth);
+  svg.setAttribute("height", canvasHeight);
+  svg.setAttribute("viewBox", `0 0 ${canvasWidth} ${canvasHeight}`);
+  svg.setAttribute("xmlns", svgNS);
+
+  // Create an image element and set its attributes
+  const image = document.createElementNS(svgNS, "image");
+  image.setAttributeNS(
+    "http://www.w3.org/1999/xlink",
+    "href",
+    canvas.toDataURL("image/png")
+  );
+  image.setAttribute("width", canvasWidth);
+  image.setAttribute("height", canvasHeight);
+
+  // Center the image within the SVG viewBox
+  const svgWidth = parseInt(svg.getAttribute("width"), 10);
+  const svgHeight = parseInt(svg.getAttribute("height"), 10);
+
+  // Calculate offsets
+  const xOffset = (svgWidth - canvasWidth) / 2;
+  const yOffset = (svgHeight - canvasHeight) / 2;
+
+  // Apply offsets to center the image
+  image.setAttribute("x", xOffset);
+  image.setAttribute("y", yOffset);
+
+  svg.appendChild(image);
+
+  // Serialize SVG to string
+  const serializer = new XMLSerializer();
+  const svgString = serializer.serializeToString(svg);
+
+  // Create a blob from the SVG string and trigger download
+  const blob = new Blob([svgString], { type: "image/svg+xml" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "image.svg";
-
   link.click();
 };
 
@@ -182,13 +226,12 @@ function setBrushStyle(ctx, brushStyle) {
       ctx.setLineDash([2, 20]);
       ctx.globalAlpha = 1.0;
       break;
-    case "dashed":
-      {
-        const dotSpacing = 20;
-        ctx.setLineDash([dotSpacing / 2, dotSpacing]);
-        ctx.globalAlpha = 1.0;
-        break;
-      }
+    case "dashed": {
+      const dotSpacing = 20;
+      ctx.setLineDash([dotSpacing / 2, dotSpacing]);
+      ctx.globalAlpha = 1.0;
+      break;
+    }
     case "faded":
       ctx.setLineDash([]);
       ctx.globalAlpha = 0.01;
@@ -220,10 +263,8 @@ export function increaseHeight(canvas, bgColor, thickness, color, brushStyle) {
   // Redraw the portion of the drawing that fits in the new canvas size
   ctx.putImageData(imageData, 0, 0);
 
-
   // Update drawHistory to fit within new height
   drawHistory = histArray.filter((point) => point.y <= newHeight);
-
 }
 
 export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
@@ -250,24 +291,30 @@ export function decreaseHeight(canvas, bgColor, thickness, color, brushStyle) {
 
   // Update drawHistory to fit within new height
   drawHistory = histArray.filter((point) => point.y <= newHeight);
-
 }
 
-export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum, wnum) {
-
+export function changeAspect(
+  canvas,
+  bgColor,
+  thickness,
+  color,
+  brushStyle,
+  hnum,
+  wnum
+) {
   const ctx = canvas.getContext("2d");
   const histArray = [...drawHistory];
   let newHeight, newWidth;
 
   // Set new height
-  if (hnum == 100 && wnum == 100) {//default case 
+  if (hnum == 100 && wnum == 100) {
+    //default case
     newWidth = window.innerWidth * 0.8;
     newHeight = window.innerHeight * 0.6;
-  }
-  else {
+  } else {
     //adjust wnum hnums of various options to adjust the size
-    newWidth = window.innerWidth * wnum / 100;
-    newHeight = window.innerWidth * hnum / 100;
+    newWidth = (window.innerWidth * wnum) / 100;
+    newHeight = (window.innerWidth * hnum) / 100;
   }
 
   // Save the current drawing and clear the canvas
@@ -286,8 +333,13 @@ export function changeAspect(canvas, bgColor, thickness, color, brushStyle, hnum
   handleUpdates(canvas, color, thickness, bgColor, brushStyle);
 }
 
-export function handleUpdates(canvas, color, lineThickness, bgColor, brushStyle) {
-
+export function handleUpdates(
+  canvas,
+  color,
+  lineThickness,
+  bgColor,
+  brushStyle
+) {
   const ctx = canvas.getContext("2d");
   ctx.lineWidth = lineThickness;
   ctx.strokeStyle = `${color}`;
