@@ -199,10 +199,12 @@ const Menu = ({
           {fillColor ? (
             <BiSolidPolygon
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
+              title="Fill Shape"
             />
           ) : (
             <BiPolygon
               className={`text-[2rem] md:text-[3rem] p-[0.5rem] md:p-[0.8rem] shadow-vsm rounded-[0.5rem] text-black cursor-pointer bg-[#CBCCCF] hover:bg-[#B7BABF] transform transition duration-300 ease-in-out`}
+              title="Fill Shape"
             />
           )}
         </button>
@@ -216,6 +218,7 @@ const Menu = ({
                 setPencilWidth(!pencilWidth);
                 setSelectedTool("brush");
               }}
+              title="Brush Thickness"
             />
           </button>
           {pencilWidth && (
@@ -254,7 +257,7 @@ const Menu = ({
             onClick={toggleSaveAs}
           >
             {/* Save As */}
-            <IoCloudDownloadOutline />
+            <IoCloudDownloadOutline title="Save As" />
             <svg
               className={`w-2.5 h-2.5 ms-3 ${isOpen ? "rotate-180" : ""}`}
               aria-hidden="true"

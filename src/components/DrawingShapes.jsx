@@ -214,7 +214,7 @@ const DrawingShapes = ({
           style={{ backgroundColor: '#D1D5DB', color: '#000' }}
           onClick={() => setLower(!lower)}
         >
-          <GiPencilBrush />
+          <GiPencilBrush title="Brush Styles" />
         </button>
         {lower && (
           <div className="absolute bg-slate-300 p-1 h-40 overflow-auto">
